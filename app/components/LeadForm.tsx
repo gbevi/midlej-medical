@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { BR_UFS, CONSENT_TEXT } from "@/lib/leadConstants";
 import { submitLeadForm, type LeadFormState } from "@/lib/actions";
 
@@ -14,6 +14,22 @@ const emptyLeadValues = {
 
 // Display order of fields — used to move focus to the first one with an error.
 const FIELD_ORDER = ["name", "estado", "whatsapp"] as const;
+
+/**
+ * Máscara progressiva (XX) XXXXX-XXXX. Aceita 10 (fixo) ou 11 (celular)
+ * dígitos. Cap em 11 — qualquer coisa além é ignorada. Backend faz strip
+ * de não-dígitos antes de validar, então enviar formatado é OK.
+ */
+function maskWhatsapp(raw: string): string {
+  const d = raw.replace(/\D/g, "").slice(0, 11);
+  if (d.length === 0) return "";
+  if (d.length <= 2) return `(${d}`;
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) {
+    return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  }
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
 
 export function LeadForm() {
   const [state, formAction, isPending] = useActionState(
@@ -48,6 +64,8 @@ export function LeadForm() {
     state.kind === "error" ? state.values ?? emptyLeadValues : emptyLeadValues;
   const generalError =
     state.kind === "error" && state.message ? state.message : null;
+
+  const [whatsapp, setWhatsapp] = useState(() => maskWhatsapp(values.whatsapp));
 
   return (
     <form action={formAction} noValidate className="lead-form">
@@ -126,7 +144,9 @@ export function LeadForm() {
           inputMode="tel"
           autoComplete="tel-national"
           required
-          defaultValue={values.whatsapp}
+          value={whatsapp}
+          onChange={(e) => setWhatsapp(maskWhatsapp(e.target.value))}
+          maxLength={16}
           placeholder="(11) 91234-5678"
           className="field-input"
           aria-invalid={!!errors.whatsapp}

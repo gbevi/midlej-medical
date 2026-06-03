@@ -32,7 +32,7 @@ function parseValor(raw: string): number {
 
 export function LeadSimulator() {
   const [valor, setValor] = useState(15000);
-  const [prazo, setPrazo] = useState<(typeof PRAZOS)[number]>(60);
+  const [prazo, setPrazo] = useState<(typeof PRAZOS)[number]>(30);
 
   const recebe = useMemo(() => {
     const meses = prazo / 30;
