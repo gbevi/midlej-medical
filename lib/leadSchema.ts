@@ -21,7 +21,6 @@ export const LeadSchema = z.object({
       const digits = s.replace(/\D/g, "");
       return digits.length >= 10 && digits.length <= 11;
     }, "Use DDD + número"),
-  wantsAntecipacao: z.boolean().optional(),
 });
 
 export type LeadInput = z.infer<typeof LeadSchema>;

@@ -10,7 +10,6 @@ const emptyLeadValues = {
   name: "",
   estado: "",
   whatsapp: "",
-  wantsAntecipacao: false,
 };
 
 // Display order of fields — used to move focus to the first one with an error.
@@ -140,17 +139,6 @@ export function LeadForm() {
           </span>
         )}
       </div>
-
-      <label className="checkbox-row" htmlFor="wantsAntecipacao">
-        <input
-          id="wantsAntecipacao"
-          name="wantsAntecipacao"
-          type="checkbox"
-          className="checkbox"
-          defaultChecked={values.wantsAntecipacao}
-        />
-        <span className="field-help">Quero antecipar meus plantões.</span>
-      </label>
 
       {generalError && (
         <p role="alert" className="field-error">

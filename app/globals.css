@@ -364,6 +364,164 @@ em {
 }
 
 /* ───────────────────────────────────────────────────────────────────
+   Section — Simulador (off-white, show-the-math moment)
+   ─────────────────────────────────────────────────────────────────── */
+
+.section-simulador {
+  background: var(--body-warm-off-white);
+  color: var(--ink-text);
+  padding: clamp(80px, 12vw, 140px) 0;
+  border-bottom: 1px solid var(--rule-faint);
+}
+
+.section-simulador h2 {
+  font-size: clamp(2rem, 4.6vw, 3.25rem);
+  line-height: 1.05;
+  margin-bottom: clamp(16px, 2vw, 24px);
+  max-width: 18ch;
+}
+
+.section-simulador .lede {
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-muted-on-body);
+  margin-bottom: clamp(48px, 7vw, 72px);
+  max-width: 40ch;
+}
+
+.sim-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+  padding-top: clamp(32px, 5vw, 48px);
+  padding-bottom: clamp(32px, 5vw, 48px);
+  border-top: 1px solid var(--rule-faint);
+  border-bottom: 1px solid var(--rule-faint);
+}
+
+.sim-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sim-currency-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.sim-currency-prefix {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-muted-on-body);
+  pointer-events: none;
+}
+
+.sim-currency-input {
+  padding-left: 44px;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.sim-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sim-pill {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-text);
+  background: var(--surface-raised);
+  border: 1px solid var(--ink-border-faint);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease,
+              color 140ms ease;
+  min-width: 86px;
+  min-height: var(--touch-min);
+}
+
+.sim-pill:hover:not(.is-active) {
+  border-color: var(--ink-border-medium);
+}
+
+.sim-pill.is-active {
+  background: var(--ink-graphite);
+  color: var(--body-warm-off-white);
+  border-color: var(--ink-graphite);
+}
+
+.sim-pill:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring-clay-strong);
+}
+
+.sim-output {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: clamp(0px, 3vw, 40px);
+}
+
+.sim-output-label {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted-on-body);
+}
+
+.sim-output-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink-graphite);
+  font-variant-numeric: lining-nums tabular-nums;
+  margin: 4px 0 8px;
+}
+
+.sim-output-meta {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted-on-body);
+  letter-spacing: 0;
+}
+
+.sim-disclaimer {
+  margin-top: clamp(24px, 4vw, 40px);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-muted-on-body);
+  max-width: 56ch;
+}
+
+@media (max-width: 880px) {
+  .sim-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .sim-output {
+    padding-left: 0;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────
    Section — Duas soluções (drenched ink)
    ─────────────────────────────────────────────────────────────────── */
 

@@ -15,7 +15,6 @@ export type LeadFormState =
         name: string;
         estado: string;
         whatsapp: string;
-        wantsAntecipacao: boolean;
       };
     };
 
@@ -24,7 +23,6 @@ function readValues(formData: FormData) {
     name: (formData.get("name") ?? "").toString(),
     estado: (formData.get("estado") ?? "").toString(),
     whatsapp: (formData.get("whatsapp") ?? "").toString(),
-    wantsAntecipacao: formData.get("wantsAntecipacao") === "on",
   };
 }
 
@@ -73,7 +71,6 @@ export async function submitLeadForm(
         name: parsed.data.name,
         estado: parsed.data.estado,
         whatsapp: parsed.data.whatsapp,
-        wantsAntecipacao: parsed.data.wantsAntecipacao,
         consentText: CONSENT_TEXT,
       }),
       cache: "no-store",

@@ -1,5 +1,6 @@
 import { SiteHeader } from "./components/SiteHeader";
 import { LeadForm } from "./components/LeadForm";
+import { LeadSimulator } from "./components/LeadSimulator";
 import { MidlejMark } from "./components/MidlejMark";
 import { RevealOnScroll } from "./components/RevealOnScroll";
 
@@ -42,6 +43,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* SIMULADOR — mostra a conta antes de descer a página */}
+      <LeadSimulator />
 
       {/* DUAS SOLUÇÕES — drenched ink */}
       <section className="section-duas">
