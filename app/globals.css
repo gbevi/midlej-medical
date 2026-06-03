@@ -407,27 +407,51 @@ em {
   gap: 28px;
 }
 
+/* Wrapper assume o visual de input (borda, bg, focus). R$ e número
+   ficam em células flex separadas — sem position:absolute, sem overlap. */
 .sim-currency-wrap {
-  position: relative;
   display: flex;
   align-items: stretch;
+  background: var(--body-warm-off-white);
+  border: 1px solid var(--ink-border-faint);
+  border-radius: var(--radius-sm);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+  overflow: hidden;
+}
+.sim-currency-wrap:focus-within {
+  border-color: var(--accent-clay);
+  box-shadow: 0 0 0 3px var(--ring-clay-soft);
 }
 
 .sim-currency-prefix {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px 0 16px;
   font-family: var(--font-sans);
   font-size: 17px;
   font-weight: 500;
   color: var(--text-muted-on-body);
+  user-select: none;
   pointer-events: none;
+  flex-shrink: 0;
 }
 
 .sim-currency-input {
-  padding-left: 44px;
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 14px 16px 14px 4px;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  color: var(--ink-text);
   font-variant-numeric: lining-nums tabular-nums;
+  line-height: 1.4;
+}
+.sim-currency-input::placeholder {
+  color: var(--text-muted-on-body);
+  opacity: 0.5;
 }
 
 .sim-pills {

@@ -34,10 +34,9 @@ export function LeadSimulator() {
   const [valor, setValor] = useState(15000);
   const [prazo, setPrazo] = useState<(typeof PRAZOS)[number]>(60);
 
-  const { recebe, desconto, meses } = useMemo(() => {
-    const m = prazo / 30;
-    const d = valor * TAXA_AO_MES * m;
-    return { recebe: Math.max(0, valor - d), desconto: d, meses: m };
+  const recebe = useMemo(() => {
+    const meses = prazo / 30;
+    return Math.max(0, valor - valor * TAXA_AO_MES * meses);
   }, [valor, prazo]);
 
   return (
@@ -64,7 +63,7 @@ export function LeadSimulator() {
                   value={valor === 0 ? "" : fmtNumber.format(valor)}
                   onChange={(e) => setValor(parseValor(e.target.value))}
                   placeholder="0"
-                  className="field-input sim-currency-input"
+                  className="sim-currency-input"
                 />
               </div>
               <span className="field-help">
@@ -96,10 +95,6 @@ export function LeadSimulator() {
           <div className="sim-output" aria-live="polite">
             <p className="sim-output-label">Você recebe hoje</p>
             <p className="sim-output-value num">{fmt.format(recebe)}</p>
-            <p className="sim-output-meta">
-              Desconto {fmt.format(desconto)} · {TAXA_AO_MES * 100}% a.m. ×{" "}
-              {meses} {meses === 1 ? "mês" : "meses"}
-            </p>
           </div>
         </div>
 
