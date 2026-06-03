@@ -53,15 +53,22 @@ export async function submitLeadForm(
   const hdrs = await headers();
 
   try {
+    const requestHeaders: Record<string, string> = {
+      "content-type": "application/json",
+      "x-forwarded-for":
+        hdrs.get("x-forwarded-for") ?? hdrs.get("x-real-ip") ?? "",
+      "user-agent": hdrs.get("user-agent") ?? "",
+      referer: hdrs.get("referer") ?? "",
+    };
+    // Em prod a LP envia o shared secret; em dev (chave vazia) o header
+    // é omitido e o backend pula a checagem.
+    if (env.PLENO_MED_INGEST_KEY) {
+      requestHeaders["x-pleno-med-key"] = env.PLENO_MED_INGEST_KEY;
+    }
+
     const res = await fetch(`${env.BACKEND_API_URL}/api/pleno-med/leads`, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-forwarded-for":
-          hdrs.get("x-forwarded-for") ?? hdrs.get("x-real-ip") ?? "",
-        "user-agent": hdrs.get("user-agent") ?? "",
-        referer: hdrs.get("referer") ?? "",
-      },
+      headers: requestHeaders,
       body: JSON.stringify({
         name: parsed.data.name,
         estado: parsed.data.estado,
