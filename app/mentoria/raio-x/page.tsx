@@ -99,7 +99,7 @@ export default function RaioXPage() {
                 </dl>
                 <footer className="lp-raiox-laudo-foot">
                   <span>Emissão · em até 5 dias úteis</span>
-                  <span>Sem proposta, sem ligação fria</span>
+                  <span>Sem custo, sem compromisso</span>
                 </footer>
               </div>
             </aside>
@@ -155,8 +155,7 @@ export default function RaioXPage() {
                 successBody={
                   <>
                     Respondemos pelo WhatsApp informado em até{" "}
-                    <span className="cs-num">1 dia útil</span>. Sem ligação fria,
-                    sem proposta antes do raio-x.
+                    <span className="cs-num">1 dia útil</span>.
                   </>
                 }
               />

@@ -105,10 +105,6 @@ export default function EbookPage() {
 
       <section className="lp-ebook-bridge">
         <div className="cs-container">
-          <span className="cs-eyebrow cs-num">Colofão</span>
-          <p className="lp-ebook-bridge-text">
-            Trinta e duas páginas, <em>direto ao osso</em>. Sem ligação fria depois.
-          </p>
           <a href="#guia" className="cs-link-underline">
             § Receber o guia <span aria-hidden="true">→</span>
           </a>

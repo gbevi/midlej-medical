@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MidlejMark } from "@/app/components/MidlejMark";
+import { MentoriaMark } from "@/app/components/MentoriaMark";
 
 /**
  * Header institucional das 5 LPs. Lockup Midlej + sub-label MENTORIA
@@ -20,7 +20,7 @@ export function MentoriaHeader({
     <header className="cs-header">
       <div className="cs-header-inner">
         <Link href="/mentoria" className="cs-header-brand" aria-label="Midlej Capital · Mentoria">
-          <MidlejMark height={44} />
+          <MentoriaMark height={44} />
         </Link>
         <Link href={ctaHref} className="cs-header-cta">
           {ctaLabel}

@@ -1,7 +1,7 @@
 import { SiteHeader } from "./components/SiteHeader";
 import { LeadForm } from "./components/LeadForm";
 import { LeadSimulator } from "./components/LeadSimulator";
-import { MidlejMark } from "./components/MidlejMark";
+import { MentoriaMark } from "./components/MentoriaMark";
 import { RevealOnScroll } from "./components/RevealOnScroll";
 
 export default function Home() {
@@ -214,7 +214,7 @@ export default function Home() {
         <div className="container">
           <div className="footer-stack">
             <div className="footer-mark">
-              <MidlejMark height={44} />
+              <MentoriaMark height={44} />
             </div>
 
             <p className="footer-statement">

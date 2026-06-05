@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MidlejMark } from "./MidlejMark";
+import { MentoriaMark } from "./MentoriaMark";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,7 +25,7 @@ export function SiteHeader() {
           aria-label="PLENOMED, voltar ao topo"
         >
           <span className="site-header-mark">
-            <MidlejMark height={44} />
+            <MentoriaMark height={44} />
           </span>
         </a>
 

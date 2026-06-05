@@ -1,4 +1,4 @@
-import { MidlejMark } from "@/app/components/MidlejMark";
+import { MentoriaMark } from "@/app/components/MentoriaMark";
 
 export function MentoriaFooter() {
   const year = new Date().getFullYear();
@@ -7,11 +7,11 @@ export function MentoriaFooter() {
       <div className="cs-container">
         <div className="cs-footer-grid">
           <div className="cs-footer-mark">
-            <MidlejMark height={44} />
+            <MentoriaMark height={44} />
           </div>
           <p className="cs-footer-statement">
-            A mentoria da <em>Midlej Capital</em> atende exclusivamente
-            profissionais médicos no Brasil. Modelo de fee recorrente, sem
+            A mentoria da <em>Midlej Capital</em> atende
+            profissionais no Brasil inteiro. Modelo de fee recorrente, sem
             comissão por produto.
           </p>
         </div>
