@@ -347,10 +347,13 @@ function S03_Internacionais() {
                 ]}
               />
             </div>
-            <div className="mt-10">
+            <div className="mt-10 flex flex-wrap items-center gap-6">
+              <Link href="/investimentos" className="btn-primary-inverse">
+                Conheça os investimentos
+                <Arrow />
+              </Link>
               <Link href="#contato" className="btn-ghost-inverse">
                 Quero diversificar globalmente
-                <Arrow />
               </Link>
             </div>
           </div>

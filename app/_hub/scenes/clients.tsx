@@ -29,3 +29,18 @@ export const WorkshopRoomClient = dynamic(() => import("./WorkshopRoom"), {
   ssr: false,
   loading: () => null,
 });
+
+export const CurrencyOrbitsClient = dynamic(() => import("./CurrencyOrbits"), {
+  ssr: false,
+  loading: () => null,
+});
+
+export const AllocationRingsClient = dynamic(() => import("./AllocationRings"), {
+  ssr: false,
+  loading: () => null,
+});
+
+export const CompoundCurveClient = dynamic(() => import("./CompoundCurve"), {
+  ssr: false,
+  loading: () => null,
+});

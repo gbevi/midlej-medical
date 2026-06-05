@@ -5,9 +5,9 @@ import { HubHeader } from "../_hub/HubHeader";
 import { HubLeadForm } from "../_hub/HubLeadForm";
 import { SmoothAnchor } from "../_hub/SmoothAnchor";
 import {
-  GlobeClient as Globe,
-  AltLayersClient as AltLayers,
-  PrevidenciaStackClient as PrevidenciaStack,
+  CurrencyOrbitsClient as CurrencyOrbits,
+  AllocationRingsClient as AllocationRings,
+  CompoundCurveClient as CompoundCurve,
 } from "../_hub/scenes/clients";
 
 export const metadata: Metadata = {
@@ -40,6 +40,7 @@ export default function InvestimentosPage() {
       <ParaQuem />
       <Depoimentos />
       <FAQSection />
+      <OutrasFrentes />
       <Contato />
       <Footer />
     </main>
@@ -269,7 +270,7 @@ function OndeOCapitalVive() {
 
           <div className="col-span-12 md:col-span-7 order-1 md:order-2">
             <div className="w-full aspect-square">
-              <Globe className="w-full h-full" />
+              <CurrencyOrbits className="w-full h-full" />
             </div>
           </div>
         </div>
@@ -293,7 +294,7 @@ function Composicao() {
         <div className="mt-10 relative">
           <div className="w-full aspect-[16/10] md:aspect-[16/9] relative">
             <div className="absolute inset-0">
-              <AltLayers className="w-full h-full" />
+              <AllocationRings className="w-full h-full" />
             </div>
             <div className="absolute left-0 bottom-0 max-w-[24ch] p-2 md:p-6">
               <h2 className="t-display text-[clamp(2rem,4.5vw,4rem)] leading-[0.96] text-on-ink-strong">
@@ -395,29 +396,33 @@ function TempoTrabalhando() {
   return (
     <section data-tone="light" className="bg-paper">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-36">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-          <div className="col-span-12 md:col-span-5 lg:col-span-4">
-            <div className="mx-auto w-full max-w-[360px] aspect-[3/4]">
-              <PrevidenciaStack className="w-full h-full" />
-            </div>
-          </div>
+        <Mark eyebrow="O ativo principal" dark={false} />
+        <div className="mt-10 grid grid-cols-12 gap-8 items-end">
+          <h2 className="col-span-12 md:col-span-7 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[20ch]">
+            O tempo trabalhando.
+          </h2>
+          <p className="col-span-12 md:col-span-5 t-lede text-ink-soft text-[1.05rem] max-w-[40ch]">
+            <span className="asterisk" />
+            Aporte estável + retorno reinvestido + horizonte longo. A curva
+            que ninguém vê quando começa.
+          </p>
+        </div>
 
-          <div className="col-span-12 md:col-span-7 lg:col-span-7 lg:col-start-6">
-            <Mark eyebrow="O ativo principal" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[20ch]">
-              O tempo trabalhando.
-            </h2>
-            <p className="mt-10 t-lede text-ink-soft text-[1.05rem] max-w-[42ch]">
-              <span className="asterisk" />
-              Aporte estável + retorno reinvestido + horizonte longo. A curva
-              que ninguém vê quando começa.
-            </p>
-            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[50ch]">
+        {/* Curva ocupa toda a largura — é a coisa que precisa ser desenhada */}
+        <div className="mt-14 md:mt-20 w-full aspect-[16/8] md:aspect-[16/7]">
+          <CompoundCurve className="w-full h-full" />
+        </div>
+
+        <div className="mt-12 grid grid-cols-12 gap-10 md:gap-16 items-start">
+          <div className="col-span-12 md:col-span-6">
+            <p className="t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[50ch]">
               A diferença entre uma carteira eficiente e uma carteira média
               não aparece no primeiro ano. Aparece no oitavo, no décimo
               quinto, no vigésimo. É por isso que a banca é plurianual: o
               ganho do modelo é função do tempo.
             </p>
+          </div>
+          <div className="col-span-12 md:col-span-6">
             <dl className="mt-12 grid grid-cols-3 gap-x-6 md:gap-x-10 border-t border-line pt-6">
               <div>
                 <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-ink-mute">
@@ -701,6 +706,38 @@ function FAQSection() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================================================================
+   Outras frentes — backlink editorial pro hub /
+   ================================================================ */
+
+function OutrasFrentes() {
+  return (
+    <section data-tone="light" className="bg-bone">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+        <div className="grid grid-cols-12 gap-8 items-end">
+          <div className="col-span-12 md:col-span-8">
+            <Mark eyebrow="Hub Midlej Capital" dark={false} />
+            <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.04] text-ink max-w-[26ch]">
+              Investimentos é uma das oito frentes da banca.
+            </h2>
+            <p className="mt-8 t-lede text-ink-soft text-[1.0625rem] max-w-[48ch]">
+              Mentoria, internacionais, seguros, alternativos, plano de saúde,
+              previdência e treinamentos. Operadas sob o mesmo critério,
+              num único interlocutor.
+            </p>
+          </div>
+          <div className="col-span-12 md:col-span-4 flex md:justify-end">
+            <Link href="/" className="btn-primary">
+              Ver o hub completo
+              <Arrow />
+            </Link>
           </div>
         </div>
       </div>
