@@ -9,9 +9,6 @@ const HubConstellation = dynamic(() => import("../components/HubConstellation"),
   loading: () => null,
 });
 
-const WHATSAPP =
-  "https://wa.me/556183015739?text=Ol%C3%A1%2C%20gostaria%20de%20conhecer%20as%20solu%C3%A7%C3%B5es%20da%20Midlej%20Capital.";
-
 /**
  * Hero do hub Midlej Capital.
  *
@@ -31,7 +28,7 @@ export function HubHero() {
   return (
     <section
       data-tone="dark"
-      className="relative isolate overflow-hidden bg-[var(--color-ink)] text-[var(--color-on-ink-strong)]"
+      className="relative isolate overflow-hidden bg-ink text-on-ink-strong"
     >
       {/* Canvas 3D ocupando o hero inteiro como camada de fundo. */}
       <div
@@ -48,26 +45,21 @@ export function HubHero() {
       <div className="relative z-10 px-6 md:px-12 lg:px-16 pt-36 pb-28 md:pt-44 md:pb-36">
         <div className="max-w-[1400px] mx-auto grid grid-cols-12 gap-8 items-end">
           <div className="col-span-12 md:col-span-8 lg:col-span-7">
-            <p className="reveal r-1 t-mono text-[0.72rem] tracking-[0.18em] uppercase text-[var(--color-on-ink-mute)] mb-6">
+            <p className="reveal r-1 t-mono text-[0.72rem] tracking-[0.18em] uppercase text-on-ink-mute mb-6">
               Midlej Capital
             </p>
-            <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.96] text-balance text-[var(--color-on-ink-strong)] max-w-[18ch]">
+            <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.96] text-balance text-on-ink-strong max-w-[18ch]">
               Hub de soluções financeiras.
             </h1>
-            <p className="reveal r-2 t-lede mt-10 text-[var(--color-on-ink-soft)] text-[1.05rem] md:text-[1.2rem] max-w-[48ch]">
+            <p className="reveal r-2 t-lede mt-10 text-on-ink-soft text-[1.05rem] md:text-[1.2rem] max-w-[48ch]">
               <span className="asterisk" />Oito frentes operando sob o mesmo
               critério. Sem produto da prateleira. Sem comissão por venda.
             </p>
             <div className="reveal r-3 mt-12 flex flex-wrap items-center gap-6">
-              <a
-                href={WHATSAPP}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary-inverse"
-              >
-                Falar com a banca
+              <Link href="#contato" className="btn-primary-inverse">
+                Pedir primeira conversa
                 <ArrowRight />
-              </a>
+              </Link>
               <Link href="#solucoes" className="btn-ghost-inverse">
                 Ver as oito frentes
               </Link>
@@ -83,7 +75,7 @@ export function HubHero() {
       {/* Hairline inferior — termina o hero como uma página de capa */}
       <div
         aria-hidden
-        className="relative z-10 mx-auto max-w-[1400px] border-t border-[var(--color-line-on-ink)]"
+        className="relative z-10 mx-auto max-w-[1400px] border-t border-line-on-ink"
       />
     </section>
   );

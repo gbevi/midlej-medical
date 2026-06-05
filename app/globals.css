@@ -383,6 +383,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Quando uma rota da marca (`[data-brand]` na &lt;main&gt;) está montada, ela
+   redefine background/color do body pra evitar que o herói ink herde
+   o `color: var(--ink-text)` (escuro) do body legado da Pleno Med. */
+body:has([data-brand]) {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-brand);
+}
+
 /* Paper grain — fixed, atmospheric, very subtle. Carries warmth without decoration. */
 body::after {
   content: "";
