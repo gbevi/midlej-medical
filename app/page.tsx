@@ -4,6 +4,7 @@ import { Logo } from "./components/Logo";
 import { HubHeader } from "./_hub/HubHeader";
 import { HubHero } from "./_hub/HubHero";
 import { HubLeadForm } from "./_hub/HubLeadForm";
+import { SmoothAnchor } from "./_hub/SmoothAnchor";
 
 import { FullTimeline } from "./_hub/svg/FullTimeline";
 import { PocketRing } from "./_hub/svg/PocketRing";
@@ -34,6 +35,7 @@ export default function HubPage() {
       id="main"
       className="brand-body min-h-screen bg-paper text-ink"
     >
+      <SmoothAnchor />
       <HubHeader />
       <HubHero />
 
