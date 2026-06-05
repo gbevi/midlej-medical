@@ -1,5 +1,293 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════
+   MIDLEJ CAPITAL · BRAND FOUNDATION
+   Tokens, tipografia e utilities herdados de midlej-lp (manual de
+   marca oficial). Aplicado globalmente. As regras antigas de Pleno
+   Med (mais abaixo) permanecem temporariamente porque alimentam a
+   LP atual; serão depreciadas quando /plenomed migrar para o sistema
+   da marca.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Ink (mandatory brand navy + logo secondary) */
+  --color-ink: #062241;
+  --color-ink-2: #2D5871;
+
+  /* Tinted neutrals (OKLCH, all tilted toward the navy hue ~240) */
+  --color-paper: oklch(96.8% 0.010 78);
+  --color-bone: oklch(94.5% 0.014 78);
+  --color-bone-2: oklch(91% 0.018 78);
+  --color-ink-soft: oklch(48% 0.040 240);
+  --color-ink-mute: oklch(62% 0.020 240);
+
+  /* Rare emphasis. Oxblood, not gold. <1% of surface. */
+  --color-emphasis: oklch(46% 0.115 30);
+
+  --color-line: oklch(20% 0.04 240 / 0.14);
+  --color-line-soft: oklch(20% 0.04 240 / 0.07);
+  --color-line-strong: oklch(20% 0.04 240 / 0.28);
+
+  /* Inverse-mode tokens for use on ink (navy-drenched sections) */
+  --color-on-ink-strong: oklch(96.8% 0.010 78);
+  --color-on-ink-soft: oklch(96.8% 0.010 78 / 0.68);
+  --color-on-ink-mute: oklch(96.8% 0.010 78 / 0.62);
+  --color-line-on-ink: oklch(96.8% 0.010 78 / 0.18);
+
+  --font-brand: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root { color-scheme: light; }
+
+/* Brand body voice — só ativa quando o elemento tem `.brand` ou está dentro
+   de uma rota da marca (hub /, /mentoria, /plenomed-migrado). Por
+   enquanto a Pleno Med atual mantém seu próprio body styling abaixo. */
+.brand-body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-brand);
+  font-feature-settings: "kern", "liga", "calt", "ss01";
+  font-variation-settings: "wdth" 100, "opsz" 16;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Single-family voice: hierarchy through weight, width, optical size, scale */
+
+.t-display {
+  font-family: var(--font-brand);
+  font-weight: 600;
+  font-variation-settings: "wdth" 92, "opsz" 96;
+  letter-spacing: -0.028em;
+  line-height: 0.96;
+}
+
+.t-display-light {
+  font-family: var(--font-brand);
+  font-weight: 300;
+  font-variation-settings: "wdth" 100, "opsz" 96;
+  letter-spacing: -0.022em;
+  line-height: 1.02;
+}
+
+.t-quote {
+  font-family: var(--font-brand);
+  font-weight: 300;
+  font-variation-settings: "wdth" 100, "opsz" 48;
+  letter-spacing: -0.012em;
+  line-height: 1.18;
+}
+
+.t-lede {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  font-variation-settings: "wdth" 100, "opsz" 36;
+  letter-spacing: -0.005em;
+  line-height: 1.45;
+}
+
+.t-body {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  font-variation-settings: "wdth" 100, "opsz" 16;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+.t-mono {
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-variation-settings: "wdth" 100, "opsz" 14;
+  font-feature-settings: "tnum", "lnum";
+  letter-spacing: 0.01em;
+}
+
+.t-caps {
+  font-family: var(--font-brand);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.hairline { border-color: var(--color-line); }
+.hairline-strong { border-color: var(--color-line-strong); }
+.hairline-on-ink { border-color: var(--color-line-on-ink); }
+
+/* Rare typographic asterisk. Oxblood. */
+.asterisk::before {
+  content: "*";
+  color: var(--color-emphasis);
+  font-family: var(--font-brand);
+  font-weight: 500;
+  margin-right: 0.18em;
+}
+
+/* Square buttons — ink-on-paper. No rounded SaaS pills. */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1rem 1.5rem;
+  min-height: 44px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+  transition: background 260ms cubic-bezier(.2,.7,.2,1), transform 260ms cubic-bezier(.2,.7,.2,1);
+}
+.btn-primary:hover {
+  background: oklch(18% 0.06 240);
+  transform: translateY(-1px);
+}
+.btn-primary svg { transition: transform 260ms cubic-bezier(.2,.7,.2,1); }
+.btn-primary:hover svg { transform: translateX(3px); }
+
+.btn-primary-inverse {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1rem 1.5rem;
+  min-height: 44px;
+  background: var(--color-on-ink-strong);
+  color: var(--color-ink);
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+  transition: background 260ms cubic-bezier(.2,.7,.2,1), transform 260ms cubic-bezier(.2,.7,.2,1);
+}
+.btn-primary-inverse:hover {
+  background: oklch(99% 0.005 78);
+  transform: translateY(-1px);
+}
+.btn-primary-inverse svg { transition: transform 260ms cubic-bezier(.2,.7,.2,1); }
+.btn-primary-inverse:hover svg { transform: translateX(3px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.25rem;
+  min-height: 44px;
+  color: var(--color-ink);
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--color-ink);
+  transition: opacity 220ms ease;
+}
+.btn-ghost:hover { opacity: 0.6; }
+
+.btn-ghost-inverse {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.25rem;
+  min-height: 44px;
+  color: var(--color-on-ink-strong);
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--color-on-ink-strong);
+  transition: opacity 220ms ease;
+}
+.btn-ghost-inverse:hover { opacity: 0.7; }
+
+.brand-link-underline {
+  position: relative;
+  display: inline-block;
+}
+.brand-link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 400ms cubic-bezier(.2,.7,.2,1);
+}
+.brand-link-underline:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+/* Brand focus indicator (oxblood) — escopo evita conflito com focus-ring
+   das LPs antigas. */
+.brand *:focus-visible,
+[data-brand] *:focus-visible {
+  outline: 2px solid var(--color-emphasis);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Brand skip-link — sobrescreve a versão antiga só quando estiver dentro
+   de [data-brand]. */
+[data-brand] .skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  background: none;
+  border-radius: 0;
+}
+[data-brand] .skip-link:focus,
+[data-brand] .skip-link:focus-visible {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  z-index: 100;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.5rem;
+  text-decoration: none;
+}
+
+/* Page-load reveal — additive only. Content is visible by default,
+   we just slide it up from translateY(8px). Failsafe: if the animation
+   never runs (reduced-motion, JS-blocked, etc.) content stays readable. */
+.reveal {
+  animation: brand-reveal 800ms cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes brand-reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.r-1 { animation-delay: 80ms; }
+.r-2 { animation-delay: 200ms; }
+.r-3 { animation-delay: 320ms; }
+.r-4 { animation-delay: 440ms; }
+.r-5 { animation-delay: 560ms; }
+.r-6 { animation-delay: 680ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
 /* ───────────────────────────────────────────────────────────────────
    Pleno Med · editorial private-banking
    ─────────────────────────────────────────────────────────────────── */

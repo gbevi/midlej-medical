@@ -13,27 +13,37 @@
    sticky. */
 html:has(.midlej-mentoria),
 body:has(.midlej-mentoria) {
-  background: var(--ink-graphite);
+  background: var(--color-ink);
 }
 
 .midlej-mentoria {
-  /* Manrope em todo o sistema — display e sans. Mesmo família da landing
-     original Pleno Med. Itálico do <em> = peso 500 (Manrope synthetic
-     italic deforma muito; o original já adota essa solução). */
-  --cs-font-display: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
-  --cs-font-sans: var(--font-manrope), system-ui, sans-serif;
+  /* Tipografia: usa fonte da marca (Bricolage Grotesque) carregada
+     no root via --font-brand. --cs-font-display e --cs-font-sans são
+     a mesma família — a hierarquia vem das classes .t-* da marca. */
+  --cs-font-display: var(--font-brand), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cs-font-sans: var(--font-brand), system-ui, sans-serif;
 
-  --cs-ink: var(--ink-graphite);
-  --cs-ink-deep: var(--ink-graphite-deeper);
-  --cs-paper: var(--body-warm-off-white);
-  --cs-paper-raised: var(--surface-raised);
-  --cs-text: var(--ink-text);
-  --cs-muted: var(--text-muted-on-body);
-  --cs-muted-ink: var(--text-muted-on-ink);
-  --cs-rule: var(--rule-faint);
-  --cs-rule-ink: var(--rule-on-ink);
-  --cs-clay: var(--accent-clay);
-  --cs-clay-deep: var(--accent-clay-deeper);
+  /* Paleta: aponta direto pros tokens da marca Midlej. */
+  --cs-ink: var(--color-ink);                 /* navy #062241 */
+  --cs-ink-deep: oklch(12% 0.04 240);          /* hover do primary */
+  --cs-paper: var(--color-paper);
+  --cs-paper-raised: var(--color-bone);
+  --cs-text: var(--color-ink);                 /* texto principal = navy */
+  --cs-muted: var(--color-ink-soft);
+  --cs-muted-ink: var(--color-on-ink-mute);    /* texto secundário sobre ink */
+  --cs-rule: var(--color-line);
+  --cs-rule-ink: var(--color-line-on-ink);
+  --cs-clay: var(--color-emphasis);            /* OXBLOOD — substitui warm clay */
+  --cs-clay-deep: oklch(40% 0.115 30);
+
+  /* Alphas derivados (compat com mentoria.css existente). */
+  --ring-clay-soft: oklch(46% 0.115 30 / 0.25);
+  --ring-clay-strong: oklch(46% 0.115 30 / 0.45);
+  --ink-border-faint: oklch(20% 0.04 240 / 0.18);
+  --ink-border-medium: oklch(20% 0.04 240 / 0.35);
+  --rule-on-ink-soft: var(--color-line-on-ink);
+  --rule-on-ink-strong: oklch(96.8% 0.010 78 / 0.32);
+  --rule-faint: var(--color-line);
 
   --cs-content-max: 1180px;
   --cs-prose-max: 60ch;
@@ -158,7 +168,7 @@ body:has(.midlej-mentoria) {
 }
 .cs-wordmark-scope {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   letter-spacing: -0.005em;
   font-size: 15px;
@@ -225,7 +235,7 @@ body:has(.midlej-mentoria) {
   max-width: 40ch;
   color: var(--cs-paper);
 }
-.cs-footer-statement em { color: var(--cs-clay); font-style: italic; }
+.cs-footer-statement em { color: var(--cs-clay); font-weight: 600; }
 .cs-footer-rule {
   height: 1px;
   background: var(--cs-rule-ink);
@@ -288,7 +298,7 @@ body:has(.midlej-mentoria) {
   letter-spacing: -0.022em;
   max-width: 18ch;
 }
-.cs-display em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.cs-display em { color: var(--cs-clay); font-weight: 600; }
 .cs-section--ink .cs-display em { color: var(--cs-clay); }
 
 .cs-headline {
@@ -299,11 +309,11 @@ body:has(.midlej-mentoria) {
   letter-spacing: -0.015em;
   max-width: 22ch;
 }
-.cs-headline em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.cs-headline em { color: var(--cs-clay); font-weight: 600; }
 
 .cs-lede {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 300;
   font-size: clamp(1.125rem, 1.8vw, 1.5rem);
   line-height: 1.45;
@@ -532,7 +542,7 @@ body:has(.midlej-mentoria) {
   border-top: 1px solid color-mix(in oklch, var(--cs-clay) 60%, transparent);
   max-width: 36ch;
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: 15.5px;
   line-height: 1.55;
@@ -540,7 +550,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-raiox-hero-stat em {
   color: var(--cs-clay);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
 }
 .lp-raiox-hero > .cs-container { position: relative; z-index: 3; }
@@ -594,7 +604,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-raiox-laudo-id {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   color: var(--cs-text);
@@ -602,7 +612,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-raiox-laudo-patient {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.4;
@@ -626,7 +636,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-raiox-laudo-row dt {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 16px;
   color: var(--cs-clay);
   line-height: 1;
@@ -649,7 +659,7 @@ body:has(.midlej-mentoria) {
   background: color-mix(in oklch, var(--cs-clay) 6%, transparent);
 }
 .lp-raiox-laudo-row--highlight dd em {
-  font-style: italic;
+  font-style: normal;
   color: var(--cs-clay);
   font-weight: 500;
 }
@@ -686,7 +696,7 @@ body:has(.midlej-mentoria) {
   color: var(--cs-paper);
   max-width: 42ch;
 }
-.lp-raiox-pitch p em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.lp-raiox-pitch p em { color: var(--cs-clay); font-weight: 600; }
 
 /* O quê o raio-x revela — paper, table-of-findings */
 .lp-raiox-revela h2 { max-width: 18ch; }
@@ -714,7 +724,7 @@ body:has(.midlej-mentoria) {
   left: -68px;
   top: clamp(24px, 3.5vw, 36px);
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: 40px;
   line-height: 1;
@@ -789,7 +799,7 @@ body:has(.midlej-mentoria) {
 .lp-raiox-wa-sub {
   margin: 0;
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 14.5px;
   color: var(--cs-muted);
 }
@@ -1029,7 +1039,7 @@ body:has(.midlej-mentoria) {
 .lp-ebook-chapter:last-child { border-bottom: 1px solid var(--cs-rule); }
 .lp-ebook-ch-num {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: 3rem;
   line-height: 1;
@@ -1047,7 +1057,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-ebook-ch-title {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1.125rem, 1.6vw, 1.5rem);
   font-weight: 400;
   letter-spacing: -0.008em;
@@ -1099,7 +1109,7 @@ body:has(.midlej-mentoria) {
 .lp-ebook-bridge .cs-eyebrow { color: var(--text-muted-on-ink); }
 .lp-ebook-bridge-text {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1rem, 1.6vw, 1.25rem);
   line-height: 1.5;
   color: var(--cs-paper);
@@ -1136,7 +1146,7 @@ body:has(.midlej-mentoria) {
 .lp-ebook-inline-input::placeholder {
   color: var(--cs-muted, var(--cs-muted-ink));
   opacity: 0.55;
-  font-style: italic;
+  font-style: normal;
 }
 .lp-ebook-inline-input:focus {
   border-bottom-color: var(--cs-clay);
@@ -1190,7 +1200,7 @@ body:has(.midlej-mentoria) {
   line-height: 1.03;
   max-width: 16ch;
 }
-.lp-sim-hero h1 em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.lp-sim-hero h1 em { color: var(--cs-clay); font-weight: 600; }
 .lp-sim-hero .cs-lede { margin-top: 28px; color: var(--cs-muted-ink); }
 
 /* Painel do simulador — paper, vira o ferramentão */
@@ -1261,7 +1271,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-sim-output-sentence {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1rem, 1.6vw, 1.25rem);
   color: var(--cs-muted-ink);
   line-height: 1.5;
@@ -1360,7 +1370,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-sim-slider-value {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   color: var(--cs-clay);
   font-size: 18px;
   font-variant-numeric: lining-nums tabular-nums;
@@ -1370,7 +1380,7 @@ body:has(.midlej-mentoria) {
 .lp-sim-disclaimer {
   font-size: 12.5px;
   color: var(--cs-muted);
-  font-style: italic;
+  font-style: normal;
   font-family: var(--cs-font-display);
   margin: 8px 0 0;
   line-height: 1.5;
@@ -1419,7 +1429,7 @@ body:has(.midlej-mentoria) {
   padding: 4px 0;
   margin-top: 4px;
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 16px;
   color: var(--cs-paper);
   border-bottom: 1px solid var(--cs-clay);
@@ -1448,7 +1458,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-sim-lead-prompt {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 16px;
   color: var(--cs-muted);
   margin: 0;
@@ -1463,7 +1473,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-sim-lead-success {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 18px;
   color: var(--cs-text);
   margin: 0 0 16px;
@@ -1485,7 +1495,7 @@ body:has(.midlej-mentoria) {
   border: 0;
   padding: 0 0 2px;
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 16px;
   color: var(--cs-muted);
   cursor: pointer;
@@ -1535,7 +1545,7 @@ body:has(.midlej-mentoria) {
 .lp-sim-compare-year--muted { color: var(--cs-muted); }
 .lp-sim-compare-delta {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1rem, 1.6vw, 1.25rem);
   color: var(--cs-clay);
   white-space: nowrap;
@@ -1586,7 +1596,7 @@ body:has(.midlej-mentoria) {
   max-width: 16ch;
   margin-top: 24px !important;
 }
-.lp-planilha-hero h1 em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.lp-planilha-hero h1 em { color: var(--cs-clay); font-weight: 600; }
 .lp-planilha-hero .cs-lede {
   margin-top: 20px;
   font-size: clamp(1rem, 1.4vw, 1.125rem);
@@ -1631,7 +1641,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-planilha-section-mark {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   color: var(--cs-clay);
   font-size: 18px;
@@ -1659,7 +1669,7 @@ body:has(.midlej-mentoria) {
   color: var(--cs-muted);
   margin-top: 2px;
   letter-spacing: 0;
-  font-style: italic;
+  font-style: normal;
   font-family: var(--cs-font-display);
   font-weight: 400;
 }
@@ -1685,7 +1695,7 @@ body:has(.midlej-mentoria) {
 .lp-planilha-amount .cs-sim-prefix {
   padding: 0 2px 0 10px;
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 15px;
   color: var(--cs-muted);
   display: inline-flex;
@@ -1742,7 +1752,7 @@ body:has(.midlej-mentoria) {
 .lp-planilha-total .cs-eyebrow { color: var(--cs-muted-ink); }
 .lp-planilha-total strong {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: clamp(1.25rem, 2vw, 1.625rem);
   color: var(--cs-paper);
@@ -1751,7 +1761,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-planilha-total-meta {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: 13.5px;
   color: var(--cs-muted-ink);
 }
@@ -1855,7 +1865,7 @@ body:has(.midlej-mentoria) {
   letter-spacing: -0.025em;
   max-width: 18ch;
 }
-.lp-alt-hero h1 em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.lp-alt-hero h1 em { color: var(--cs-clay); font-weight: 600; }
 .lp-alt-hero .cs-lede {
   margin-top: 36px;
   color: var(--cs-muted-ink);
@@ -1873,7 +1883,7 @@ body:has(.midlej-mentoria) {
 .lp-alt-pullquote {
   position: relative;
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: clamp(1.625rem, 3.6vw, 2.75rem);
   line-height: 1.25;
@@ -1895,7 +1905,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-alt-pullquote p { margin: 0; }
 .lp-alt-pullquote p + p { margin-top: 0.4em; }
-.lp-alt-pullquote em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.lp-alt-pullquote em { color: var(--cs-clay); font-weight: 600; }
 .lp-alt-pullquote-attr {
   display: block;
   margin-top: 28px;
@@ -1963,7 +1973,7 @@ body:has(.midlej-mentoria) {
 }
 .lp-alt-scenario-date .year {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   color: var(--cs-clay);
   font-size: clamp(2.5rem, 4vw, 3.5rem);
@@ -2041,7 +2051,7 @@ body:has(.midlej-mentoria) {
   margin-top: 28px;
   max-width: 56ch;
 }
-.lp-alt-explainer .cs-prose em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.lp-alt-explainer .cs-prose em { color: var(--cs-clay); font-weight: 600; }
 
 /* Comparador-final form (alt) — same paper form */
 .lp-alt-cta {
@@ -2079,7 +2089,7 @@ body:has(.midlej-mentoria) {
   line-height: 1.05;
   max-width: 20ch;
 }
-.cs-index-hero h1 em { color: var(--cs-clay); font-style: italic; font-weight: 400; }
+.cs-index-hero h1 em { color: var(--cs-clay); font-weight: 600; }
 .cs-index-hero .cs-lede { margin-top: 32px; color: var(--cs-muted-ink); max-width: 50ch; }
 .cs-index-portas { background: var(--cs-paper); padding: clamp(72px, 10vw, 120px) 0; }
 .cs-index-porta {
@@ -2093,7 +2103,7 @@ body:has(.midlej-mentoria) {
 .cs-index-porta:last-child { border-bottom: 1px solid var(--cs-rule); }
 .cs-index-porta-num {
   font-family: var(--cs-font-display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   font-size: 28px;
   color: var(--cs-clay);

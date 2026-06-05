@@ -1,7 +1,27 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "./globals.css";
 
+/**
+ * Bricolage Grotesque — fonte oficial da marca Midlej Capital.
+ *
+ * Variable font com eixos `opsz` (optical size) e `wdth` (width). Toda a
+ * hierarquia tipográfica do site (display / lede / body / mono / caps)
+ * é construída sobre essas duas axes, definidas em globals.css nas
+ * classes .t-*.
+ */
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-brand",
+  subsets: ["latin"],
+  axes: ["opsz", "wdth"],
+  display: "swap",
+});
+
+/**
+ * Manrope segue carregada porque a LP original do Pleno Med (em /plenomed)
+ * usa --font-manrope em globals.css. Quando o Pleno Med for migrado pra
+ * Bricolage também, removemos esta importação.
+ */
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -10,28 +30,43 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Pleno Med · Capital sob a sua escala de plantões",
+  metadataBase: new URL("https://midlejcapital.com.br"),
+  title: {
+    default: "Midlej Capital · Hub de soluções financeiras",
+    template: "%s · Midlej Capital",
+  },
   description:
-    "Antecipação de recebíveis de plantão em 24h e crédito calibrado sobre a sua escala. Pleno Med é a operação de crédito médico da Midlej Capital.",
-  metadataBase: new URL("https://plenomed.com.br"),
+    "Mentoria, investimentos, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
   openGraph: {
-    title: "Pleno Med · Capital sob a sua escala de plantões",
+    title: "Midlej Capital",
     description:
-      "Antecipação em 24h e crédito sobre a escala. Operação Midlej Capital.",
+      "Hub de soluções financeiras. Sem produto da prateleira, sem comissão por venda.",
     type: "website",
     locale: "pt_BR",
   },
   robots: { index: true, follow: true },
 };
 
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F6F2EA" },
+    { media: "(prefers-color-scheme: dark)", color: "#062241" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={manrope.variable}>
-      <body>
-        <a href="#capital" className="skip-link">
-          Pular para o formulário
+    <html
+      lang="pt-BR"
+      className={`${bricolage.variable} ${manrope.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <a href="#main" className="skip-link">
+          Pular para o conteúdo
         </a>
         {children}
       </body>
