@@ -1,6 +1,6 @@
 import { MidlejMark } from "@/app/components/MidlejMark";
 
-export function ConsultoriaFooter() {
+export function MentoriaFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="cs-footer">
@@ -10,7 +10,7 @@ export function ConsultoriaFooter() {
             <MidlejMark height={44} />
           </div>
           <p className="cs-footer-statement">
-            A consultoria da <em>Midlej Capital</em> atende exclusivamente
+            A mentoria da <em>Midlej Capital</em> atende exclusivamente
             profissionais médicos no Brasil. Modelo de fee recorrente, sem
             comissão por produto.
           </p>
@@ -18,7 +18,7 @@ export function ConsultoriaFooter() {
         <div className="cs-footer-rule" />
         <div className="cs-footer-legal">
           <span>Midlej Capital · CNPJ 35.340.252/0001-44</span>
-          <span>© {year} Midlej Capital Consultoria. Uso interno e institucional.</span>
+          <span>© {year} Midlej Capital Mentoria. Uso interno e institucional.</span>
         </div>
       </div>
     </footer>

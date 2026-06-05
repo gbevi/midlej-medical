@@ -14,14 +14,17 @@
 type Props = {
   height?: number;
   className?: string;
-  /** When false, omits the PLENOMED sub-label (useful for compact contexts). */
+  /** When false, omits the sub-label (useful for compact contexts). */
   showSubmark?: boolean;
+  /** Sub-label text; defaults to "PLENOMED". E.g. "MENTORIA". */
+  submarkText?: string;
 };
 
 export function MidlejMark({
   height = 40,
   className,
   showSubmark = true,
+  submarkText = "PLENOMED",
 }: Props) {
   return (
     <svg
@@ -92,7 +95,7 @@ export function MidlejMark({
               textRendering: "geometricPrecision",
             }}
           >
-            PLENOMED
+            {submarkText}
           </text>
         </>
       )}

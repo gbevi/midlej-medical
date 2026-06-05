@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ConsultoriaHeader } from "./_components/ConsultoriaHeader";
-import { ConsultoriaFooter } from "./_components/ConsultoriaFooter";
+import { MentoriaHeader } from "./_components/MentoriaHeader";
+import { MentoriaFooter } from "./_components/MentoriaFooter";
 
 const PORTAS = [
   {
@@ -35,10 +35,10 @@ const PORTAS = [
   },
 ];
 
-export default function ConsultoriaIndex() {
+export default function MentoriaIndex() {
   return (
     <>
-      <ConsultoriaHeader scope="Cinco portas, um corredor" />
+      <MentoriaHeader />
       <section className="cs-index-hero">
         <div className="cs-container">
           <span className="cs-eyebrow">Plano de aquisição · médicos</span>
@@ -49,7 +49,7 @@ export default function ConsultoriaIndex() {
           <p className="cs-lede">
             Cada porta atende um momento diferente do médico que pensa na própria
             carteira. Todas levam ao mesmo destino: um diagnóstico gratuito,
-            assinado pela mesa.
+            assinado.
           </p>
         </div>
       </section>
@@ -64,7 +64,7 @@ export default function ConsultoriaIndex() {
                 <p>{p.desc}</p>
               </div>
               <Link
-                href={`/consultoria/${p.slug}`}
+                href={`/mentoria/${p.slug}`}
                 className="cs-link-underline cs-index-porta-cta"
               >
                 Abrir <span aria-hidden="true">→</span>
@@ -74,7 +74,7 @@ export default function ConsultoriaIndex() {
         </div>
       </section>
 
-      <ConsultoriaFooter />
+      <MentoriaFooter />
     </>
   );
 }
