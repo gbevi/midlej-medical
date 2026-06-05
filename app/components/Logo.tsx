@@ -19,7 +19,7 @@
 type Tone = "light" | "dark";
 
 const PALETTE: Record<Tone, { body: string; accent: string }> = {
-  light: { body: "#062241", accent: "#2D5871" },
+  light: { body: "#233853", accent: "#2D5871" },
   dark: { body: "#FFFFFF", accent: "rgba(255,255,255,0.62)" },
 };
 

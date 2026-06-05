@@ -1,340 +1,331 @@
-<!-- SEED: components, exact spacing, and signature patterns get refined once code exists. Re-run $impeccable document after implementation to capture the real component layer. -->
 ---
-name: Pleno Med
-description: A medical-credit hub by Midlej Capital, designed as private-banking-discreto for the brasileiro plantonista.
+name: Midlej Capital
+description: Hub privado de planejamento financeiro. Sistema de marca aplicado a /, /investimentos, /mentoria/* e (em breve) /plenomed/*.
 colors:
-  ink-graphite: "oklch(0.18 0.01 240)"
-  ink-graphite-deeper: "oklch(0.12 0.01 240)"
-  ink-text: "oklch(0.20 0.01 240)"
-  body-warm-off-white: "oklch(0.97 0.005 80)"
-  surface-raised: "oklch(0.99 0.004 80)"
-  rule-faint: "oklch(0.86 0.005 80)"
-  rule-on-ink: "oklch(0.32 0.01 240)"
-  text-muted-on-body: "oklch(0.42 0.01 240)"
-  text-muted-on-ink: "oklch(0.78 0.01 240)"
-  accent-warm-clay: "oklch(0.55 0.12 35)"
-  accent-clay-deeper: "oklch(0.48 0.13 30)"
+  ink:               "#233853"
+  ink-2:             "#4a6b8c"
+  paper:             "oklch(96.8% 0.010 78)"
+  bone:              "oklch(94.5% 0.014 78)"
+  bone-2:            "oklch(91% 0.018 78)"
+  ink-soft:          "oklch(48% 0.040 240)"
+  ink-mute:          "oklch(62% 0.020 240)"
+  emphasis-oxblood:  "oklch(46% 0.115 30)"
+  line:              "oklch(20% 0.04 240 / 0.14)"
+  line-soft:         "oklch(20% 0.04 240 / 0.07)"
+  line-strong:       "oklch(20% 0.04 240 / 0.28)"
+  on-ink-strong:     "oklch(96.8% 0.010 78)"
+  on-ink-soft:       "oklch(96.8% 0.010 78 / 0.68)"
+  on-ink-mute:       "oklch(96.8% 0.010 78 / 0.62)"
+  line-on-ink:       "oklch(96.8% 0.010 78 / 0.18)"
 typography:
-  display:
-    fontFamily: "'Spectral', 'Source Serif 4', Georgia, serif"
-    fontSize: "clamp(2.5rem, 7.2vw, 5.5rem)"
-    fontWeight: 500
-    lineHeight: 1.05
-    letterSpacing: "-0.015em"
-  headline:
-    fontFamily: "'Spectral', 'Source Serif 4', Georgia, serif"
-    fontSize: "clamp(2rem, 4.6vw, 3.5rem)"
-    fontWeight: 500
-    lineHeight: 1.05
-    letterSpacing: "-0.012em"
-  numerals:
-    fontFamily: "'Spectral', 'Source Serif 4', Georgia, serif"
-    fontSize: "clamp(1.875rem, 4vw, 3rem)"
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: "-0.005em"
-    fontFeature: "'lnum', 'tnum'"
-  title:
-    fontFamily: "'Manrope', system-ui, sans-serif"
-    fontSize: "clamp(1.125rem, 1.4vw, 1.25rem)"
-    fontWeight: 600
-    lineHeight: 1.3
-    letterSpacing: "-0.01em"
-  body:
-    fontFamily: "'Manrope', system-ui, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: "-0.005em"
-  body-on-ink:
-    fontFamily: "'Manrope', system-ui, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 400
-    lineHeight: 1.7
-    letterSpacing: "-0.005em"
-  label:
-    fontFamily: "'Manrope', system-ui, sans-serif"
-    fontSize: "0.8125rem"
-    fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: "0.02em"
+  family:            "Bricolage Grotesque (variable, axes: opsz + wdth)"
+  fallback:          "ui-sans-serif, system-ui, sans-serif"
+  display:           "wdth 92, opsz 96, weight 600, line-height 0.96, tracking -0.028em"
+  display-light:     "wdth 100, opsz 96, weight 300, line-height 1.02, tracking -0.022em"
+  quote:             "wdth 100, opsz 48, weight 300, line-height 1.18, tracking -0.012em"
+  lede:              "wdth 100, opsz 36, weight 400, line-height 1.45, tracking -0.005em"
+  body:              "wdth 100, opsz 16, weight 400, line-height 1.6, tracking 0"
+  mono:              "wdth 100, opsz 14, weight 500, tnum + lnum, tracking 0.01em"
+  caps:              "weight 500, tracking 0.14em, uppercase, 0.7rem"
 rounded:
-  none: "0px"
-  xs: "2px"
-  sm: "4px"
-  md: "6px"
+  default:           "0px (square)"
+  rare-corner:       "2px (cards SVG internos apenas)"
 spacing:
-  hairline: "1px"
-  xs: "6px"
-  sm: "12px"
-  md: "20px"
-  lg: "32px"
-  xl: "56px"
-  xxl: "96px"
-  section: "clamp(96px, 12vw, 160px)"
-components:
-  button-primary:
-    backgroundColor: "{colors.ink-graphite}"
-    textColor: "{colors.body-warm-off-white}"
-    typography: "{typography.label}"
-    rounded: "{rounded.sm}"
-    padding: "16px 28px"
-  button-primary-hover:
-    backgroundColor: "{colors.ink-graphite-deeper}"
-  button-primary-on-ink:
-    backgroundColor: "{colors.body-warm-off-white}"
-    textColor: "{colors.ink-graphite}"
-    typography: "{typography.label}"
-    rounded: "{rounded.sm}"
-    padding: "16px 28px"
-  input-field:
-    backgroundColor: "{colors.body-warm-off-white}"
-    textColor: "{colors.ink-text}"
-    typography: "{typography.body}"
-    rounded: "{rounded.sm}"
-    padding: "14px 16px"
+  hairline:          "1px"
+  micro:             "8px"
+  sm:                "16px"
+  md:                "24px"
+  lg:                "40px"
+  xl:                "64px"
+  section:           "clamp(96px, 12vw, 160px) — vertical de seção"
+  reading-max:       "1400px"
+buttons:
+  shape:             "Quadrado, padding 1rem × 1.5rem, sem border-radius"
+  primary:           "bg ink + text paper"
+  primary-inverse:   "bg paper + text ink (sobre ink)"
+  ghost:             "border-bottom 1px ink, transparente"
+  ghost-inverse:     "border-bottom 1px paper, transparente"
+hairlines:
+  on-body:           "1px var(--color-line)"
+  on-ink:            "1px var(--color-line-on-ink)"
+emphasis:
+  asterisk:          "oxblood, antes de quotes/aspas pra abertura editorial"
+  link-underline:    "currentColor, scaleX transition (left-to-right)"
+  focus-ring:        "2px oxblood + 3px offset, escopo [data-brand]"
 ---
 
-# Design System: Pleno Med
+# Design System: Midlej Capital
 
-## 1. Overview
+## 1. North Star
 
-**Creative North Star: "A nota fiscal numa mesa de mogno."**
+**"Banca privada-discreta, não fintech."**
 
-The page should feel like sitting across the desk from a discreet private banker in a quiet room — not like a fintech checkout. The aesthetic is *banco privado*, not *banco-tradicional* (gold, navy, marble) and not *fintech-moderno* (teal, chips, gradients). Deep ink graphite carries the hero, §I Duas soluções, the §IV closer, and the institutional footer; a warm off-white carries §II Como funciona and §III Por que. One warm clay accent appears sparingly — on the italic labels of §III claims, on the `<em>` emphasis in display headings, on link / CTA underlines, and on the focus ring. Serif display does the talking on headings; humanist sans handles everything else with calm, ample line-height. No section kickers. No oversized step numerals. No badges. No imagery. Spacing is generous on desktop and disciplined on mobile.
+A marca opera no registro de uma banca privada de planejamento financeiro: instrumentos editoriais, tipografia carregando autoridade, números falando alto, oxblood usado raramente como pontuação. A interface deve sentir-se como um instrumento financeiro materializado, não como um produto SaaS.
 
-This system explicitly rejects the four anti-references named in PRODUCT.md: the generic fintech teal/cyan family, the stock-photo médico cliché, SaaS-template scaffolding (4-up benefit cards, numbered 01/02/03 cards, "transform your X" prose), and the gold-and-navy traditional-bank look. The page should be unguessable from the category alone: nothing on it should announce "fintech landing page."
+Recusas explícitas:
+- Fintech teal/cyan, gradientes coloridos, botões arredondados >4px
+- Stock-photo de "consultor sorrindo" ou prédios corporativos
+- SaaS scaffolding (4-up benefit cards, kicker eyebrows decorativos, prosa "transform your X")
+- Gold + navy banca-tradicional, texturas mármore, ornamentos
+- Ícones genéricos sem contexto
 
-**Key Characteristics:**
-- Drenched private-banking ink for the hero, §I Duas soluções, the §IV closer, and the institutional footer
-- Warm off-white for §II Como funciona, §III Por que, and the form panel
-- Serif display + (aspirational) serif numerics — typography is the visual system
-- A single warm-clay accent, used as ink, never as decoration
-- Generous fluid spacing; one strong rule line where most pages would put a card
-- No section scaffolding: no numbered kickers, no oversized step numerals, no eyebrows
-- Motion is restrained: the hero entrance, three on-scroll list / quote reveals, and one form-success entrance. Nothing else animates on scroll.
+A página deve ser inadivinhável a partir da categoria. Um usuário que abrir `/` ou `/investimentos` deve sentir que aterrissou num documento curado, não num template.
 
-## 2. Colors
+## 2. Cores
 
-The palette is a Committed strategy anchored on ink. One deep surface, one warm body, one accent that only touches numbers.
+A paleta é drenched ink ancorada no navy. Uma única superfície profunda (ink), duas superfícies claras (paper + bone), um acento raro de oxblood.
 
-### Primary
-- **Ink Graphite** (`oklch(0.18 0.01 240)`): The hero surface and the final-CTA surface. Carries roughly 40–50% of the visible page. Reads near-black with a barely-cool tilt — anti-warm, anti-fintech-blue. Where the page makes its strongest claims, it makes them on this color.
-- **Ink Graphite Deeper** (`oklch(0.12 0.01 240)`): Reserved for hover states on the primary button and as a paired darker stripe inside the ink surface when separation is needed without a card.
+### Primárias
 
-### Secondary
-- **Warm Clay Accent** (`oklch(0.55 0.12 35)`): The single accent. Touches exactly **one word of text on the entire page** — the italic `<em>capital</em>` in the hero h1. Beyond that one word, clay is reserved for UI accents only: the 1px underline beneath inline links, the bottom-border on the hero CTA and header CTA, the `::selection` background, and the focus ring (at 30–45% alpha). Never used as a background fill. Never used on a button. Never tints headings, claim labels, sub-marks, or footer text. **Aspirational**: when the worked-example surface ships, clay extends to mark every R$ / % / date on it.
-- **Clay Deeper** (`oklch(0.48 0.13 30)`): Hover state for inline links.
+- **Ink** (`#233853`): o navy oficial da marca. Carrega ~40–50% da superfície visível em qualquer rota. Header fixed, hero, seções de prova (depoimentos, CTA final), footer institucional. Tom escolhido pra ter melhor contraste com paper sem virar preto puro.
+- **Ink-2** (`#4a6b8c`): secundário do diamante do logo. Não usar em texto.
 
-### Neutral
-- **Body Warm Off-White** (`oklch(0.97 0.005 80)`): The off-white surfaces — §II Como funciona, §III Por que, and the form panel. A barely-warm tint, never confused with cream or sand.
-- **Surface Raised** (`oklch(0.99 0.004 80)`): Used inside the warm-off-white sections when a subtle inset is genuinely needed (e.g. the form panel). 2-step lift, not card.
-- **Ink Text** (`oklch(0.20 0.01 240)`): Body text on warm-off-white. ≥4.5:1 contrast verified.
-- **Text Muted on Body** (`oklch(0.42 0.01 240)`): Secondary text on warm-off-white (e.g. form helper text). ≥4.5:1 still required — not light-gray-for-elegance.
-- **Text Muted on Ink** (`oklch(0.78 0.01 240)`): Secondary text on ink surface. Generous line-height (+0.05) per impeccable.
-- **Rule Faint** (`oklch(0.86 0.005 80)`): The hairline that replaces card borders on body sections.
-- **Rule on Ink** (`oklch(0.32 0.01 240)`): The hairline on ink surfaces.
+### Claras
 
-### Named Rules
+- **Paper** (`oklch(96.8% 0.010 78)`): off-white warm com tilt navy. Background base de seções editorial (`bg-paper`). Texto sobre ink usa esta cor.
+- **Bone** (`oklch(94.5% 0.014 78)`): paper rebaixado um passo, para seções que precisam de variação rítmica sem virar branco-cinza. Usado uma vez por página como "respiração intermediária".
+- **Bone-2** (`oklch(91% 0.018 78)`): hover de cards de bone, raro.
 
-**The Ink-or-Off-White Rule.** Every section is either ink-graphite OR warm-off-white. No third surface color. No mid-tones. No tinted cards floating on either. Two surfaces, hard cut between them, ruled hairline at the join.
+### Emphasis: Oxblood
 
-**The One-Word-Of-Clay Rule.** Only one word of body text on the entire page is ever clay: the italic `<em>capital</em>` in the hero h1. That single word is the brand's whole color statement. Every other instance of clay on the page is a UI accent (link underline, CTA underline, focus ring, selection background). No clay on claim labels, sub-headings, italic emphasis elsewhere, footer text, badges, tags, or numerals. The rule isn't "use clay sparingly" — it's "use clay on one word, then never again as text." If you'd reach for clay as text color anywhere else, use ink instead.
+- **Emphasis** (`oklch(46% 0.115 30)`): vermelho-vinho. **<1% da superfície da página**. Usado em:
+  - Asterisco `*` antes de quotes
+  - Numerais romanos de etapas (I, II, III) em seções editoriais
+  - Tag/eyebrow de seções (`Manifesto`, `Como conduzimos`)
+  - Hairline sob link no hover
+  - Focus ring (`focus-visible`)
+  - Acentos em viz SVG (cursor da timeline, borda highlight da matrix, shells dos nós 3D)
 
-**The No-Tinted-Card Rule.** Floating cards with subtle gray-blue backgrounds are forbidden. If a section needs grouping, use rule lines and spacing. If it needs separation, switch surfaces (ink ↔ off-white).
+Nunca usar oxblood em:
+- Backgrounds de seção (jamais como fill grande)
+- Texto de corpo
+- Botões (botões são sempre ink ou inverse, nunca oxblood)
 
-## 3. Typography
+### Texto
 
-**Display Font:** Spectral (Production Type, via Google Fonts), with Source Serif 4 and Georgia as fallback
-**Body Font:** Manrope (with system-ui and sans-serif as fallback)
-**Numerals Font:** Spectral with `font-feature-settings: 'lnum', 'tnum'` for lining tabular figures on every R$/percentage/date (aspirational — see §8)
+- **Ink** (`#233853`): texto principal sobre paper/bone
+- **Ink-soft** (`oklch(48% 0.040 240)`): secundário sobre paper
+- **Ink-mute** (`oklch(62% 0.020 240)`): terciário sobre paper (eyebrows mono, captions)
+- **On-ink-strong** (`oklch(96.8% 0.010 78)`): texto principal sobre ink
+- **On-ink-soft** (`/ 0.68`): secundário sobre ink
+- **On-ink-mute** (`/ 0.62`): terciário sobre ink
 
-**Character:** Spectral is a contemporary humanist serif designed for screen reading. Moderate stroke contrast (warmer and more organic than Bodoni's Didone extremes), rounded terminals, broad humanist letterforms. The italic is a true italic — distinctly cursive, not just a sloped roman — which lets `<em>` emphasis carry real voice. Manrope underneath is calm, humanist, and modern enough to read as 2026, not 1996. The pair has commitment and warmth; it deliberately avoids Fraunces, Cormorant, Playfair, and the rest of the reflex-reject list. Neither family has been hand-waved.
+### Hairlines
 
-**Why Spectral over Bodoni Moda:** the original pick (Bodoni Moda) carried Didone authority but read as cold and formal — closer to a fashion magazine than a private-banking conversation. Spectral keeps the serifed gravitas while bringing the warmth of a humanist serif. It also handles small sizes (form labels, footer microcopy) better than a Didone, which can look anemic below 14px.
-
-### Hierarchy
-
-- **Display** (Bodoni Moda 500, `clamp(2.75rem, 6vw, 5.25rem)`, line-height 1.02, letter-spacing −0.02em): hero h1 and the final-CTA h2 only. Ceiling is honored: under 6rem. Tracking floor is honored: not tighter than −0.04em.
-- **Headline** (Bodoni Moda 500, `clamp(1.75rem, 3.2vw, 2.5rem)`, line-height 1.1, letter-spacing −0.015em): the per-section h2 (Duas soluções, Como funciona, Por que, Capital).
-- **Numerals** (Bodoni Moda 500, `clamp(1.875rem, 4vw, 3rem)`, line-height 1, `lnum tnum`) — **aspirational, not shipped**. Reserved for a future worked-example surface where R$ / % / date carry the work. The `.num` utility class is wired in CSS, awaiting copy.
-- **Title** (Manrope 600, `clamp(1.125rem, 1.4vw, 1.25rem)`, line-height 1.3): inline subtitles, FAQ questions.
-- **Body** (Manrope 400, `1.0625rem` (17px), line-height 1.6, max-width 60–68ch): all running prose on warm-off-white. The 17px floor is deliberate — financial prose loses authority at 15px.
-- **Body on Ink** (Manrope 400, `1.0625rem`, line-height 1.7): the same body, +0.1 line-height on ink surfaces per impeccable's light-on-dark rule.
-- **Label** (Manrope 500, `0.8125rem`, letter-spacing 0.02em): used on CNPJ + copyright microcopy in the footer and on form helper text. No all-caps except where it labels a single word (e.g. "CRM/UF").
+- **Line** (`oklch(20% 0.04 240 / 0.14)`): hairline padrão em paper/bone
+- **Line-strong** (`/ 0.28`): hairline com mais peso (raro)
+- **Line-on-ink** (`oklch(96.8% 0.010 78 / 0.18)`): hairline sobre ink, paper-color translúcido
 
 ### Named Rules
 
-**The Serif-Is-For-Numbers Rule.** Bodoni earns its place on (1) headings and (2) every numeric value (R$, %, date). Nowhere else. A serif phrase in body copy is forbidden; that's what Manrope is for. Numerics in sans are forbidden; that's what Bodoni is for. The split is the discipline.
+**The Ink-or-Paper Rule.** Toda seção é ou ink ou paper (ou bone como variação editorial). Nenhuma terceira surface intermediária. Sem gradientes entre seções. A transição é por borda hairline ou por hard cut.
 
-**The 17px Body Floor.** Body text never drops below 17px on the page. Financial copy at 14–15px reads as the body of a Terms-and-Conditions document. We are not that.
+**The One-Percent-of-Oxblood Rule.** Se você puser oxblood em mais de 1% da área visível da seção, você errou. Use ink para tudo que não for asterisco, numeral romano, hover de link, ou viz accent. Oxblood é pontuação, não pintura.
 
-**The No-All-Caps-Sentence Rule.** Uppercase is reserved for tightly tracked labels of ≤4 words (one-word "CRM", "CET", "LGPD" inline are allowed). No section eyebrows, no all-caps headings, no all-caps badges. The 2023 kicker is on the saturated-AI-grammar list; not here.
+**The No-Tinted-Card Rule.** Cards com background tintado (gray-blue, paper-elevated, etc) são proibidos. Para separar conteúdo, use hairlines + espaço. Para escalar separação, inverta superfície (paper ↔ ink).
 
-## 4. Elevation
+## 3. Tipografia
 
-Flat by default. Depth comes from surface switches (ink ↔ off-white) and from hairlines, not from shadows. The page should look like one printed sheet of cardstock with one folded section, not like a stack of floating panels.
+**Fonte única:** Bricolage Grotesque (variable, axes `opsz` + `wdth`). Carregada via `next/font/google` com variável `--font-brand`.
 
-### Shadow Vocabulary
+Toda hierarquia tipográfica vem de **peso × largura × tamanho ótico × escala**. Sem mistura serif/sans. Sem itálico (Bricolage não tem axis slant; itálico sintético deforma o glifo).
 
-There is no decorative shadow vocabulary. Two tiny exceptions, each functional:
+### Classes de utilidade (em `globals.css`)
 
-- **Focus Ring** (`box-shadow: 0 0 0 3px oklch(0.55 0.12 35 / 0.35)`): the warm-clay focus state on inputs and buttons. Replaces both the default browser ring and any decorative border-color flicker. Accessibility, not decoration.
-- **Form Lift** (`box-shadow: 0 1px 0 oklch(0.86 0.005 80)`): a single hairline shadow that quietly grounds the form panel against the warm-off-white background. Counts as a rule line, not as a card.
+| Classe | Uso |
+|---|---|
+| `.t-display` | wdth 92 + opsz 96, weight 600, `letter-spacing: -0.028em`, `line-height: 0.96`. H1, H2 dominantes. |
+| `.t-display-light` | wdth 100 + opsz 96, weight 300, `letter-spacing: -0.022em`, `line-height: 1.02`. Subtítulos display, números editoriais. |
+| `.t-quote` | wdth 100 + opsz 48, weight 300, `letter-spacing: -0.012em`, `line-height: 1.18`. Quotes editoriais, manifesto. |
+| `.t-lede` | wdth 100 + opsz 36, weight 400. Parágrafo introdutório de seção. |
+| `.t-body` | wdth 100 + opsz 16, weight 400, `line-height: 1.6`. Texto corrido. **Mínimo 16px**. |
+| `.t-mono` | weight 500, `lnum` + `tnum`, `letter-spacing: 0.01em`. Eyebrows tracked-uppercase, números. |
+| `.t-caps` | weight 500, `tracking: 0.14em`, uppercase, 0.7rem. Tags pequenas. |
 
-### Named Rules
+### Tamanhos (`clamp` por convenção)
 
-**The No-Floating-Card Rule.** Soft shadows under cards are forbidden. The original LP's flat surface accidentally got this right; we keep that and harden it as doctrine. Hover effects on cards: do not lift; instead invert the surface (off-white → ink) or shift the rule to clay.
+| Slot | Range |
+|---|---|
+| Hero H1 | `clamp(2.4rem, 6vw, 5.25rem)` |
+| H2 grande | `clamp(2rem, 4.5vw, 3.75rem)` |
+| H2 médio | `clamp(1.875rem, 3.6vw, 3rem)` |
+| H3 | `clamp(1.25rem, 2vw, 1.625rem)` |
+| Quote dominante | `clamp(1.5rem, 3.2vw, 2.625rem)` |
+| Lede | `1.0625rem – 1.2rem` |
+| Body | `1rem – 1.0625rem` |
+| Mono / eyebrow | `0.66rem – 0.72rem` |
 
-**The Ghost-Card Refusal.** The impeccable codex-specific defect — 1px border + soft wide drop shadow on the same element — is forbidden absolutely. Pick a hairline OR a tiny focus ring; never both as decoration.
+### Regras
 
-## 5. Components
+**Sem itálico real ou sintético.** Bricolage não tem axis slant; `font-style: italic` rende glyphs torcidos. Emphasis no `<em>` global = `font-weight: 600` + `color: var(--color-emphasis)` (oxblood). Discreto, baseado em peso.
 
-(Seed: form, button, input, nav, and rule patterns are committed. The product-story timeline and FAQ patterns get codified once implemented and we re-run `$impeccable document`.)
+**Tracking inverso pra display.** `letter-spacing` negativo (-0.022em a -0.028em) em headings — Bricolage tem letras largas e o tracking apertado evita "espaço de Manrope".
 
-### Buttons
+**Numerais sempre `tabular-nums`.** Use `.t-mono`, `.t-display-light` com `tabular-nums` class, ou `font-variant-numeric: lining-nums tabular-nums` direto.
 
-- **Shape:** Tight rectangle (4px radius). Not pill. Not 12px+ rounded.
-- **Primary (on warm-off-white):** Ink-graphite background, off-white text, Manrope 500, label-size, letter-spacing 0.02em. Padding 16px × 28px. Hover: shift to ink-graphite-deeper. No transform, no lift, no shadow.
-- **Primary (on ink):** Inverted — off-white background, ink-graphite text. Same shape, same padding.
-- **Focus:** 3px warm-clay outer ring at 35% opacity. Visible on tab.
-- **Disabled:** 40% opacity, cursor not-allowed.
+**16px é o piso de texto.** `.t-body` em 1rem mínimo. Nunca cair pra 14/15 — copy financeira em <16px lê como letra miúda jurídica.
 
-### Inputs
+## 4. Botões e CTAs
 
-- **Style:** Off-white surface raised one step (`surface-raised`), 1px ink-text border at 14% opacity (`oklch(0.20 0.01 240 / 0.14)`), 4px radius. Label above, never floating-label.
-- **Typography:** Manrope 400 17px (matches body — financial inputs are not "form fields", they are statements of fact).
-- **Focus:** Border shifts to warm-clay; same 3px ring at 35% as buttons. No accent fill.
-- **Error:** Border shifts to ink-graphite (not red — red is fintech-vocabulary). Error message in 13px label-size beneath, prefixed with a small inline triangle SVG icon for color-blind accessibility.
-- **Helper text:** Manrope 400 13px, `text-muted-on-body`.
+**Sempre quadrado** (border-radius 0). Square buttons reforçam o registro de banca/instrumento. Pills arredondadas são SaaS.
 
-### Navigation
+| Classe | Contexto | Aparência |
+|---|---|---|
+| `.btn-primary` | Sobre paper/bone | bg ink, text paper, padding 1rem × 1.5rem |
+| `.btn-primary-inverse` | Sobre ink | bg paper, text ink |
+| `.btn-ghost` | Sobre paper | border-bottom 1px ink, transparente |
+| `.btn-ghost-inverse` | Sobre ink | border-bottom 1px paper, transparente |
 
-- **Shape:** Single sticky top bar, always ink. No nav links — left side: the Midlej icon mark + a hairline divider + the wordmark "PLENOMED" set in Bodoni Moda 500 at 20–22px (uppercase, the only intentional uppercase wordmark on the page). Right side: one anchor CTA ("Quero meu acesso", Manrope 500 label-size, no button styling — a 1px warm-clay underline.). The hit area for the CTA is expanded via pseudo-element to 44px without disturbing the underline.
-- **Scroll:** On scroll past 24px the bar condenses (padding + slightly deeper ink). Background and border-color transition only — no layout-property transitions.
-- **Mobile:** Same composition, no hamburger needed.
+Hover: translateY(-1px) + transition de bg (`260ms cubic-bezier(.2,.7,.2,1)`). Seta `→` translada 3px no hover.
 
-### Rule Lines
+### Anchor links e formulários
 
-- **On body:** 1px solid `rule-faint`, full-width or contained to the content max-width (set per section).
-- **On ink:** 1px solid `rule-on-ink`, same.
-- **Section rule:** Two-line treatment for major section openings — a 1px rule, 2px gap, another 1px rule. Earns its place at the masthead-style headings only.
+Todos os CTAs apontando pra `#contato` (ou outras âncoras) devem ser interceptados pelo `<SmoothAnchor />` no topo da página (client component). Ele:
+- `preventDefault()` no clique
+- `scrollIntoView({behavior:'smooth'})` no alvo
+- Mantém URL limpa (não escreve `#contato` na barra)
+- Faz o CTA funcionar N vezes seguidas
 
-### Form Panel
+`scroll-padding-top: 80px` no html garante que o destino aterrisse abaixo do header fixed.
 
-- **Surface:** `surface-raised` on warm-off-white, no shadow, hairline rule top and bottom. Not a card.
-- **Title:** No separate panel title — the section heading "A medicina é sua. *O capital, a gente organiza.*" carries it.
-- **Layout:** Single column, generous spacing. Labels above fields. No two-column layouts; financial forms are not address forms.
-- **Submit button:** Full-width on mobile, content-width on desktop. Label: "Pedir uma proposta".
-- **A11y:** On submit failure, focus moves to the first errored field. The honeypot field is offscreen, `aria-hidden`, `tabindex=-1`. Skip-link targets `#capital`.
+## 5. Surfaces e Composição
 
-### §III Claims Block
+### Pattern de página
 
-The Por que Pleno Med section replaces the SaaS 4-up benefit grid PRODUCT.md bans. Structure: section h2 → italic display lede → display-italic pull-quote → two `.claim` articles in a `.claims` list.
+Padrão de header → hero → manifesto/marcos → seções alternadas (ink/paper/bone) → contato → footer. Ritmo geral:
 
-- **Pull-quote:** Bodoni Moda 400, `clamp(1.5rem, 3vw, 2.25rem)`, max-width 36ch, no quotation marks; the typography is the quote.
-- **Claims:** Each `.claim` is a 2-column grid (label-left / prose-right, collapses to stacked at 880px). The label is an italic Bodoni Moda h3 in warm clay (e.g. *"Mesa dedicada ao plantonista."*). The prose is body Manrope with `text-muted-on-body` weight. Rule lines top and between. No cells, no cards.
+```
+HEADER (fixed, tone-aware)
+HERO ink
+MANIFESTO paper
+SEÇÃO ink
+SEÇÃO paper
+SEÇÃO ink
+SEÇÃO paper
+SEÇÃO ink
+SEÇÃO bone (1× por página, variação)
+SEÇÃO paper
+SEÇÃO ink
+CONTATO ink (form)
+FOOTER ink
+```
 
-### §II Flow Block
+O header fixed lê a `data-tone="dark"|"light"` de cada `<section>` via `getBoundingClientRect` em rAF e flipa **bg + texto + logo** com transição 300ms.
 
-The Como funciona section ships as a rule-divided `.flow` list (semantic `<ol>` for sequence, visual numerals suppressed). Each `.flow-step` is a 2-column grid: a sentence-act h3 left (Bodoni 500, e.g. *"O capital cai em 24h."*), supporting prose right. No oversized step numerals — the heading IS the beat.
+### Grid
 
-### Footer (Institutional Ink)
+12-col grid via Tailwind. `max-w-[1400px]` (reading-max). Padding horizontal: `px-6 md:px-12 lg:px-16`.
 
-- **Surface:** Ink-graphite (matches §IV closer; the two ink surfaces form the page's closing breath). Substantial padding (`clamp(72px, 9vw, 120px)` top, `clamp(40px, 5vw, 64px)` bottom).
-- **Layout:** 2-column grid at >720px (mark left, statement right), single column below. Legal microcopy sits in a full-width row under a hairline `rule-on-ink`.
-- **Mark:** MidlejMark at 44px height, in off-white.
-- **Statement:** Display Bodoni Moda 400, `clamp(1.5rem, 2.6vw, 2.125rem)`. "Pleno Med é a operação de crédito médico da *Midlej Capital*. Atende exclusivamente profissionais médicos no Brasil." Italic clay on "Midlej Capital" `<em>`.
-- **Legal:** Manrope 500 label-size, `text-muted-on-ink`. CNPJ, copyright. No nav grid, no link columns — those are the SaaS footer reflex this is refusing.
+Composições preferidas:
+- **12-col, asymmetric**: copy 7/12 + viz 5/12, ou vice-versa
+- **Full-width centered**: hero, marcos editoriais, manifesto quote
+- **2-col 50/50**: contato (texto + form)
 
-### Discreet "novo" Tag
-
-`.tag-novo` replaces the all-caps tracked badge originally specced. It's an italic Bodoni Moda inline mark at 0.55em, warm-clay, no border, no padding. Used once (on the §I "Crédito sobre a sua escala" h3).
+Evite: 3-col cards iguais (SaaS). Se precisar de 3 elementos paralelos (proof row, depoimentos), divide hairline-on-top + col-span-4.
 
 ## 6. Motion
 
-Restraint is the voice. The page has exactly **four motion moments** plus the existing micro-interactions; nothing else moves on scroll, hover, or click.
+**Restrained.** Quatro tipos de movimento no sistema:
 
-### Easing tokens
+### Reveal on load
 
-```css
---ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
---ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);   /* page default */
---ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
-```
+Hero entrance via `.reveal` + `.r-1` a `.r-6` (delays 80ms staggered). Slide-up `translateY(8px)` + fade. Failsafe: conteúdo é visível por default; animação roda apenas se classe `.reveal` estiver presente.
 
-No bounce, no elastic, no `cubic-bezier` with overshoot. All entrances ease-out only — the gesture decelerates into rest. Exit transitions, where they exist, run at ~75% of enter duration.
+### Scroll-driven (3D scenes + FullTimeline)
 
-### The four moments
+`useScrollProgress(containerRef)` hook em `app/_hub/lib/useScrollProgress.ts` escreve `0..1` em `progressRef.current` via rAF. As cenas three.js (Globe, AltLayers, PrevidenciaStack, WorkshopRoom) consomem o ref dentro de `useFrame` para mapear scroll → rotação, separação, ou ativação progressiva. A FullTimeline SVG usa o mesmo padrão com CSS custom property `--ft-p` e `calc()`.
 
-1. **Hero entrance.** `.hero-h1`, `.hero-sub`, `.hero-actions` fade-rise on load, staggered 0 / 90 / 180 ms, 700 ms each, `--ease-out-quint`. The page's signature opening gesture.
-2. **§I Duas soluções stagger.** When `.duas-grid` enters the viewport, its two `.produto` articles fade-rise with a 90 ms sibling stagger. Emphasizes the duality (the brand's whole pitch).
-3. **§II Como funciona stagger.** When `.flow` enters the viewport, its three `.flow-step` items fade-rise with a 90 ms sibling stagger. Earns its place because the section is literally an ordered sequence.
-4. **§III pull-quote solo reveal.** When the `.pull-quote` enters the viewport, it fades up as a single moment (no stagger), 800 ms `--ease-out-quint`. The pull-quote is the centerpiece; the reveal makes it the moment.
-5. **Form success entrance.** When `<LeadForm>` swaps to its success state, `.form-success` fades + rises 600 ms; the Bodoni numeral "I" delays 220 ms behind the container. This is the conversion moment; it deserves a careful gesture.
+### Tone-aware header
 
-### Micro-interaction layer (unchanged, just documented)
-
-- Header `data-scrolled` toggles background-color + border-color, 240 ms ease. No padding/layout transitions on the sticky bar.
-- Hero / header CTAs: color + border-color on hover, 180 ms ease; the arrow translates `+3–4px` on hover.
-- Form inputs: border-color + box-shadow on focus, 160 ms ease.
-- Buttons: background-color on hover, 180 ms `--ease-out-quint`.
-
-### Implementation pattern (reveal-on-scroll)
-
-- Server renders content **visible** by default. Never gates content visibility on a class that JS must add later.
-- An inline script in `<head>` adds `.reveal-ready` to `<html>` only if `IntersectionObserver` is supported.
-- CSS only hides pre-reveal state when `.reveal-ready` is present: `.reveal-ready [data-reveal="true"]:not([data-revealed="true"]) > .reveal-item { opacity: 0; transform: translateY(10px); }`.
-- `<RevealOnScroll />` (client component) observes every `[data-reveal="true"]` element and sets `data-revealed="true"` when it crosses the viewport at 15% threshold. Each element is unobserved after firing — this is a one-shot entrance, not a scroll-driven re-trigger.
-- Sibling stagger uses `--i: 0 | 1 | 2 …` on each child; the transition-delay is `calc(var(--i) * 90ms)`.
-- Failure modes: if JS doesn't run / IO isn't supported / hydration stalls, content stays visible. Sections never ship blank.
+Detecção via `getBoundingClientRect` em rAF a cada scroll. Última seção `[data-tone]` cujo top cruzou a linha do header define a tone. Bg + texto + logo transitam em 300ms.
 
 ### Reduced motion
 
-`@media (prefers-reduced-motion: reduce)` collapses every animation + transition to 0.01 ms via the standard `*, *::before, *::after` recipe. Hero entrance specifically sets `animation: none; opacity: 1; transform: none;` so it doesn't snap-flash. Reveal items are visible by default (`.reveal-ready` doesn't add anything to disable the hiding rule, but the transition-duration collapse makes the reveal effectively instant).
+`prefers-reduced-motion: reduce` → todas as cenas 3D caem para SVG estático. Reveal pula direto pro estado final. Smooth-scroll vira jump.
 
-### What we do **not** do
+### O que NÃO fazemos
 
-- No scroll-progress bars, no parallax, no scroll-jacking.
-- No fade-on-scroll for sections, headings, or paragraphs (only the four moments above).
-- No hover effects on the `.produto`, `.claim`, or `.flow-step` blocks — they aren't interactive and shouldn't suggest they are.
-- No spinner / loading icons. Form submit shows "Enviando…" text + `:disabled` dim; that's the loading affordance.
-- No micro-bounces, no scale-on-hover for cards, no card lift. The design system explicitly forbids both.
+- Parallax de imagens (não usamos imagens grandes)
+- Scroll-jacking
+- Loaders / spinners (estado vazio é "Carregando…" texto)
+- Hover lift em cards
+- Bouncing/elastic easings (`cubic-bezier(.2,.7,.2,1)` é o padrão — ease-out claro)
 
-## 7. Do's and Don'ts
+## 7. Componentes-chave
 
-### Do:
-- **Do** carry every claim with a name. "A operação é estruturada pela Midlej Capital" is the shape. "Operação regulada" alone is forbidden. Specific noun + concrete fact, not adjective.
-- **Do** put the warm clay accent on exactly ONE word of text — the italic `<em>capital</em>` in the hero h1. Everywhere else, clay is a UI accent only (link underline, CTA underline, focus ring, selection background). Italic emphasis elsewhere on the page stays in the parent text color.
-- **Do** set every R$ value, percentage, and date in Bodoni Moda with `lnum tnum` features — when the worked-example section ships. Until then, the `.num` class is wired and waiting.
-- **Do** keep body text at 17px floor with `text-wrap: pretty` on prose and `text-wrap: balance` on h1/h2/h3.
-- **Do** invert surfaces (off-white ↔ ink) to create separation. Two surfaces, hard cut, hairline at the join.
-- **Do** ship the form with LGPD consent checkbox + linked privacy policy + terms; never collect WhatsApp without explicit consent base.
-- **Do** respect `prefers-reduced-motion`. The single hero entrance and any link/button transition gets a crossfade fallback.
+### `HubHeader` (`app/_hub/HubHeader.tsx`)
+Header fixed client-component. Lê data-tone das seções, flipa estilo, contém logo + CTA "Pedir conversa". **NÃO duplicar em cada rota** — importar e usar uma vez por página.
 
-### Don't:
-- **Don't** use the **generic fintech teal/cyan** family. PRODUCT.md names this as anti-reference #1. No exceptions, including hover states or microcopy highlights.
-- **Don't** use **stock-photo médico clichés**. PRODUCT.md names smiling-doctor-with-stethoscope as anti-reference #2. This seed ships no imagery; if photography lands later, it is real and commissioned, not stock.
-- **Don't** build **SaaS-template scaffolding**: 4-up benefit cards, 3-step numbered process cards, badge rows, "transform your X" prose. PRODUCT.md names these as anti-reference #3.
-- **Don't** apply the **traditional-bank gold-and-navy aesthetic**. PRODUCT.md names this as anti-reference #4. Gold is forbidden; navy is forbidden; marble textures are forbidden.
-- **Don't** put a tiny uppercase tracked eyebrow above section headings. The 01/02/03 numbered card row is also forbidden as section scaffolding.
-- **Don't** pair a 1px border with a box-shadow blur ≥16px on the same element (the impeccable "ghost-card" defect).
-- **Don't** use border-radius ≥12px on cards, sections, or inputs. The cap is 6px; buttons and inputs sit at 4px.
-- **Don't** use border-left or border-right >1px as a colored stripe accent.
-- **Don't** use gradient text (`background-clip: text` on a gradient). Emphasis through weight and size.
-- **Don't** use Inter, DM Sans, Plus Jakarta Sans, Fraunces, Cormorant, Playfair, Instrument Sans, or any other reflex-reject family. The pick is committed: Bodoni Moda + Manrope.
-- **Don't** drop body text below 17px. Financial copy at 14–15px reads as terms-and-conditions, not as authority.
-- **Don't** write aphoristic-cadence body copy (the "serious statement, then punchy short rebuttal" rhythm). PRODUCT.md flags this; the rebuild rewrites every instance.
-- **Don't** reintroduce numbered section kickers (I./II./III./IV.) or oversized step numerals (01/02/03). The cut from the editorial-magazine reflex is deliberate; that lane is the saturated AI default of 2026 per `brand.md`. Section breaks happen via surface inversion + spacing, not labels.
-- **Don't** ship a SaaS-footer link grid (Product / Company / Resources / Legal). The institutional ink footer is a closing breath, not a sitemap.
+### `HubLeadForm` (`app/_hub/HubLeadForm.tsx`)
+Formulário canônico de 3 campos (nome, estado, WhatsApp). Posta em `/api/pleno-med/leads` via `submitLeadForm`. Aceita `tone="dark"|"light"`. Reusável em qualquer seção de captura.
 
-## 8. Launch scope — what ships, what's aspirational
+### `SmoothAnchor` (`app/_hub/SmoothAnchor.tsx`)
+Client component que delega cliques em `<a href="#…">`, faz scroll programático sem alterar URL. Plugar uma vez por página, antes do Header. Sem ele, CTAs funcionam apenas 1× por sessão.
 
-The system as authored exceeds what the first launch ships. Recording the gap honestly here so future iterations don't lose track:
+### `Logo` (`app/components/Logo.tsx`)
+SVG vetorizado com prop `tone` e `subText`. Variantes: "" (só MIDLEJ), "CAPITAL" (lockup completo do hub), "EDUCATION" (mentoria), "PLENOMED" (Pleno Med).
 
-- **Worked-example surface (`mostrar a conta`):** Specced but not built. PRODUCT.md principle #5 is held back; the page makes claims without showing the math today. When this lands, it ships between §II and §III with one antecipação example + one crédito example (R$ + taxa + CET, real or labeled `exemplo ilustrativo`).
-- **Regulator credential block:** Cut from the design system. Decision recorded 2026-06-03: the brand does not surface a CVM nº on the page at launch. If regulatory copy returns later, it lives quietly in the footer legal row, not as a standalone block.
-- **§III as 4-up grid:** Cut. Replaced by `.claims` block (pull-quote + two named sub-claims), described above.
-- **`.badge-novo` (all-caps tracked):** Cut. Replaced by `.tag-novo` (italic Bodoni Moda inline mark).
-- **Roman-numeral kickers (I./II./III./IV.):** Cut. Section structure relies on surface inversion + spacing + heading authority.
-- **Oversized step numerals (01/02/03):** Cut. §II ships as `.flow` (rule-divided sentence-act list).
+### Cenas 3D (`app/_hub/scenes/`)
+Globe, AltLayers, PrevidenciaStack, WorkshopRoom. Exportadas como dynamic-loaded clients via `app/_hub/scenes/clients.tsx`. Cada uma:
+- `meshBasicMaterial` (sem lights)
+- Cor paper `#F6F2EA` ou branco `#FFFFFF`
+- Wireframe shell oxblood `#9B3221`
+- `frameloop={inView ? "always" : "never"}` pausa fora da viewport
+- SVG fallback para reduced-motion
+- Mouse parallax via `useThree().pointer`
+- Scroll-driven rotation via `useScrollProgress`
+
+### Viz SVG (`app/_hub/svg/`)
+FullTimeline (scroll-driven), PocketRing, SeguroCompare, SaudeMatrix. Pure SVG/CSS, IntersectionObserver para reveal one-shot, exceto FullTimeline que é scroll-progress.
+
+## 8. Anti-patterns explícitos
+
+| ❌ Não | ✅ Sim |
+|---|---|
+| Card com background tintado e drop shadow | Hairline separator + espaço |
+| Botão pill rounded-full | Square 4px max |
+| Texto em itálico (synthetic) | Weight 600 + cor oxblood |
+| `text-[var(--color-xxx)]` arbitrary value | `text-on-ink-strong` named class (Tailwind v4 expõe via @theme) |
+| Header transparente sem awareness do bg | Header detecta data-tone e adapta |
+| Numeração 01/02/03 sempre presente | Mark = só régua + eyebrow tracked |
+| 3 colunas paralelas iguais (SaaS triptych) | Lista hairline-divided ou grid asymmetric |
+| `href="#anchor"` direto sem interceptor | Mesmo `href` + SmoothAnchor no topo da página |
+| Imagem de "consultor sorrindo" | Sem imagens humanas — anônimo + cidade |
+| Cores hex hardcoded em componentes | CSS vars `var(--color-…)` |
+| `font-style: italic` em qualquer lugar | Substituir por peso + cor |
+| Botão "Saiba mais" | CTA específico ("Pedir primeira conversa", "Avaliar minha cobertura") |
+| Reuso de logo sem submark | Sempre passar `subText` quando o contexto pede (CAPITAL, EDUCATION, PLENOMED) |
+| WhatsApp como CTA principal | Apenas formulário — WhatsApp foi removido |
+
+## 9. Convenções de copy
+
+- **Tom**: banca privada-discreta. Frases curtas. Verbos diretos ("Estruturamos", "Acompanhamos") em vez de "a mesa" ou "a equipe".
+- **Sem "mesa"**: substituído por verbos ativos ("respondemos", "pedimos", "estruturamos").
+- **Sem "ligação fria"**: removido. Cold call ativa, não vamos prometer o contrário.
+- **Sem em-dashes** (`—`): usar ponto final ou vírgula.
+- **Sem overexplaining**: eyebrows que repetem o headline foram removidos. SectionMark = só régua + eyebrow tracked.
+- **Asterisco oxblood** (`<span className="asterisk" />`) antes de quotes/aspas para sinalizar abertura editorial.
+- **Depoimentos anônimos**: "Médico, 41 anos · São Paulo" — sem fotos, sem nomes reais (LGPD + autenticidade).
+
+## 10. Rotas e scope
+
+| Rota | Tipo | Status |
+|---|---|---|
+| `/` | Hub Midlej Capital — 8 frentes editoriais | Live |
+| `/investimentos` | Deep-dive de investimentos privados | Live |
+| `/mentoria` | Índice das 5 LPs de mentoria | Live |
+| `/mentoria/{raio-x,ebook,simulador,planilha,alternativos}` | 5 LPs de tráfego pago | Live, paleta brand aplicada |
+| `/plenomed` | LP original Pleno Med (crédito médico) | Live, ainda usa CSS legado próprio |
+
+Toda rota brand monta `<main data-brand>` para ativar:
+- Background paper no body
+- `scroll-padding-top: 80px` no html
+- Smooth scroll
+- Brand body styles (`body:has([data-brand])`)
+
+## 11. Changelog
+
+- **2026-06-05**: `--color-ink` atualizado de `#062241` (navy escuro) → `#233853` (navy médio). Ajustado `--color-ink-2` de `#2D5871` → `#4a6b8c`. Hover do `.btn-primary` migrado de `oklch(18% 0.06 240)` → `oklch(18% 0.045 245)`. Aplicado em todos os componentes que hardcodaram a cor (Logo, SVG viz, layout themeColor).
+- **2026-06-05**: rota `/investimentos` criada como deep-dive da frente "investimentos internacionais" do hub.
+- **2026-06-05**: SmoothAnchor introduzido — CTAs com âncora (#contato) agora funcionam N vezes sem alterar URL.
+- **2026-06-05**: HubHeader virou tone-aware — detecta `data-tone` e flipa bg+texto+logo entre ink e paper.

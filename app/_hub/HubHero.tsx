@@ -52,10 +52,6 @@ export function HubHero() {
             <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.96] text-balance text-on-ink-strong max-w-[18ch]">
               Hub de soluções financeiras.
             </h1>
-            <p className="reveal r-2 t-lede mt-10 text-on-ink-soft text-[1.05rem] md:text-[1.2rem] max-w-[48ch]">
-              <span className="asterisk" />Oito frentes operando sob o mesmo
-              critério. Sem produto da prateleira. Sem comissão por venda.
-            </p>
             <div className="reveal r-3 mt-12 flex flex-wrap items-center gap-6">
               <Link href="#contato" className="btn-primary-inverse">
                 Pedir primeira conversa

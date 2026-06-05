@@ -11,8 +11,8 @@
 
 @theme {
   /* Ink (mandatory brand navy + logo secondary) */
-  --color-ink: #062241;
-  --color-ink-2: #2D5871;
+  --color-ink: #233853;
+  --color-ink-2: #4a6b8c;
 
   /* Tinted neutrals (OKLCH, all tilted toward the navy hue ~240) */
   --color-paper: oklch(96.8% 0.010 78);
@@ -141,7 +141,7 @@
   transition: background 260ms cubic-bezier(.2,.7,.2,1), transform 260ms cubic-bezier(.2,.7,.2,1);
 }
 .btn-primary:hover {
-  background: oklch(18% 0.06 240);
+  background: oklch(18% 0.045 245);
   transform: translateY(-1px);
 }
 .btn-primary svg { transition: transform 260ms cubic-bezier(.2,.7,.2,1); }

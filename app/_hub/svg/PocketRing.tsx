@@ -22,7 +22,7 @@ export function PocketRing({ className }: { className?: string }) {
   const reduced = useReducedMotion();
   const final = reduced;
 
-  const INK = "#062241";
+  const INK = "#233853";
   const OXBLOOD = "#9B3221";
 
   const CX = 160;

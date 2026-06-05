@@ -25,7 +25,7 @@ export function SaudeMatrix({ className }: { className?: string }) {
   const reduced = useReducedMotion();
   const revealed = inView || reduced;
 
-  const INK = "#062241";
+  const INK = "#233853";
   const OXBLOOD = "#9B3221";
 
   const COLS = 4;

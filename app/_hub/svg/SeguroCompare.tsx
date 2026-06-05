@@ -26,7 +26,7 @@ export function SeguroCompare({ className }: { className?: string }) {
   const reduced = useReducedMotion();
   const active = inView || reduced;
 
-  const INK = "#062241";
+  const INK = "#233853";
   const OXBLOOD = "#9B3221";
 
   const BAR_Y_1 = 110;
