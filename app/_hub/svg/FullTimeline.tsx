@@ -1,28 +1,54 @@
 "use client";
 
-import { useInView, useReducedMotion } from "./useInView";
+import { useEffect, useRef } from "react";
+import { useReducedMotion } from "./useInView";
 
 /**
- * FullTimeline — viz da mentoria FULL.
+ * FullTimeline — viz da mentoria FULL, scroll-driven.
  *
- * Surface: INK (navy). Estética: hairline paper, marcadores ink-on-paper,
- * cursor oxblood. Três fases finitas + nó "contínuo" tracejado à direita.
+ * Surface: INK. O cursor oxblood (linha vertical + diamante) é controlado
+ * pelo progresso da seção pela viewport (0..1). Os nós preenchem nos
+ * thresholds 0 / 0.5 / 1.0 via clamp() em CSS calc.
  *
- * Choreografia:
- *  - Linha horizontal paper aparece logo no reveal (instante).
- *  - Cursor oxblood (linha vertical + diamante) traça da fase 1 → 3 em
- *    2.4s com cubic-bezier(.2,.7,.2,1).
- *  - Cada nó "preenche" (de ring vazio para paper sólido) no instante
- *    em que o cursor passa por ele — sincronizado por `animation-delay`.
- *  - O cursor para em x=770 (fase 3). A região tracejada até x=900
- *    permanece como promessa de continuidade.
+ * Implementação: hook local em rAF atualiza a CSS custom property
+ * `--ft-p` no container; transforms e opacities são computados em CSS,
+ * GPU-friendly, sem re-render React.
  *
- * `prefers-reduced-motion`: pula a animação e renderiza o estado final.
+ * `prefers-reduced-motion`: pula o tracking de scroll e fixa estado final.
  */
 export function FullTimeline({ className }: { className?: string }) {
-  const [ref, inView] = useInView<HTMLDivElement>(0.2);
+  const containerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const finalState = reduced; // se reduced, mostra tudo final desde o início.
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (typeof window === "undefined" || !el) return;
+    if (reduced) {
+      el.style.setProperty("--ft-p", "1");
+      return;
+    }
+    let raf = 0;
+    const measure = () => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = rect.height + vh;
+      const elapsed = vh - rect.top;
+      const p = Math.max(0, Math.min(1, elapsed / total));
+      el.style.setProperty("--ft-p", p.toString());
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
+    };
+  }, [reduced]);
 
   const PAPER = "#F6F2EA";
   const OXBLOOD = "#9B3221";
@@ -33,9 +59,10 @@ export function FullTimeline({ className }: { className?: string }) {
   const x3 = 770;
   const x4 = 870;
   const Y = 110;
+  const DX = x3 - x1; // 640 — trajeto total do cursor
 
   return (
-    <div ref={ref} className={className} data-revealed={inView ? "true" : "false"}>
+    <div ref={containerRef} className={className} style={{ ["--ft-p" as string]: 0 }}>
       <svg
         viewBox="0 0 900 220"
         width="100%"
@@ -48,22 +75,8 @@ export function FullTimeline({ className }: { className?: string }) {
           .ft-line { stroke: ${PAPER}; stroke-width: 1; opacity: 0.55; }
           .ft-line-dash { stroke: ${PAPER}; stroke-width: 1; opacity: 0.4; stroke-dasharray: 4 6; }
           .ft-node-ring { fill: transparent; stroke: ${PAPER}; stroke-width: 1.25; }
-          .ft-node-fill {
-            fill: ${PAPER};
-            opacity: ${finalState ? 1 : 0};
-            transform-origin: center;
-            transform-box: fill-box;
-          }
-          .ft-node-future {
-            fill: transparent;
-            stroke: ${PAPER};
-            stroke-width: 1;
-            opacity: 0.45;
-          }
-          .ft-cursor {
-            opacity: ${finalState ? 1 : 0};
-            transform: translateX(0px);
-          }
+          .ft-node-fill { fill: ${PAPER}; }
+          .ft-node-future { fill: transparent; stroke: ${PAPER}; stroke-width: 1; opacity: 0.45; }
           .ft-cursor-line { stroke: ${OXBLOOD}; stroke-width: 1.25; }
           .ft-cursor-dot { fill: ${OXBLOOD}; }
           .ft-num { fill: ${OXBLOOD}; font-size: 11px; letter-spacing: 0.16em; }
@@ -71,38 +84,21 @@ export function FullTimeline({ className }: { className?: string }) {
           .ft-proof { fill: ${PAPER}; opacity: 0.62; font-size: 11.5px; letter-spacing: 0.02em; }
           .ft-cont { fill: ${PAPER}; opacity: 0.5; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
 
-          [data-revealed="true"] .ft-cursor {
-            animation: ft-cursor-move 2400ms cubic-bezier(.2,.7,.2,1) forwards;
-          }
-          [data-revealed="true"] .ft-node-1 .ft-node-fill {
-            animation: ft-node-pop 280ms cubic-bezier(.2,.7,.2,1) 240ms forwards;
-          }
-          [data-revealed="true"] .ft-node-2 .ft-node-fill {
-            animation: ft-node-pop 280ms cubic-bezier(.2,.7,.2,1) 1200ms forwards;
-          }
-          [data-revealed="true"] .ft-node-3 .ft-node-fill {
-            animation: ft-node-pop 280ms cubic-bezier(.2,.7,.2,1) 2280ms forwards;
+          /* Cursor: traduz X pelo progress; fade-in nos primeiros 5% */
+          .ft-cursor {
+            transform: translateX(calc(var(--ft-p, 0) * ${DX}px));
+            opacity: clamp(0, calc(var(--ft-p, 0) / 0.05), 1);
+            transition: none;
           }
 
-          @keyframes ft-cursor-move {
-            0%   { transform: translateX(0px); opacity: 0; }
-            8%   { opacity: 1; }
-            100% { transform: translateX(${x3 - x1}px); opacity: 1; }
-          }
-          @keyframes ft-node-pop {
-            0%   { opacity: 0; }
-            100% { opacity: 1; }
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            .ft-cursor { transform: translateX(${x3 - x1}px) !important; opacity: 1 !important; animation: none !important; }
-            .ft-node-fill { opacity: 1 !important; animation: none !important; }
-          }
+          /* Nós preenchem ao passar pelo threshold do cursor */
+          .ft-node-1 .ft-node-fill { opacity: clamp(0, calc((var(--ft-p, 0) - 0.05) / 0.05), 1); }
+          .ft-node-2 .ft-node-fill { opacity: clamp(0, calc((var(--ft-p, 0) - 0.50) / 0.05), 1); }
+          .ft-node-3 .ft-node-fill { opacity: clamp(0, calc((var(--ft-p, 0) - 0.92) / 0.05), 1); }
         `}</style>
 
         {/* Linha base */}
         <line x1={x1} y1={Y} x2={x3} y2={Y} className="ft-line" />
-        {/* Trecho tracejado para "contínuo" */}
         <line x1={x3} y1={Y} x2={x4} y2={Y} className="ft-line-dash" />
 
         {/* Nós */}
@@ -115,7 +111,6 @@ export function FullTimeline({ className }: { className?: string }) {
             <text x={n.x} y={Y - 36} textAnchor="middle" className="ft-num">
               {n.num}
             </text>
-            {/* diamante (octahedron 2D) */}
             <polygon
               points={`${n.x},${Y - 14} ${n.x + 14},${Y} ${n.x},${Y + 14} ${n.x - 14},${Y}`}
               className="ft-node-ring"
@@ -133,7 +128,7 @@ export function FullTimeline({ className }: { className?: string }) {
           </g>
         ))}
 
-        {/* Nó "contínuo" à direita: menor, fade, sem fill */}
+        {/* Nó "contínuo" à direita */}
         <g>
           <polygon
             points={`${x4},${Y - 8} ${x4 + 8},${Y} ${x4},${Y + 8} ${x4 - 8},${Y}`}
@@ -144,8 +139,8 @@ export function FullTimeline({ className }: { className?: string }) {
           </text>
         </g>
 
-        {/* Cursor oxblood */}
-        <g className="ft-cursor" style={{ transform: `translateX(${finalState ? x3 - x1 : 0}px)` }}>
+        {/* Cursor oxblood — ancorado em x1, translatado por --ft-p */}
+        <g className="ft-cursor">
           <line x1={x1} y1={80} x2={x1} y2={140} className="ft-cursor-line" />
           <polygon
             points={`${x1},${Y - 6} ${x1 + 6},${Y} ${x1},${Y + 6} ${x1 - 6},${Y}`}

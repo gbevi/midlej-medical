@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import {
@@ -8,6 +8,7 @@ import {
   useInView,
   useReducedMotion,
 } from "./sharedScene";
+import { useScrollProgress } from "../lib/useScrollProgress";
 
 type Props = { className?: string };
 
@@ -15,11 +16,10 @@ const DISC_COUNT = 10;
 const SPACING = 0.28;
 const DISC_RADIUS = 0.8;
 
-function StackRig({ inView }: { inView: boolean }) {
+function StackRig({ progressRef }: { progressRef: RefObject<number> }) {
   const group = useRef<THREE.Group>(null!);
   const discRefs = useRef<(THREE.Group | null)[]>([]);
   const { pointer } = useThree();
-  const startRef = useRef<number | null>(null);
 
   const targetYs = useMemo(
     () => Array.from({ length: DISC_COUNT }, (_, i) => i * SPACING),
@@ -34,13 +34,16 @@ function StackRig({ inView }: { inView: boolean }) {
     [],
   );
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (!group.current) return;
-    // Start the entrance animation when first in view (inside frame loop to keep render pure).
-    if (inView && startRef.current === null) {
-      startRef.current = state.clock.elapsedTime;
-    }
-    group.current.rotation.y += delta * 0.06;
+    const p = progressRef.current;
+
+    const targetY = p * Math.PI * 1.5;
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      targetY,
+      0.06,
+    );
 
     // Mouse parallax — tilt X by pointer.y.
     const targetX = pointer.y * 0.2;
@@ -50,27 +53,23 @@ function StackRig({ inView }: { inView: boolean }) {
       0.04,
     );
 
-    // Entrance animation — discs rise from below with stagger.
-    if (startRef.current !== null) {
-      const elapsed = state.clock.elapsedTime - startRef.current;
-      for (let i = 0; i < DISC_COUNT; i++) {
-        const g = discRefs.current[i];
-        if (!g) continue;
-        const delay = i * 0.08;
-        const local = Math.max(0, elapsed - delay);
-        const k = Math.min(1, local / 0.6);
-        const eased = 1 - Math.pow(1 - k, 3);
-        g.position.y = THREE.MathUtils.lerp(-0.4, targetYs[i], eased);
-        // Fade in by scaling the material opacity via userData approach: just lerp opacity on children's materials.
-        g.traverse((obj) => {
-          const m = obj as THREE.Mesh;
-          if (m.isMesh && m.material) {
-            const mat = m.material as THREE.MeshBasicMaterial;
-            const baseOp = (m.userData.baseOpacity as number) ?? 1;
-            mat.opacity = baseOp * eased;
-          }
-        });
-      }
+    // Scroll-driven stagger: disc i activates at p >= i/DISC_COUNT,
+    // ramping over a window of 1/DISC_COUNT.
+    const window = 1 / DISC_COUNT;
+    for (let i = 0; i < DISC_COUNT; i++) {
+      const g = discRefs.current[i];
+      if (!g) continue;
+      const local = Math.max(0, Math.min(1, (p - i * window) / window));
+      const eased = 1 - Math.pow(1 - local, 3);
+      g.position.y = THREE.MathUtils.lerp(-0.4, targetYs[i], eased);
+      g.traverse((obj) => {
+        const m = obj as THREE.Mesh;
+        if (m.isMesh && m.material) {
+          const mat = m.material as THREE.MeshBasicMaterial;
+          const baseOp = (m.userData.baseOpacity as number) ?? 1;
+          mat.opacity = baseOp * eased;
+        }
+      });
     }
   });
 
@@ -157,6 +156,7 @@ function StaticPrevidencia({ className }: { className?: string }) {
 export default function PrevidenciaStack({ className }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef);
+  const progressRef = useScrollProgress(wrapRef);
   const reduced = useReducedMotion();
 
   if (reduced) return <StaticPrevidencia className={className} />;
@@ -174,7 +174,7 @@ export default function PrevidenciaStack({ className }: Props) {
         frameloop={inView ? "always" : "never"}
         style={{ width: "100%", height: "100%" }}
       >
-        <StackRig inView={inView} />
+        <StackRig progressRef={progressRef} />
       </Canvas>
     </div>
   );

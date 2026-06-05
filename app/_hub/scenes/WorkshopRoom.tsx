@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -9,6 +9,7 @@ import {
   useInView,
   useReducedMotion,
 } from "./sharedScene";
+import { useScrollProgress } from "../lib/useScrollProgress";
 
 type Props = { className?: string };
 
@@ -16,7 +17,7 @@ const COLS = 6;
 const ROWS = 4;
 const SPEAKER_POS: [number, number, number] = [0, -0.1, -0.8];
 
-function WorkshopRig() {
+function WorkshopRig({ progressRef }: { progressRef: RefObject<number> }) {
   const group = useRef<THREE.Group>(null!);
   const audienceRefs = useRef<(THREE.Mesh | null)[]>([]);
   const { pointer } = useThree();
@@ -33,17 +34,20 @@ function WorkshopRig() {
     return arr;
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (!group.current) return;
-    group.current.rotation.y += delta * 0.02;
-    const targetY = pointer.x * 0.15;
-    // Combine auto + parallax: track parallax as offset around the spinning base.
-    // Simpler approach: directly lerp rotation.y around its current value plus parallax target.
-    // To keep it readable, store parallax in rotation.z-like channel via a child? Easier: ignore - just keep auto-rotate, add parallax X tilt to rotation.x.
-    // Use rotation.x for parallax tilt to avoid fighting auto Y rotation.
+    const p = progressRef.current;
+    const targetYRot = (p - 0.5) * 0.8;
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      targetYRot,
+      0.06,
+    );
+    // Mouse parallax on X tilt (kept independent of Y sweep).
+    const targetXRot = pointer.x * 0.15;
     group.current.rotation.x = THREE.MathUtils.lerp(
       group.current.rotation.x,
-      targetY,
+      targetXRot,
       0.04,
     );
 
@@ -202,6 +206,7 @@ function StaticWorkshop({ className }: { className?: string }) {
 export default function WorkshopRoom({ className }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef);
+  const progressRef = useScrollProgress(wrapRef);
   const reduced = useReducedMotion();
 
   if (reduced) return <StaticWorkshop className={className} />;
@@ -219,7 +224,7 @@ export default function WorkshopRoom({ className }: Props) {
         frameloop={inView ? "always" : "never"}
         style={{ width: "100%", height: "100%" }}
       >
-        <WorkshopRig />
+        <WorkshopRig progressRef={progressRef} />
       </Canvas>
     </div>
   );

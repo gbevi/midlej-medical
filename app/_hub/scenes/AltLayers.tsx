@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import {
@@ -8,6 +8,7 @@ import {
   useInView,
   useReducedMotion,
 } from "./sharedScene";
+import { useScrollProgress } from "../lib/useScrollProgress";
 
 type Props = { className?: string };
 
@@ -30,7 +31,7 @@ function seededScatter(seed: number) {
   return pts;
 }
 
-function LayersRig() {
+function LayersRig({ progressRef }: { progressRef: RefObject<number> }) {
   const group = useRef<THREE.Group>(null!);
   const planeRefs = useRef<(THREE.Group | null)[]>([]);
   const { pointer } = useThree();
@@ -40,19 +41,25 @@ function LayersRig() {
     [],
   );
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (!group.current) return;
-    group.current.rotation.y += delta * 0.04;
-    const t = state.clock.elapsedTime;
-    group.current.rotation.x = Math.sin(t * 0.5) * 0.05;
+    const p = progressRef.current;
+    const targetY = p * Math.PI * 1.0;
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      targetY,
+      0.06,
+    );
 
-    // Mouse parallax: separate planes along Z by pointer.x.
-    const spread = 1 + pointer.x * 0.3;
+    // Scroll-driven separation + mouse parallax on Z.
+    const scrollSpread = 1 + p * 1.8;
+    const pointerSpread = 1 + pointer.x * 0.3;
+    const spread = scrollSpread * pointerSpread;
     BASE_Z.forEach((z, i) => {
       const g = planeRefs.current[i];
       if (!g) return;
       const targetZ = z * spread;
-      g.position.z = THREE.MathUtils.lerp(g.position.z, targetZ, 0.06);
+      g.position.z = THREE.MathUtils.lerp(g.position.z, targetZ, 0.08);
     });
   });
 
@@ -147,6 +154,7 @@ function StaticAltLayers({ className }: { className?: string }) {
 export default function AltLayers({ className }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef);
+  const progressRef = useScrollProgress(wrapRef);
   const reduced = useReducedMotion();
 
   if (reduced) return <StaticAltLayers className={className} />;
@@ -164,7 +172,7 @@ export default function AltLayers({ className }: Props) {
         frameloop={inView ? "always" : "never"}
         style={{ width: "100%", height: "100%" }}
       >
-        <LayersRig />
+        <LayersRig progressRef={progressRef} />
       </Canvas>
     </div>
   );

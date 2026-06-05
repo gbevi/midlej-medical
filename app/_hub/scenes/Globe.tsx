@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -9,6 +9,7 @@ import {
   useInView,
   useReducedMotion,
 } from "./sharedScene";
+import { useScrollProgress } from "../lib/useScrollProgress";
 
 type Props = { className?: string };
 
@@ -41,7 +42,7 @@ function latLonToVec(lat: number, lon: number, r: number): THREE.Vector3 {
   return new THREE.Vector3(x, y, z);
 }
 
-function GlobeRig() {
+function GlobeRig({ progressRef }: { progressRef: RefObject<number> }) {
   const group = useRef<THREE.Group>(null!);
   const { pointer } = useThree();
 
@@ -61,9 +62,14 @@ function GlobeRig() {
     });
   }, [cityVecs]);
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     if (!group.current) return;
-    group.current.rotation.y += delta * 0.08;
+    const targetY = progressRef.current * Math.PI * 2.4;
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      targetY,
+      0.06,
+    );
     const targetX = pointer.y * 0.3;
     group.current.rotation.x = THREE.MathUtils.lerp(
       group.current.rotation.x,
@@ -200,6 +206,7 @@ function StaticGlobe({ className }: { className?: string }) {
 export default function Globe({ className }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef);
+  const progressRef = useScrollProgress(wrapRef);
   const reduced = useReducedMotion();
 
   if (reduced) return <StaticGlobe className={className} />;
@@ -217,7 +224,7 @@ export default function Globe({ className }: Props) {
         frameloop={inView ? "always" : "never"}
         style={{ width: "100%", height: "100%" }}
       >
-        <GlobeRig />
+        <GlobeRig progressRef={progressRef} />
       </Canvas>
     </div>
   );
