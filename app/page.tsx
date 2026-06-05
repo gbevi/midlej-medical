@@ -51,8 +51,40 @@ export default function HubPage() {
       <S08_Workshops />
 
       <Contato />
+      <ConhecaInvestimentos />
       <HubFooter />
     </main>
+  );
+}
+
+/* ================================================================
+   Backlink editorial pra /investimentos
+   ================================================================ */
+
+function ConhecaInvestimentos() {
+  return (
+    <section data-tone="light" className="bg-bone">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+        <div className="grid grid-cols-12 gap-8 items-end">
+          <div className="col-span-12 md:col-span-8">
+            <SectionMark eyebrow="Banca de investimentos" dark={false} />
+            <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.04] text-ink max-w-[26ch]">
+              Investimentos é uma frente própria. Tem página própria.
+            </h2>
+            <p className="mt-8 t-lede text-ink-soft text-[1.0625rem] max-w-[48ch]">
+              Modelo de fee, geografia de capital, composição em camadas,
+              tempo composto, e a primeira conversa. Em mais detalhe.
+            </p>
+          </div>
+          <div className="col-span-12 md:col-span-4 flex md:justify-end">
+            <Link href="/investimentos" className="btn-primary">
+              Conheça os investimentos
+              <Arrow />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -347,13 +379,10 @@ function S03_Internacionais() {
                 ]}
               />
             </div>
-            <div className="mt-10 flex flex-wrap items-center gap-6">
-              <Link href="/investimentos" className="btn-primary-inverse">
-                Conheça os investimentos
-                <Arrow />
-              </Link>
+            <div className="mt-10">
               <Link href="#contato" className="btn-ghost-inverse">
                 Quero diversificar globalmente
+                <Arrow />
               </Link>
             </div>
           </div>

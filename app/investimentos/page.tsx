@@ -39,9 +39,9 @@ export default function InvestimentosPage() {
       <TempoTrabalhando />
       <ParaQuem />
       <Depoimentos />
+      <Contato />
       <FAQSection />
       <OutrasFrentes />
-      <Contato />
       <Footer />
     </main>
   );
