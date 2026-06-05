@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useState } from "react";
 import { BR_UFS, CONSENT_TEXT } from "@/lib/leadConstants";
 import { submitLeadForm, type LeadFormState } from "@/lib/actions";
+import { ev } from "@/lib/analytics";
 
 /**
  * Formulário canônico das 5 LPs de mentoria.
@@ -49,6 +50,10 @@ export function MentoriaLeadForm({
   const [state, action, pending] = useActionState(submitLeadForm, initial);
 
   useEffect(() => {
+    if (state.kind === "success") {
+      ev.leadSuccess(idPrefix);
+      return;
+    }
     if (state.kind !== "error") return;
     const fields = state.fields ?? {};
     const first = FIELD_ORDER.find((n) => fields[n]?.length);
