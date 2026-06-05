@@ -392,6 +392,15 @@ body:has([data-brand]) {
   font-family: var(--font-brand);
 }
 
+/* Smooth scroll + offset pro header fixed (64px de altura + 16px de respiro).
+   Sem isso, clicar num anchor (#contato, #frentes, etc) salta direto pro topo
+   do elemento — que fica escondido atrás do header. Escopo via :has() pra não
+   afetar o /plenomed (que não tem header fixed). */
+html:has(body [data-brand]) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 /* Paper grain — fixed, atmospheric, very subtle. Carries warmth without decoration. */
 body::after {
   content: "";

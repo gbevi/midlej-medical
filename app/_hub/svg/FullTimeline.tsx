@@ -57,7 +57,7 @@ export function FullTimeline({ className }: { className?: string }) {
   const x1 = 130;
   const x2 = 450;
   const x3 = 770;
-  const x4 = 870;
+  const x4 = 840; // recuado pra "→ contínuo" caber dentro do viewBox 900
   const Y = 110;
   const DX = x3 - x1; // 640 — trajeto total do cursor
 
@@ -128,14 +128,15 @@ export function FullTimeline({ className }: { className?: string }) {
           </g>
         ))}
 
-        {/* Nó "contínuo" à direita */}
+        {/* Nó "contínuo" — diamante + label INLINE à direita, no eixo Y do timeline,
+            pra não colidir com o proof de "Sustentar" embaixo */}
         <g>
           <polygon
             points={`${x4},${Y - 8} ${x4 + 8},${Y} ${x4},${Y + 8} ${x4 - 8},${Y}`}
             className="ft-node-future"
           />
-          <text x={x4} y={Y + 38} textAnchor="middle" className="ft-cont">
-            → contínuo
+          <text x={x4 + 18} y={Y + 4} textAnchor="start" className="ft-cont">
+            contínuo
           </text>
         </g>
 

@@ -36,23 +36,25 @@ export function SaudeMatrix({ className }: { className?: string }) {
   const PAD_X = 36;
   const PAD_Y = 24;
 
+  // Nomes encurtados pra caber no card de 144px com font-size 9px uppercase.
+  // O nome completo do plano segue no tooltip do hover.
   const plans = [
-    { name: "Bradesco TOP Nacional", net: "Nacional", policy: "Coletivo", cost: 0.92, discount: 38 },
-    { name: "Amil S750", net: "Nacional", policy: "Coletivo", cost: 0.68, discount: 32 },
-    { name: "SulAmérica Especial", net: "Nacional", policy: "Coletivo", cost: 0.84, discount: 41 },
-    { name: "Allianz Plus", net: "Nacional", policy: "Coletivo", cost: 0.76, discount: 29 },
-    { name: "Notre Dame Smart 350", net: "Regional", policy: "Coletivo", cost: 0.55, discount: 27 },
-    { name: "Hapvida Mix", net: "Regional", policy: "Coletivo", cost: 0.42, discount: 24 },
-    { name: "Care Plus Saúde", net: "Nacional", policy: "Coletivo", cost: 0.88, discount: 36 },
-    { name: "Omint Premium", net: "Nacional", policy: "Coletivo", cost: 0.96, discount: 44 },
-    { name: "Porto Seguro Plus", net: "Nacional", policy: "Coletivo", cost: 0.7, discount: 31 },
-    { name: "Mediservice Total", net: "Nacional", policy: "Coletivo", cost: 0.62, discount: 28 },
-    { name: "Greenline Saúde", net: "Regional", policy: "Coletivo", cost: 0.48, discount: 22 },
-    { name: "Unimed Nacional", net: "Nacional", policy: "Coletivo", cost: 0.81, discount: 33 },
-    { name: "Embarq Premier", net: "Nacional", policy: "Coletivo", cost: 0.74, discount: 30 },
-    { name: "Pasa Master", net: "Nacional", policy: "Coletivo", cost: 0.66, discount: 26 },
-    { name: "Eça Plus", net: "Regional", policy: "Coletivo", cost: 0.58, discount: 25 },
-    { name: "Salutar Saúde", net: "Nacional", policy: "Coletivo", cost: 0.72, discount: 34 },
+    { name: "Bradesco TOP", full: "Bradesco TOP Nacional", net: "Nacional", policy: "Coletivo", cost: 0.92, discount: 38 },
+    { name: "Amil S750", full: "Amil S750", net: "Nacional", policy: "Coletivo", cost: 0.68, discount: 32 },
+    { name: "SulAmérica", full: "SulAmérica Especial", net: "Nacional", policy: "Coletivo", cost: 0.84, discount: 41 },
+    { name: "Allianz Plus", full: "Allianz Plus", net: "Nacional", policy: "Coletivo", cost: 0.76, discount: 29 },
+    { name: "Notre Dame 350", full: "Notre Dame Smart 350", net: "Regional", policy: "Coletivo", cost: 0.55, discount: 27 },
+    { name: "Hapvida Mix", full: "Hapvida Mix", net: "Regional", policy: "Coletivo", cost: 0.42, discount: 24 },
+    { name: "Care Plus", full: "Care Plus Saúde", net: "Nacional", policy: "Coletivo", cost: 0.88, discount: 36 },
+    { name: "Omint Premium", full: "Omint Premium", net: "Nacional", policy: "Coletivo", cost: 0.96, discount: 44 },
+    { name: "Porto Plus", full: "Porto Seguro Plus", net: "Nacional", policy: "Coletivo", cost: 0.7, discount: 31 },
+    { name: "Mediservice", full: "Mediservice Total", net: "Nacional", policy: "Coletivo", cost: 0.62, discount: 28 },
+    { name: "Greenline", full: "Greenline Saúde", net: "Regional", policy: "Coletivo", cost: 0.48, discount: 22 },
+    { name: "Unimed", full: "Unimed Nacional", net: "Nacional", policy: "Coletivo", cost: 0.81, discount: 33 },
+    { name: "Embarq", full: "Embarq Premier", net: "Nacional", policy: "Coletivo", cost: 0.74, discount: 30 },
+    { name: "Pasa Master", full: "Pasa Master", net: "Nacional", policy: "Coletivo", cost: 0.66, discount: 26 },
+    { name: "Eça Plus", full: "Eça Plus", net: "Regional", policy: "Coletivo", cost: 0.58, discount: 25 },
+    { name: "Salutar", full: "Salutar Saúde", net: "Nacional", policy: "Coletivo", cost: 0.72, discount: 34 },
   ];
 
   return (
@@ -72,7 +74,7 @@ export function SaudeMatrix({ className }: { className?: string }) {
           .sm-card:hover .sm-inner { transform: scale(1.05); }
           .sm-inner { transform-box: fill-box; transform-origin: center; transition: transform 220ms cubic-bezier(.2,.7,.2,1); }
           .sm-badge { fill: ${INK}; opacity: 0.55; font-size: 9.5px; letter-spacing: 0.14em; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
-          .sm-name { fill: ${INK}; opacity: 0.92; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+          .sm-name { fill: ${INK}; opacity: 0.92; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; }
           .sm-cost-bg { stroke: ${INK}; stroke-opacity: 0.18; stroke-width: 1; }
           .sm-cost-fg { stroke: ${INK}; stroke-opacity: 0.6; stroke-width: 1.5; }
           .sm-disc { fill: ${OXBLOOD}; font-size: 9.5px; letter-spacing: 0.08em; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; }
@@ -116,8 +118,14 @@ export function SaudeMatrix({ className }: { className?: string }) {
               <g className="sm-inner">
                 <rect x={x} y={y} width={CARD_W} height={CARD_H} rx={2} className="sm-rect" />
                 <text x={x + 12} y={y + 22} className="sm-badge">{idx}</text>
-                <text x={x + 12} y={y + 52} className="sm-name">
-                  {p.name.length > 22 ? p.name.slice(0, 21) + "…" : p.name}
+                <text
+                  x={x + 12}
+                  y={y + 52}
+                  className="sm-name"
+                  textLength={Math.min(p.name.length * 7.2, CARD_W - 24)}
+                  lengthAdjust="spacingAndGlyphs"
+                >
+                  {p.name}
                 </text>
                 <line x1={barX} y1={barY} x2={barX + barW} y2={barY} className="sm-cost-bg" />
                 <line x1={barX} y1={barY} x2={barX + fillW} y2={barY} className="sm-cost-fg" />
@@ -126,7 +134,7 @@ export function SaudeMatrix({ className }: { className?: string }) {
               <g className="sm-tooltip">
                 <rect x={tipX} y={tipY} width={tipW} height={tipH} rx={2} className="sm-tooltip-bg" />
                 <text x={tipX + 10} y={tipY + 21} className="sm-tooltip-text">
-                  {`${p.name} · Rede ${p.net} · Apólice ${p.policy} · −${p.discount}% vs individual`}
+                  {`${p.full} · Rede ${p.net} · Apólice ${p.policy} · −${p.discount}% vs individual`}
                 </text>
               </g>
             </g>

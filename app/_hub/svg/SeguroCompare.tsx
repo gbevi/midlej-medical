@@ -118,14 +118,16 @@ export function SeguroCompare({ className }: { className?: string }) {
         <rect x={BAR_X} y={BAR_Y_2} width={FINAL_2} height={BAR_H} className="sc-bar-2 sc-bar-2-rect" />
         <text x={BAR_X} y={BAR_Y_2 + BAR_H + 18} className="sc-mono sc-mono-strong">R$ 1,1 / mil</text>
 
-        {/* Seta oxblood + label acima do bar2 */}
+        {/* Seta oxblood + label ABAIXO do bar2 — antes ficava em y=185 e
+            colidia com a label "Estruturada Midlej" em y=180 quando a
+            animação encerrava. Agora "underlines" o bar2 inteiro. */}
         <g>
-          <line x1={BAR_X + 8} y1={195} x2={BAR_X + FINAL_2 - 14} y2={195} className="sc-arrow" />
+          <line x1={BAR_X + 8} y1={295} x2={BAR_X + FINAL_2 - 14} y2={295} className="sc-arrow" />
           <polygon
-            points={`${BAR_X + FINAL_2 - 14},189 ${BAR_X + FINAL_2 - 4},195 ${BAR_X + FINAL_2 - 14},201`}
+            points={`${BAR_X + FINAL_2 - 14},289 ${BAR_X + FINAL_2 - 4},295 ${BAR_X + FINAL_2 - 14},301`}
             className="sc-arrow-head"
           />
-          <text x={BAR_X + 14} y={185} className="sc-arrow-label">
+          <text x={BAR_X + 14} y={320} className="sc-arrow-label">
             3,3× cobertura · 70% menos custo por unidade
           </text>
         </g>

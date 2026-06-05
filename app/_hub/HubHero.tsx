@@ -27,6 +27,7 @@ export function HubHero() {
 
   return (
     <section
+      id="hero"
       data-tone="dark"
       className="relative isolate overflow-hidden bg-ink text-on-ink-strong"
     >

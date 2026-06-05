@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo } from "./components/Logo";
+import { HubHeader } from "./_hub/HubHeader";
 import { HubHero } from "./_hub/HubHero";
 import { HubLeadForm } from "./_hub/HubLeadForm";
 
@@ -71,23 +72,16 @@ function Arrow() {
 }
 
 /**
- * Coluna fixa à esquerda com numeral romano + eyebrow.
- * Aparece em todas as seções → cria âncora de leitura vertical.
+ * Âncora de leitura no topo de cada seção: pequena régua + eyebrow.
+ * Sem numeral — a continuidade vem do ritmo de superfícies, não da contagem.
  */
-function SectionMark({ n, eyebrow, dark }: { n: string; eyebrow: string; dark: boolean }) {
+function SectionMark({ eyebrow, dark }: { eyebrow: string; dark: boolean }) {
   return (
     <div className="flex items-center gap-4">
       <span
-        className={`t-display-light text-[clamp(2.2rem,3.4vw,3rem)] leading-none tabular-nums ${
-          dark ? "text-on-ink-soft" : "text-emphasis"
-        }`}
-      >
-        {n}
-      </span>
-      <span
         aria-hidden
-        className={`h-px flex-1 ${dark ? "bg-[var(--color-line-on-ink)]" : "bg-[var(--color-line)]"}`}
-        style={{ minWidth: 40, maxWidth: 80 }}
+        className={`h-px ${dark ? "bg-[var(--color-line-on-ink)]" : "bg-[var(--color-line)]"}`}
+        style={{ width: 48 }}
       />
       <p
         className={`t-mono text-[0.72rem] tracking-[0.18em] uppercase whitespace-nowrap ${
@@ -128,29 +122,12 @@ function ProofRow({
    Header + Manifesto + Contato + Footer (estruturais)
    ================================================================ */
 
-function HubHeader() {
-  return (
-    <header className="absolute top-0 inset-x-0 z-20">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-6 flex items-center justify-between gap-8">
-        <Link href="/" className="inline-flex items-center" aria-label="Midlej Capital, ir ao topo">
-          <Logo tone="dark" className="h-9 w-auto" />
-        </Link>
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="#frentes" className="t-mono text-[0.75rem] tracking-[0.18em] uppercase text-on-ink-soft brand-link-underline">
-            Frentes
-          </Link>
-          <Link href="#contato" className="t-mono text-[0.75rem] tracking-[0.18em] uppercase text-on-ink-strong brand-link-underline">
-            Contato
-          </Link>
-        </nav>
-      </div>
-    </header>
-  );
-}
+/* HubHeader vive em ./_hub/HubHeader.tsx (client component que detecta a
+   tone da seção sob ele e flipa cor + bg + logo conforme o scroll). */
 
 function Manifesto() {
   return (
-    <section id="frentes" className="bg-paper">
+    <section id="frentes" data-tone="light" className="bg-paper">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-3">
@@ -178,11 +155,11 @@ function Manifesto() {
 
 function Contato() {
   return (
-    <section id="contato" className="bg-ink text-on-ink-strong">
+    <section id="contato" data-tone="dark" className="bg-ink text-on-ink-strong">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
           <div className="col-span-12 md:col-span-6">
-            <SectionMark n="—" eyebrow="Primeira conversa" dark />
+            <SectionMark eyebrow="Primeira conversa" dark />
             <h2 className="mt-10 t-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.0] text-on-ink-strong max-w-[18ch]">
               Sem proposta antes da conversa.
             </h2>
@@ -204,11 +181,11 @@ function Contato() {
 function HubFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-ink text-on-ink-soft border-t border-line-on-ink">
+    <footer data-tone="dark" className="bg-ink text-on-ink-soft border-t border-line-on-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
         <div className="grid grid-cols-12 gap-8 items-start">
           <div className="col-span-12 md:col-span-4">
-            <Logo tone="dark" className="h-10 w-auto" />
+            <Logo tone="dark" subText="CAPITAL" className="h-12 w-auto" />
           </div>
           <div className="col-span-12 md:col-span-7 md:col-start-6">
             <p className="t-quote text-[clamp(1.0625rem,1.6vw,1.375rem)] leading-[1.4] text-on-ink-strong max-w-[40ch]">
@@ -234,12 +211,12 @@ function HubFooter() {
 
 function S01_MentoriaFull() {
   return (
-    <section id="mentoria-full" className="bg-ink text-on-ink-strong">
+    <section id="mentoria-full" data-tone="dark" className="bg-ink text-on-ink-strong">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pt-24 md:pt-32 pb-20 md:pb-28">
-        <SectionMark n="01" eyebrow="Programa contínuo" dark />
+        <SectionMark eyebrow="Programa contínuo" dark />
         <div className="mt-10 grid grid-cols-12 gap-8 items-end">
           <h2 className="col-span-12 md:col-span-7 t-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.04] text-on-ink-strong max-w-[18ch]">
-            Mentoria full.<br />
+            Mentoria completa.<br />
             <span className="text-on-ink-soft">Três frentes em paralelo.</span>
           </h2>
           <p className="col-span-12 md:col-span-5 t-lede text-on-ink-soft text-[1.05rem] max-w-[44ch]">
@@ -266,8 +243,8 @@ function S01_MentoriaFull() {
             />
           </div>
           <div className="col-span-12 md:col-span-5 flex md:justify-end">
-            <Link href="/mentoria" className="btn-primary-inverse">
-              Conhecer a mentoria full
+            <Link href="#contato" className="btn-primary-inverse">
+              Conhecer a mentoria completa
               <Arrow />
             </Link>
           </div>
@@ -285,7 +262,7 @@ function S01_MentoriaFull() {
 
 function S02_MentoriaPocket() {
   return (
-    <section id="mentoria-pocket" className="bg-paper text-ink">
+    <section id="mentoria-pocket" data-tone="light" className="bg-paper text-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
           {/* Coluna do ring */}
@@ -297,9 +274,9 @@ function S02_MentoriaPocket() {
 
           {/* Coluna do texto */}
           <div className="col-span-12 md:col-span-6 lg:col-span-6 lg:col-start-7">
-            <SectionMark n="02" eyebrow="Sprint focado" dark={false} />
+            <SectionMark eyebrow="Sprint focado" dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.04] text-ink max-w-[20ch]">
-              Mentoria pocket.
+              Mentoria condensada.
             </h2>
             <p className="mt-8 t-lede text-ink-soft text-[1.05rem] max-w-[40ch]">
               Versão objetiva para uma decisão pontual: uma sucessão, um
@@ -320,8 +297,8 @@ function S02_MentoriaPocket() {
               />
             </div>
             <div className="mt-10">
-              <Link href="/mentoria" className="btn-ghost">
-                Ver pocket
+              <Link href="#contato" className="btn-ghost">
+                Ver mentoria condensada
                 <Arrow />
               </Link>
             </div>
@@ -340,12 +317,12 @@ function S02_MentoriaPocket() {
 
 function S03_Internacionais() {
   return (
-    <section id="internacionais" className="bg-ink text-on-ink-strong">
+    <section id="internacionais" data-tone="dark" className="bg-ink text-on-ink-strong">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="grid grid-cols-12 gap-10 md:gap-12 items-center">
           {/* Copy esquerda */}
           <div className="col-span-12 md:col-span-5 order-2 md:order-1">
-            <SectionMark n="03" eyebrow="Onde o capital mora" dark />
+            <SectionMark eyebrow="Onde o capital mora" dark />
             <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-on-ink-strong max-w-[16ch]">
               Investimentos<br />internacionais.
             </h2>
@@ -395,26 +372,30 @@ function S03_Internacionais() {
 
 function S04_Seguro() {
   return (
-    <section id="seguro" className="bg-paper text-ink">
+    <section id="seguro" data-tone="light" className="bg-paper text-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <SectionMark n="04" eyebrow="Proteção patrimonial" dark={false} />
-        <div className="mt-10 grid grid-cols-12 gap-8 items-end">
-          <h2 className="col-span-12 md:col-span-7 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[18ch]">
-            Seguro de vida.<br />
-            <span className="text-ink-soft">Cobertura calibrada, custo otimizado.</span>
+        <SectionMark eyebrow="Proteção patrimonial" dark={false} />
+
+        {/* Bloco editorial em coluna: h2 → sub → lede, com respiração padronizada */}
+        <div className="mt-12 max-w-[68ch]">
+          <h2 className="t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[18ch]">
+            Seguro de vida.
           </h2>
-          <p className="col-span-12 md:col-span-5 t-lede text-ink-soft text-[1.05rem] max-w-[40ch]">
+          <p className="mt-4 t-display-light text-[clamp(1.25rem,2.2vw,1.75rem)] leading-[1.15] text-ink-soft max-w-[26ch]">
+            Cobertura calibrada, custo otimizado.
+          </p>
+          <p className="mt-8 t-lede text-ink-soft text-[1.05rem] max-w-[48ch]">
             Análise de necessidade real de capital segurado. Comparação de
             apólices fora do balcão de venda.
           </p>
         </div>
 
         {/* Bars ocupam toda a largura, em pátio de paper levantado */}
-        <div className="mt-14 md:mt-20 bg-bone p-8 md:p-12">
+        <div className="mt-16 md:mt-20 bg-bone p-8 md:p-12">
           <SeguroCompare className="w-full" />
         </div>
 
-        <div className="mt-12 grid grid-cols-12 gap-8 items-end">
+        <div className="mt-14 grid grid-cols-12 gap-8 items-end">
           <div className="col-span-12 md:col-span-7">
             <ProofRow
               dark={false}
@@ -445,9 +426,9 @@ function S04_Seguro() {
 
 function S05_Alternativos() {
   return (
-    <section id="alternativos" className="bg-ink text-on-ink-strong">
+    <section id="alternativos" data-tone="dark" className="bg-ink text-on-ink-strong">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <SectionMark n="05" eyebrow="Fora da prateleira" dark />
+        <SectionMark eyebrow="Fora da prateleira" dark />
 
         {/* Container relativo: canvas absoluto atrás, copy sobreposta */}
         <div className="mt-10 relative">
@@ -485,7 +466,7 @@ function S05_Alternativos() {
               ]}
             />
             <div className="mt-10">
-              <Link href="/mentoria/alternativos" className="btn-ghost-inverse">
+              <Link href="#contato" className="btn-ghost-inverse">
                 Ver alternativos em detalhe
                 <Arrow />
               </Link>
@@ -504,11 +485,11 @@ function S05_Alternativos() {
 
 function S06_Saude() {
   return (
-    <section id="saude" className="bg-bone text-ink">
+    <section id="saude" data-tone="light" className="bg-bone text-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="grid grid-cols-12 gap-10 md:gap-16">
           <div className="col-span-12 md:col-span-4">
-            <SectionMark n="06" eyebrow="Negociação coletiva" dark={false} />
+            <SectionMark eyebrow="Negociação coletiva" dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.875rem,3.4vw,2.75rem)] leading-[1.05] text-ink max-w-[14ch]">
               Plano de saúde.
             </h2>
@@ -555,7 +536,7 @@ function S06_Saude() {
 
 function S07_Previdencia() {
   return (
-    <section id="previdencia" className="bg-paper text-ink">
+    <section id="previdencia" data-tone="light" className="bg-paper text-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
           {/* Stack 3D em formato portrait (altura > largura) */}
@@ -567,7 +548,7 @@ function S07_Previdencia() {
 
           {/* Copy */}
           <div className="col-span-12 md:col-span-7 lg:col-span-7 lg:col-start-6">
-            <SectionMark n="07" eyebrow="Composição temporal" dark={false} />
+            <SectionMark eyebrow="Composição temporal" dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.875rem,3.4vw,2.75rem)] leading-[1.04] text-ink max-w-[18ch]">
               Previdência privada.<br />
               <span className="text-ink-soft">Estrutura tributária e gestor por mérito.</span>
@@ -607,9 +588,9 @@ function S07_Previdencia() {
 
 function S08_Workshops() {
   return (
-    <section id="workshops" className="bg-ink text-on-ink-strong">
+    <section id="workshops" data-tone="dark" className="bg-ink text-on-ink-strong">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <SectionMark n="08" eyebrow="Para grupos" dark />
+        <SectionMark eyebrow="Para grupos" dark />
         <div className="mt-10 grid grid-cols-12 gap-8 items-end">
           <h2 className="col-span-12 md:col-span-7 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-on-ink-strong max-w-[18ch]">
             Treinamentos<br />e workshops.
