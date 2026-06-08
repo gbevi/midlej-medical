@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MentoriaHeader } from "../_components/MentoriaHeader";
 import { MentoriaFooter } from "../_components/MentoriaFooter";
 import { MentoriaLeadForm } from "../_components/MentoriaLeadForm";
+import { MentoriaSuccessBody } from "../_components/MentoriaSuccessBody";
 
 export const metadata: Metadata = {
   title: "A carteira que ninguém te ofereceu · Midlej Capital",
@@ -148,9 +149,9 @@ export default function AlternativosPage() {
             O gerente vende o que tem na grade do banco.
           </h2>
           <p className="cs-prose">
-            A Midlej Capital opera no outro modelo: fee recorrente do cliente,
-            zero comissão de produto. Acessamos estruturas e ativos fora da
-            prateleira de banco. Sem interesse em te empurrar nenhum deles.
+            Acessamos estruturas e ativos fora da prateleira de banco — fee
+            recorrente do cliente, zero comissão de produto. Sem interesse em te
+            empurrar nenhum deles.
           </p>
         </div>
       </section>
@@ -171,7 +172,17 @@ export default function AlternativosPage() {
               idPrefix="alt"
               submitLabel="Quero ver minha carteira diversificada"
               successTitle="Recebemos."
-              successBody="Em até 1 dia útil retornamos com a versão diversificada da sua alocação."
+              successBody={
+                <MentoriaSuccessBody
+                  followup={
+                    <>
+                      Em até <span className="cs-num">1 dia útil</span>{" "}
+                      retornamos pelo WhatsApp com a versão diversificada da
+                      sua alocação atual.
+                    </>
+                  }
+                />
+              }
             />
           </div>
         </div>

@@ -4,6 +4,7 @@ import {
   GoogleTagManagerHead,
   GoogleTagManagerNoScript,
 } from "../components/Analytics";
+import { MentoriaUtmCapture } from "./_components/MentoriaUtmCapture";
 
 export const metadata: Metadata = {
   title: "Midlej Capital · Mentoria",
@@ -20,6 +21,7 @@ export default function MentoriaLayout({
       <GoogleTagManagerHead />
       <GoogleTagManagerNoScript />
       <div className="midlej-mentoria">
+        <MentoriaUtmCapture />
         <a href="#main" className="cs-skip-link">
           Pular para o conteúdo
         </a>

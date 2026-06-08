@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MentoriaHeader } from "../_components/MentoriaHeader";
 import { MentoriaFooter } from "../_components/MentoriaFooter";
 import { MentoriaLeadForm } from "../_components/MentoriaLeadForm";
+import { MentoriaSuccessBody } from "../_components/MentoriaSuccessBody";
 import { EbookCover } from "./EbookCover";
 
 export const metadata: Metadata = {
@@ -61,7 +62,7 @@ export default function EbookPage() {
           <div className="lp-ebook-hero-grid">
             <div>
               <h1 style={{ marginTop: 28 }}>
-                <em>Um guia curto</em>, para ler antes de mudar de banco.
+                <em>Um guia curto</em>, para ler antes de investir seu patrimônio.
               </h1>
               <p className="cs-lede">
                 Em linguagem de quem fala com médico todo dia.
@@ -70,7 +71,12 @@ export default function EbookPage() {
                 idPrefix="ebook"
                 submitLabel="Receber o guia"
                 successTitle="Pronto."
-                successBody="Mandamos o guia pelo WhatsApp informado. Boa leitura."
+                successBody={
+                  <MentoriaSuccessBody
+                    downloadHref="/guias/ebook-5-erros.pdf"
+                    downloadLabel="Baixar o guia em PDF"
+                  />
+                }
               />
             </div>
 

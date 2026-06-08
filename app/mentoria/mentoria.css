@@ -2127,6 +2127,150 @@ body:has(.midlej-mentoria) {
 }
 
 /* ─────────────────────────────────────────────────────────
+   Ebook — botão de download pós-submit
+   ───────────────────────────────────────────────────────── */
+.midlej-mentoria a.lp-ebook-download-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 16px 0;
+  padding: 14px 22px;
+  background: var(--cs-ink);
+  color: var(--cs-paper);
+  border: 1px solid var(--cs-ink);
+  border-radius: var(--radius-sm);
+  font-family: var(--cs-font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 160ms ease, transform 160ms ease;
+  width: fit-content;
+}
+.midlej-mentoria a.lp-ebook-download-cta:hover {
+  background: var(--cs-ink-deep);
+  color: var(--cs-paper);
+  transform: translateY(-1px);
+}
+.midlej-mentoria a.lp-ebook-download-cta > span:first-child {
+  font-family: var(--cs-font-display);
+  color: var(--cs-clay);
+  font-size: 16px;
+}
+.lp-ebook-download-sub {
+  display: block;
+  font-size: 14px;
+  color: var(--cs-muted);
+  line-height: 1.6;
+  max-width: 44ch;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Simulador — estado bloqueado (gate até o lead enviar o form)
+   Mostra o GAP (delta de anos) como prova; borra o ano exato.
+   ───────────────────────────────────────────────────────── */
+/* Apenas a frase secundária (idade/capital) fica totalmente borrada.
+   O ano usa máscara parcial (.lp-sim-year-mask) — vê-se a década, não o ano exato. */
+.lp-sim-output.is-locked .lp-sim-output-sentence {
+  filter: blur(8px);
+  user-select: none;
+  pointer-events: none;
+  transition: filter 240ms ease;
+}
+.lp-sim-year-mask {
+  filter: blur(0.18em);
+  opacity: 0.92;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: filter 240ms ease, opacity 240ms ease;
+}
+.midlej-mentoria a.lp-sim-output-unlock {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--cs-rule);
+  border-radius: var(--radius-sm);
+  font-family: var(--cs-font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cs-ink);
+  background: var(--cs-paper);
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease;
+  width: fit-content;
+}
+.midlej-mentoria a.lp-sim-output-unlock:hover {
+  border-color: var(--cs-clay);
+  background: var(--cs-paper-raised);
+  color: var(--cs-ink);
+}
+.lp-sim-output-unlock-mark {
+  font-family: var(--cs-font-display);
+  color: var(--cs-clay);
+  font-size: 16px;
+  line-height: 1;
+}
+.lp-sim-compare-hint {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--cs-muted);
+  line-height: 1.55;
+  max-width: 56ch;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Mobile hardening — small-screen polish across all 5 LPs
+   ───────────────────────────────────────────────────────── */
+.midlej-mentoria { overflow-x: hidden; }
+.midlej-mentoria img,
+.midlej-mentoria svg { max-width: 100%; height: auto; }
+
+@media (max-width: 720px) {
+  .cs-container { padding-inline: 20px; }
+  .cs-header-inner { padding-inline: 20px; gap: 12px; min-height: 56px; }
+  .cs-header-cta { padding: 8px 14px; }
+
+  /* Forms: keep inputs ≥16px to avoid iOS auto-zoom, tighten paddings */
+  .cs-form-panel { padding: 24px 20px; gap: 16px; }
+  .cs-input, .cs-select, .cs-textarea { font-size: 16px; padding: 12px 14px; }
+  .cs-form-consent { font-size: 12px; }
+  .cs-form-success { padding: 28px 20px; }
+
+  /* Hero spacing on tight viewports */
+  .lp-raiox-hero .cs-container,
+  .lp-ebook-hero .cs-container,
+  .lp-sim-hero .cs-container,
+  .lp-planilha-hero .cs-container,
+  .lp-alt-hero .cs-container { padding-block: 8px; }
+
+  /* Raio-x laudo facsímile: don't overflow on phones */
+  .lp-raiox-laudo { max-width: 100%; width: 100%; }
+
+  /* Simulador: ensure compare block stacks cleanly */
+  .lp-sim-compare-grid { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+  .lp-sim-compare-delta { justify-self: center; }
+
+  /* Planilha: input column gets adequate width */
+  .lp-planilha-cell-amount { min-width: 0; }
+  .lp-planilha-amount input { min-width: 0; width: 100%; }
+
+  /* Alternativos: timeline tightens */
+  .lp-alt-scenario { gap: 20px; }
+}
+
+@media (max-width: 480px) {
+  .cs-container { padding-inline: 16px; }
+  .cs-header-inner { padding-inline: 16px; }
+  .cs-form-panel { padding: 20px 16px; }
+  .lp-raiox-laudo-findings dd { font-size: 13px; }
+}
+
+/* ─────────────────────────────────────────────────────────
    Reduced motion
    ───────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

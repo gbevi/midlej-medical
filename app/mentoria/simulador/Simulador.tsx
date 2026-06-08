@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MentoriaLeadForm } from "../_components/MentoriaLeadForm";
+import { MentoriaSuccessBody } from "../_components/MentoriaSuccessBody";
+import { ev } from "@/lib/analytics";
 import { anoIndependencia } from "./simMath";
 
 function brl(n: number) {
@@ -25,11 +27,32 @@ function formatPreset(n: number): string {
   return `${n / 1000}k`;
 }
 
+/** Splits "2047" → ["204","7"] so we can mask only the last digit. */
+function splitYear(n: number): [string, string] {
+  const s = String(n);
+  if (s.length < 1) return [s, ""];
+  return [s.slice(0, -1), s.slice(-1)];
+}
+
 export function Simulador() {
   const [idade, setIdade] = useState(38);
   const [patrim, setPatrim] = useState(450000);
   const [aporte, setAporte] = useState(8000);
   const [meta, setMeta] = useState(25000);
+  const [unlocked, setUnlocked] = useState(false);
+
+  // tool_use "simulator_complete" — dispara uma vez quando o lead muda
+  // qualquer input padrão. Mede engajamento com a ferramenta separado da
+  // conversão do form.
+  const interactedRef = useRef(false);
+  useEffect(() => {
+    if (interactedRef.current) return;
+    const changed = idade !== 38 || patrim !== 450000 || aporte !== 8000 || meta !== 25000;
+    if (changed) {
+      interactedRef.current = true;
+      ev.toolUse("simulador", "simulator_complete");
+    }
+  }, [idade, patrim, aporte, meta]);
   const calc = useMemo(
     () => anoIndependencia({ idade, patrimonio: patrim, aporte, metaMensal: meta }),
     [idade, patrim, aporte, meta],
@@ -220,19 +243,35 @@ export function Simulador() {
         </div>
 
         {/* OUTPUT */}
-        <div className="lp-sim-output">
+        <div className={`lp-sim-output${unlocked ? "" : " is-locked"}`}>
           <span className="lp-sim-output-label">Seu ano de independência</span>
           <span
             className="lp-sim-output-year"
             aria-live="polite"
             aria-atomic="true"
           >
-            {displayAno}
+            {unlocked ? (
+              displayAno
+            ) : (
+              <>
+                {splitYear(displayAno)[0]}
+                <span className="lp-sim-year-mask" aria-hidden="true">
+                  {splitYear(displayAno)[1]}
+                </span>
+              </>
+            )}
           </span>
-          <p className="lp-sim-output-sentence">
+          <p className="lp-sim-output-sentence" aria-hidden={!unlocked}>
             você teria <span className="cs-num">{displayIdadeFinal}</span> anos.
             capital alvo <span className="cs-num">R$ {brl(displayAlvo)}</span>.
           </p>
+          {!unlocked && (
+            <a href="#sim-lead" className="lp-sim-output-unlock">
+              <span className="lp-sim-output-unlock-mark" aria-hidden="true">§</span>
+              <span>Liberar ano exato e memória do cálculo</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          )}
 
           <p className="lp-sim-disclaimer lp-sim-disclaimer--mobile">
             Simulação. Considera retorno real (descontada a inflação) de 5% a.a.
@@ -242,12 +281,27 @@ export function Simulador() {
         </div>
       </div>
 
-      {/* BRIDGE COMPARE. Visible always (post-unlock highlights the delta) */}
-      <div className="lp-sim-compare" aria-live="polite">
+      {/* BRIDGE COMPARE — mostra o GAP (prova de que o cálculo funcionou).
+          Os anos ficam borrados enquanto travado; o delta fica sempre visível. */}
+      <div
+        className={`lp-sim-compare${unlocked ? "" : " is-locked"}`}
+        aria-live="polite"
+      >
         <div className="lp-sim-compare-grid">
           <div className="lp-sim-compare-col">
             <span className="lp-sim-compare-label">Alocação eficiente</span>
-            <span className="lp-sim-compare-year">{displayAno}</span>
+            <span className="lp-sim-compare-year">
+              {unlocked ? (
+                displayAno
+              ) : (
+                <>
+                  {splitYear(displayAno)[0]}
+                  <span className="lp-sim-year-mask" aria-hidden="true">
+                    {splitYear(displayAno)[1]}
+                  </span>
+                </>
+              )}
+            </span>
           </div>
           <span className="lp-sim-compare-delta">
             +{deltaAnos} {deltaAnos === 1 ? "ano" : "anos"}
@@ -255,21 +309,47 @@ export function Simulador() {
           <div className="lp-sim-compare-col">
             <span className="lp-sim-compare-label">Alocação ineficiente</span>
             <span className="lp-sim-compare-year lp-sim-compare-year--muted">
-              {displayAnoIneficiente}
+              {unlocked ? (
+                displayAnoIneficiente
+              ) : (
+                <>
+                  {splitYear(displayAnoIneficiente)[0]}
+                  <span className="lp-sim-year-mask" aria-hidden="true">
+                    {splitYear(displayAnoIneficiente)[1]}
+                  </span>
+                </>
+              )}
             </span>
           </div>
         </div>
+        {!unlocked && (
+          <p className="lp-sim-compare-hint">
+            Alocação ineficiente adiciona{" "}
+            <span className="cs-num">
+              {deltaAnos} {deltaAnos === 1 ? "ano" : "anos"}
+            </span>{" "}
+            à sua data de independência. O ano exato vai pelo WhatsApp.
+          </p>
+        )}
       </div>
 
-      <div className="lp-sim-lead-panel">
+      <div className="lp-sim-lead-panel" id="sim-lead">
         <p className="lp-sim-lead-prompt">
-          Quer receber o cálculo no WhatsApp, com a memória completa?
+          {unlocked
+            ? "Memória completa a caminho do seu WhatsApp."
+            : "Receba o ano exato + a memória completa do cálculo no WhatsApp."}
         </p>
         <MentoriaLeadForm
           idPrefix="sim"
-          submitLabel="Receber o cálculo"
-          successTitle="Pronto."
-          successBody="Em breve mandamos a memória do cálculo pelo WhatsApp informado."
+          submitLabel="Liberar resultado e receber memória"
+          successTitle="Liberado."
+          successBody={
+            <MentoriaSuccessBody
+              downloadHref="/guias/memoria-calculo.pdf"
+              downloadLabel="Baixar a memória do cálculo"
+            />
+          }
+          onSuccess={() => setUnlocked(true)}
         />
       </div>
     </>

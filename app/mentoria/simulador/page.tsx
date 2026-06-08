@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { MentoriaHeader } from "../_components/MentoriaHeader";
 import { MentoriaFooter } from "../_components/MentoriaFooter";
 import { Simulador } from "./Simulador";
+import { MIDLEJ_WHATSAPP_HREF } from "@/lib/leadConstants";
 
 export const metadata: Metadata = {
   title: "Simulador de independência financeira · Midlej Capital",
   description:
-    "Em que ano o médico para de depender do plantão. Simulador interativo Midlej Capital.",
+    "Em que ano você para de depender do trabalho. Simulador interativo Midlej Capital.",
 };
 
 export default function SimuladorPage() {
@@ -20,7 +21,7 @@ export default function SimuladorPage() {
       <section className="lp-sim-hero">
         <div className="cs-container">
           <h1 style={{ marginTop: 28 }}>
-            Em que ano você <em>para de depender</em> do plantão.
+            Em que ano você <em>para de depender</em> do trabalho.
           </h1>
           <p className="cs-lede">
             Quatro números seus, um cálculo honesto. Sem promessa de
@@ -45,16 +46,16 @@ export default function SimuladorPage() {
             </div>
             <div>
               <p className="cs-prose">
-                Uma alocação ineficiente empurra essa data uma década adiante.
-                Uma alocação ajustada à sua escala antecipa, sem você ter que
-                aportar mais.
+                Esse ano não é destino, é ponto de partida. Quer entender como
+                antecipamos essa data sem você precisar aportar mais? Mande uma
+                mensagem.
               </p>
               <a
-                href="#abrir"
+                href={MIDLEJ_WHATSAPP_HREF}
                 className="cs-link-underline"
                 style={{ marginTop: 24, display: "inline-flex" }}
               >
-                Voltar ao simulador <span aria-hidden="true">↑</span>
+                Falar no WhatsApp <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>

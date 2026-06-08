@@ -4,9 +4,9 @@ import { MentoriaFooter } from "../_components/MentoriaFooter";
 import { Planilha } from "./Planilha";
 
 export const metadata: Metadata = {
-  title: "Onde mora seu dinheiro · Planilha para médico PJ · Midlej Capital",
+  title: "Onde mora seu dinheiro · Planilha de gastos · Midlej Capital",
   description:
-    "Mapa interativo dos vazamentos do fluxo de caixa do médico PJ. Veja em 2 minutos quanto realmente sobra no fim do mês.",
+    "Mapa interativo dos vazamentos do seu fluxo de caixa. Veja em 2 minutos quanto realmente sobra no fim do mês.",
 };
 
 export default function PlanilhaPage() {

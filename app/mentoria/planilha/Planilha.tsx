@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MentoriaLeadForm } from "../_components/MentoriaLeadForm";
+import { MentoriaSuccessBody } from "../_components/MentoriaSuccessBody";
+import { ev } from "@/lib/analytics";
 
 function parseBRL(s: string): number {
   const d = s.replace(/\D/g, "");
@@ -18,39 +20,58 @@ const ROWS: Array<{
   key: string;
   label: string;
   hint?: string;
-  section?: string;
   sign: 1 | -1;
 }> = [
-  { key: "sec-renda", section: "Entradas", label: "", sign: 1 },
-  { key: "renda", label: "Renda mensal líquida", hint: "PJ + plantões, antes de qualquer débito", sign: 1 },
-  { key: "sec-fixos", section: "Custos fixos", label: "", sign: -1 },
-  { key: "moradia", label: "Moradia", hint: "aluguel, condomínio, IPTU, contas", sign: -1 },
-  { key: "carro", label: "Carro", hint: "parcela, seguro, manutenção, combustível", sign: -1 },
-  { key: "saude", label: "Saúde, escola, plano", sign: -1 },
-  { key: "sec-var", section: "Variáveis", label: "", sign: -1 },
-  { key: "alimentacao", label: "Alimentação e mercado", sign: -1 },
-  { key: "lazer", label: "Lazer, viagens, restaurantes", sign: -1 },
-  { key: "outros", label: "Outros e imprevistos", sign: -1 },
+  {
+    key: "renda",
+    label: "Renda mensal líquida",
+    hint: "antes de qualquer débito",
+    sign: 1,
+  },
+  {
+    key: "fixos",
+    label: "Custos fixos",
+    hint: "moradia, carro, saúde, escola, planos",
+    sign: -1,
+  },
+  {
+    key: "variaveis",
+    label: "Variáveis",
+    hint: "alimentação, lazer, viagens, imprevistos",
+    sign: -1,
+  },
 ];
 
 export function Planilha() {
   const [vals, setVals] = useState<Record<string, number>>({
     renda: 45000,
-    moradia: 8000,
-    carro: 3500,
-    saude: 4500,
-    alimentacao: 5000,
-    lazer: 6000,
-    outros: 4000,
+    fixos: 16000,
+    variaveis: 15000,
   });
 
   const sobra = useMemo(() => {
     let s = 0;
     for (const r of ROWS) {
-      if (r.section) continue;
       s += r.sign * (vals[r.key] ?? 0);
     }
     return s;
+  }, [vals]);
+
+  // Dispara "tool_use simulator_complete" UMA vez por sessão, quando o
+  // usuário interage com algum campo. Permite medir, junto com leadSuccess,
+  // se a fricção está no simulador ou no formulário (analista pediu).
+  const interactedRef = useRef(false);
+  useEffect(() => {
+    if (interactedRef.current) return;
+    const initial = { renda: 45000, fixos: 16000, variaveis: 15000 };
+    const changed =
+      vals.renda !== initial.renda ||
+      vals.fixos !== initial.fixos ||
+      vals.variaveis !== initial.variaveis;
+    if (changed) {
+      interactedRef.current = true;
+      ev.toolUse("planilha", "simulator_complete");
+    }
   }, [vals]);
 
   const renda = vals.renda ?? 0;
@@ -74,40 +95,28 @@ export function Planilha() {
             </tr>
           </thead>
           <tbody>
-            {ROWS.map((r) => {
-              if (r.section) {
-                return (
-                  <tr className="lp-planilha-row-section" key={r.key}>
-                    <td colSpan={2}>
-                      <span className="lp-planilha-section-mark" aria-hidden="true">§</span>
-                      <h3>{r.section}</h3>
-                    </td>
-                  </tr>
-                );
-              }
-              return (
-                <tr className="lp-planilha-row" key={r.key}>
-                  <th scope="row" className="lp-planilha-label">
-                    <label htmlFor={`pl-${r.key}`}>{r.label}</label>
-                    {r.hint && <span className="cs-hint">{r.hint}</span>}
-                  </th>
-                  <td className="lp-planilha-cell-amount">
-                    <div className="lp-planilha-amount">
-                      <span className="cs-sim-prefix" aria-hidden="true">R$</span>
-                      <input
-                        id={`pl-${r.key}`}
-                        type="text"
-                        inputMode="numeric"
-                        value={fmtBRL(vals[r.key] ?? 0)}
-                        onChange={(e) =>
-                          setVals((p) => ({ ...p, [r.key]: parseBRL(e.target.value) }))
-                        }
-                      />
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
+            {ROWS.map((r) => (
+              <tr className="lp-planilha-row" key={r.key}>
+                <th scope="row" className="lp-planilha-label">
+                  <label htmlFor={`pl-${r.key}`}>{r.label}</label>
+                  {r.hint && <span className="cs-hint">{r.hint}</span>}
+                </th>
+                <td className="lp-planilha-cell-amount">
+                  <div className="lp-planilha-amount">
+                    <span className="cs-sim-prefix" aria-hidden="true">R$</span>
+                    <input
+                      id={`pl-${r.key}`}
+                      type="text"
+                      inputMode="numeric"
+                      value={fmtBRL(vals[r.key] ?? 0)}
+                      onChange={(e) =>
+                        setVals((p) => ({ ...p, [r.key]: parseBRL(e.target.value) }))
+                      }
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
           <tfoot>
             <tr className="lp-planilha-total-row">
@@ -132,13 +141,21 @@ export function Planilha() {
 
       <div className="lp-planilha-capture">
         <div className="lp-planilha-form-copy">
-          <span className="cs-eyebrow">Quer a planilha pronta?</span>
+          <span className="cs-eyebrow">
+            Quer entender a estrutura completa dos seus gastos e receber a
+            planilha pronta?
+          </span>
         </div>
         <MentoriaLeadForm
           idPrefix="pl"
           submitLabel="Receber a planilha"
-          successTitle="Vai chegar pelo WhatsApp."
-          successBody="A planilha em Excel + um resumo do seu cenário. Quanto está saindo por categoria, e o que costuma estar escondido nos custos variáveis."
+          successTitle="Pronto."
+          successBody={
+            <MentoriaSuccessBody
+              downloadHref="/guias/planilha-onde-mora-seu-dinheiro.xlsx"
+              downloadLabel="Baixar a planilha em Excel"
+            />
+          }
         />
       </div>
     </div>

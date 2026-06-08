@@ -39,6 +39,8 @@ type Props = {
   successBody?: React.ReactNode;
   /** id prefix para inputs, evita colisão se houver dois forms na mesma página. */
   idPrefix?: string;
+  /** Callback disparado na primeira transição para sucesso. */
+  onSuccess?: () => void;
 };
 
 export function MentoriaLeadForm({
@@ -46,19 +48,22 @@ export function MentoriaLeadForm({
   successTitle,
   successBody,
   idPrefix = "cs-lead",
+  onSuccess,
 }: Props) {
   const [state, action, pending] = useActionState(submitLeadForm, initial);
 
   useEffect(() => {
     if (state.kind === "success") {
       ev.leadSuccess(idPrefix);
+      ev.conversion(idPrefix);
+      onSuccess?.();
       return;
     }
     if (state.kind !== "error") return;
     const fields = state.fields ?? {};
     const first = FIELD_ORDER.find((n) => fields[n]?.length);
     if (first) document.getElementById(`${idPrefix}-${first}`)?.focus();
-  }, [state, idPrefix]);
+  }, [state, idPrefix, onSuccess]);
 
   const [wa, setWa] = useState("");
 
@@ -68,7 +73,7 @@ export function MentoriaLeadForm({
         <span className="cs-form-success-mark">✓</span>
         <h3 className="lp-cs-success-title">{successTitle}</h3>
         {successBody ? (
-          <p className="cs-prose">{successBody}</p>
+          <div className="cs-prose">{successBody}</div>
         ) : (
           <p className="cs-prose">
             Respondemos pelo WhatsApp informado em até{" "}

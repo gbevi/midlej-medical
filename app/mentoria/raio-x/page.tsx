@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { MentoriaHeader } from "../_components/MentoriaHeader";
 import { MentoriaFooter } from "../_components/MentoriaFooter";
 import { MentoriaLeadForm } from "../_components/MentoriaLeadForm";
+import { MentoriaSuccessBody } from "../_components/MentoriaSuccessBody";
+import { MIDLEJ_WHATSAPP_HREF } from "@/lib/leadConstants";
 
-// TODO: substitute by real number
-const WHATSAPP_HREF = "https://wa.me/5511999999999";
+const WHATSAPP_HREF = MIDLEJ_WHATSAPP_HREF;
 
 export const metadata: Metadata = {
   title: "Raio-x da sua carteira · Midlej Capital",
   description:
-    "Uma análise gratuita da carteira que você já tem hoje. Sem custo, sem proposta. Para médicos.",
+    "Uma análise gratuita da carteira que você já tem hoje. Sem custo, sem proposta.",
 };
 
 const FINDINGS = [
@@ -63,8 +64,8 @@ export default function RaioXPage() {
                 Precisa de um <em>diagnóstico</em>.
               </h1>
               <p className="lp-raiox-hero-stat">
-                9 em cada 10 médicos que abrem a carteira pagam{" "}
-                <em>2 a 4 vezes mais</em> de taxa do que precisam.
+                9 em cada 10 carteiras que abrimos pagam{" "}
+                <em>2 a 4 vezes mais</em> de taxa do que precisariam.
               </p>
             </div>
             <aside className="lp-raiox-hero-meta" aria-label="Laudo facsímile">
@@ -153,10 +154,16 @@ export default function RaioXPage() {
                 submitLabel="Quero meu raio-x"
                 successTitle="Recebemos."
                 successBody={
-                  <>
-                    Respondemos pelo WhatsApp informado em até{" "}
-                    <span className="cs-num">1 dia útil</span>.
-                  </>
+                  <MentoriaSuccessBody
+                    followup={
+                      <>
+                        Respondemos pelo WhatsApp em até{" "}
+                        <span className="cs-num">1 dia útil</span> pra combinar
+                        o envio dos extratos. O laudo escrito sai em até{" "}
+                        <span className="cs-num">5 dias úteis</span>.
+                      </>
+                    }
+                  />
                 }
               />
             </div>
