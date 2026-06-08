@@ -11,7 +11,6 @@ const DEFAULT_VERTICALS = [
   "Investimentos internacionais",
   "Seguro de vida",
   "Produtos alternativos",
-  "Plano de saúde",
   "Previdência privada",
   "Treinamentos e workshops",
 ];

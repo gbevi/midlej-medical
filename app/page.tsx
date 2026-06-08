@@ -8,8 +8,6 @@ import { SmoothAnchor } from "./_hub/SmoothAnchor";
 
 import { FullTimeline } from "./_hub/svg/FullTimeline";
 import { PocketRing } from "./_hub/svg/PocketRing";
-import { SeguroCompare } from "./_hub/svg/SeguroCompare";
-import { SaudeMatrix } from "./_hub/svg/SaudeMatrix";
 
 import {
   GlobeClient as Globe,
@@ -21,7 +19,7 @@ import {
 export const metadata: Metadata = {
   title: "Midlej Capital · Hub de soluções financeiras",
   description:
-    "Mentoria, investimentos internacionais, seguros, alternativos, previdência, plano de saúde e treinamentos. Uma banca de planejamento financeiro sem conflito.",
+    "Mentoria, investimentos internacionais, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
 };
 
 /* ================================================================
@@ -46,7 +44,6 @@ export default function HubPage() {
       <S03_Internacionais />
       <S04_Seguro />
       <S05_Alternativos />
-      <S06_Saude />
       <S07_Previdencia />
       <S08_Workshops />
 
@@ -175,11 +172,6 @@ function Manifesto() {
               Precisa de critério para decidir, contexto para comparar e
               continuidade para sustentar.
             </p>
-            <p className="mt-10 t-body text-[1.05rem] leading-[1.7] text-ink-soft max-w-[56ch]">
-              A Midlej Capital opera sob fee recorrente do cliente. Zero
-              comissão de produto, zero distribuição de marca. Oito frentes
-              abaixo, conduzidas no mesmo princípio.
-            </p>
           </div>
         </div>
       </div>
@@ -265,23 +257,11 @@ function S01_MentoriaFull() {
           <FullTimeline className="w-full" />
         </div>
 
-        <div className="mt-14 md:mt-20 grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 md:col-span-7">
-            <ProofRow
-              dark
-              items={[
-                { k: "Sessões iniciais", v: "3 a 5" },
-                { k: "Revisão", v: "Trimestral" },
-                { k: "Duração", v: "12 meses+" },
-              ]}
-            />
-          </div>
-          <div className="col-span-12 md:col-span-5 flex md:justify-end">
-            <Link href="#contato" className="btn-primary-inverse">
-              Conhecer a mentoria completa
-              <Arrow />
-            </Link>
-          </div>
+        <div className="mt-14 md:mt-20 flex justify-end">
+          <Link href="#contato" className="btn-primary-inverse">
+            Conhecer a mentoria completa
+            <Arrow />
+          </Link>
         </div>
       </div>
     </section>
@@ -424,12 +404,7 @@ function S04_Seguro() {
           </p>
         </div>
 
-        {/* Bars ocupam toda a largura, em pátio de paper levantado */}
-        <div className="mt-16 md:mt-20 bg-bone p-8 md:p-12">
-          <SeguroCompare className="w-full" />
-        </div>
-
-        <div className="mt-14 grid grid-cols-12 gap-8 items-end">
+        <div className="mt-14 md:mt-20 grid grid-cols-12 gap-8 items-end">
           <div className="col-span-12 md:col-span-7">
             <ProofRow
               dark={false}
@@ -491,71 +466,12 @@ function S05_Alternativos() {
             </p>
           </div>
           <div className="col-span-12 md:col-span-6">
-            <ProofRow
-              dark
-              items={[
-                { k: "Ticket mínimo", v: "R$ 100k+" },
-                { k: "Classes", v: "PE · RE · CRA" },
-                { k: "Lock-up", v: "3 a 7 anos" },
-              ]}
-            />
-            <div className="mt-10">
+            <div className="flex md:justify-end">
               <Link href="#contato" className="btn-ghost-inverse">
                 Ver alternativos em detalhe
                 <Arrow />
               </Link>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
-   06 — Plano de saúde · bone · matrix domina à direita
-   composição: copy magra à esquerda, matrix densa à direita
-   ================================================================ */
-
-function S06_Saude() {
-  return (
-    <section id="saude" data-tone="light" className="bg-bone text-ink">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
-        <div className="grid grid-cols-12 gap-10 md:gap-16">
-          <div className="col-span-12 md:col-span-4">
-            <SectionMark eyebrow="Negociação coletiva" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,3.4vw,2.75rem)] leading-[1.05] text-ink max-w-[14ch]">
-              Plano de saúde.
-            </h2>
-            <p className="mt-8 t-lede text-ink-soft text-[1.0625rem] max-w-[34ch]">
-              Mesma operadora, mesma rede, condição corporativa via veículo
-              coletivo.
-            </p>
-            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[40ch]">
-              Estruturamos a contratação afinada ao seu perfil. Custo
-              significativamente menor que a contratação como pessoa física.
-            </p>
-            <div className="mt-12">
-              <ProofRow
-                dark={false}
-                items={[
-                  { k: "Economia média", v: "−35%" },
-                  { k: "Operadoras", v: "10+" },
-                  { k: "Renovação", v: "Acompanhada" },
-                ]}
-              />
-            </div>
-            <div className="mt-10">
-              <Link href="#contato" className="btn-primary">
-                Quero comparar planos
-                <Arrow />
-              </Link>
-            </div>
-          </div>
-
-          {/* Matrix grande à direita */}
-          <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <SaudeMatrix className="w-full" />
           </div>
         </div>
       </div>
