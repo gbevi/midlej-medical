@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = {
   title: "Midlej Capital · Hub de soluções financeiras",
   description:
-    "Mentoria, investimentos internacionais, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
+    "Mentoria, investimentos internacionais, câmbio, seguros, alternativos, previdência e treinamentos. Uma banca de planejamento financeiro sem conflito.",
 };
 
 /* ================================================================
@@ -42,6 +42,7 @@ export default function HubPage() {
       <S01_MentoriaFull />
       <S02_MentoriaPocket />
       <S03_Internacionais />
+      <S03b_Cambio />
       <S04_Seguro />
       <S05_Alternativos />
       <S07_Previdencia />
@@ -189,10 +190,14 @@ function Contato() {
             <h2 className="mt-10 t-display text-[clamp(2rem,4.5vw,3.75rem)] leading-[1.0] text-on-ink-strong max-w-[18ch]">
               Sem proposta antes da conversa.
             </h2>
-            <p className="mt-10 t-lede text-on-ink-soft text-[1.1rem] max-w-[44ch]">
-              A primeira conversa é gratuita, sem material comercial, sem
-              gravação. Você descreve o caso, ouvimos, e respondemos se a
-              banca é o canal certo para você.
+            <p className="mt-10 t-lede text-on-ink-soft text-[1.1rem] max-w-[48ch]">
+              A primeira conversa é gratuita, confidencial e sem compromisso.
+            </p>
+            <p className="mt-6 t-body text-[1rem] leading-[1.65] text-on-ink-soft max-w-[52ch]">
+              Você apresenta seu contexto, seus objetivos e desafios. Nós
+              ouvimos, fazemos as perguntas certas e avaliamos como agregar
+              valor ao seu caso. Somente depois disso discutimos caminhos e
+              soluções.
             </p>
           </div>
           <div className="col-span-12 md:col-span-6 md:col-start-7">
@@ -257,11 +262,23 @@ function S01_MentoriaFull() {
           <FullTimeline className="w-full" />
         </div>
 
-        <div className="mt-14 md:mt-20 flex justify-end">
-          <Link href="#contato" className="btn-primary-inverse">
-            Conhecer a mentoria completa
-            <Arrow />
-          </Link>
+        <div className="mt-14 md:mt-20 grid grid-cols-12 gap-8 items-end">
+          <div className="col-span-12 md:col-span-7">
+            <ProofRow
+              dark
+              items={[
+                { k: "Sessões iniciais", v: "2 a 4" },
+                { k: "Revisão", v: "Sob demanda" },
+                { k: "Duração", v: "30 a 60 dias" },
+              ]}
+            />
+          </div>
+          <div className="col-span-12 md:col-span-5 flex md:justify-end">
+            <Link href="#contato" className="btn-primary-inverse">
+              Conhecer a mentoria completa
+              <Arrow />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -289,24 +306,26 @@ function S02_MentoriaPocket() {
           {/* Coluna do texto */}
           <div className="col-span-12 md:col-span-6 lg:col-span-6 lg:col-start-7">
             <SectionMark eyebrow="Sprint focado" dark={false} />
-            <h2 className="mt-10 t-display text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.04] text-ink max-w-[20ch]">
-              Mentoria condensada.
+            <h2 className="mt-10 t-display text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1.04] text-ink max-w-[24ch]">
+              Mentoria condensada<br />
+              <span className="text-ink-soft">ou onboarding objetivo.</span>
             </h2>
-            <p className="mt-8 t-lede text-ink-soft text-[1.05rem] max-w-[40ch]">
-              Versão objetiva para uma decisão pontual: uma sucessão, um
-              portfólio, uma reorganização tributária.
+            <p className="mt-8 t-lede text-ink-soft text-[1.05rem] max-w-[44ch]">
+              Nosso método traz clareza para as principais decisões da sua
+              vida financeira.
             </p>
-            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[48ch]">
-              Sai do escopo com plano escrito, recomendações fundamentadas e
-              o que decidir caso o cenário mude.
+            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[52ch]">
+              Vamos abordar organização, proteção, sucessão, internacionalização
+              e crédito, mostrando na prática como fortalecer sua estrutura
+              patrimonial e financeira.
             </p>
             <div className="mt-12">
               <ProofRow
                 dark={false}
                 items={[
-                  { k: "Janela", v: "6 semanas" },
-                  { k: "Sessões", v: "4" },
-                  { k: "Entrega", v: "Doc. decisório" },
+                  { k: "Janela", v: "30 a 60 dias" },
+                  { k: "Sessões", v: "2 a 4" },
+                  { k: "Entrega", v: "Plano customizado" },
                 ]}
               />
             </div>
@@ -338,27 +357,23 @@ function S03_Internacionais() {
           <div className="col-span-12 md:col-span-5 order-2 md:order-1">
             <SectionMark eyebrow="Onde o capital mora" dark />
             <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-on-ink-strong max-w-[16ch]">
-              Investimentos<br />internacionais.
+              Patrimônio<br />em dólar.
             </h2>
-            <p className="mt-8 t-lede text-on-ink-soft text-[1.05rem] max-w-[36ch]">
-              Diversificação fora do CDI, com mecanismo, não promessa.
-              Carteira global construída com método.
+            <p className="mt-8 t-lede text-on-ink-soft text-[1.05rem] max-w-[40ch]">
+              O dólar é a moeda de reserva global e a base dos maiores mercados
+              financeiros do mundo.
             </p>
-            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-on-ink-soft max-w-[44ch]">
-              Estruturamos exposição em ações globais, renda fixa offshore,
-              fundos macro e instrumentos cambiais. Abertura de conta no
-              exterior assistida.
+            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-on-ink-soft max-w-[52ch]">
+              Conectamos seu patrimônio a estruturas internacionais por meio de
+              contas offshore, trusts e veículos globais, com acesso às
+              principais gestoras e instituições financeiras do mercado
+              internacional.
             </p>
-            <div className="mt-12">
-              <ProofRow
-                dark
-                items={[
-                  { k: "Jurisdições", v: "EUA · UK · UE" },
-                  { k: "Classes", v: "Ações · RF · Hedge" },
-                  { k: "Conta", v: "Assistida" },
-                ]}
-              />
-            </div>
+            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-on-ink-soft max-w-[52ch]">
+              Diversificação geográfica, proteção cambial e exposição a
+              oportunidades globais, sempre através de parceiros especializados
+              e regulados. Abertura de conta internacional assistida.
+            </p>
             <div className="mt-10">
               <Link href="#contato" className="btn-ghost-inverse">
                 Quero diversificar globalmente
@@ -371,6 +386,43 @@ function S03_Internacionais() {
           <div className="col-span-12 md:col-span-7 order-1 md:order-2 relative">
             <div className="w-full aspect-square">
               <Globe className="w-full h-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================================================================
+   03b — Câmbio · paper · editorial limpo
+   composição: header + descrição, sem ProofRow
+   ================================================================ */
+
+function S03b_Cambio() {
+  return (
+    <section id="cambio" data-tone="light" className="bg-bone text-ink">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+          <div className="col-span-12 md:col-span-5">
+            <SectionMark eyebrow="Operação cambial" dark={false} />
+            <h2 className="mt-10 t-display text-[clamp(1.875rem,3.4vw,2.75rem)] leading-[1.04] text-ink max-w-[14ch]">
+              Câmbio.
+            </h2>
+          </div>
+          <div className="col-span-12 md:col-span-7">
+            <p className="t-lede text-ink-soft text-[1.05rem] max-w-[48ch]">
+              Compra e envio de dólares americanos para contas no exterior.
+            </p>
+            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[52ch]">
+              Execução assistida com parceiros regulados — desde a abertura
+              da operação até a liquidação na conta de destino.
+            </p>
+            <div className="mt-10">
+              <Link href="#contato" className="btn-ghost">
+                Operar câmbio
+                <Arrow />
+              </Link>
             </div>
           </div>
         </div>
@@ -393,34 +445,26 @@ function S04_Seguro() {
         {/* Bloco editorial em coluna: h2 → sub → lede, com respiração padronizada */}
         <div className="mt-12 max-w-[68ch]">
           <h2 className="t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-ink max-w-[18ch]">
-            Seguro de vida.
+            Seguros.
           </h2>
-          <p className="mt-4 t-display-light text-[clamp(1.25rem,2.2vw,1.75rem)] leading-[1.15] text-ink-soft max-w-[26ch]">
+          <p className="mt-4 t-display-light text-[clamp(1.25rem,2.2vw,1.75rem)] leading-[1.15] text-ink-soft max-w-[28ch]">
             Cobertura calibrada, custo otimizado.
           </p>
-          <p className="mt-8 t-lede text-ink-soft text-[1.05rem] max-w-[48ch]">
+          <p className="mt-8 t-lede text-ink-soft text-[1.05rem] max-w-[52ch]">
             Análise de necessidade real de capital segurado. Comparação de
             apólices fora do balcão de venda.
           </p>
+          <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-ink-soft max-w-[52ch]">
+            Principais produtos: seguro de vida, doenças graves e seguro
+            empresarial de responsabilidade civil.
+          </p>
         </div>
 
-        <div className="mt-14 md:mt-20 grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 md:col-span-7">
-            <ProofRow
-              dark={false}
-              items={[
-                { k: "Cobertura média", v: "3,3×" },
-                { k: "Custo / mil", v: "−70%" },
-                { k: "Modalidades", v: "Vida + DIT" },
-              ]}
-            />
-          </div>
-          <div className="col-span-12 md:col-span-5 flex md:justify-end">
-            <Link href="#contato" className="btn-primary">
-              Avaliar minha cobertura
-              <Arrow />
-            </Link>
-          </div>
+        <div className="mt-14 md:mt-20 flex justify-end">
+          <Link href="#contato" className="btn-primary">
+            Avaliar minha cobertura
+            <Arrow />
+          </Link>
         </div>
       </div>
     </section>
@@ -513,8 +557,8 @@ function S07_Previdencia() {
                 dark={false}
                 items={[
                   { k: "IR mínimo", v: "10%" },
-                  { k: "Veículo", v: "PGBL · VGBL" },
-                  { k: "Gestores", v: "Selecionados" },
+                  { k: "Veículos", v: "PGBL · VGBL" },
+                  { k: "Diferencial", v: "Sem come-cotas e ITCMD" },
                 ]}
               />
             </div>
@@ -545,9 +589,10 @@ function S08_Workshops() {
           <h2 className="col-span-12 md:col-span-7 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-on-ink-strong max-w-[18ch]">
             Treinamentos<br />e workshops.
           </h2>
-          <p className="col-span-12 md:col-span-5 t-lede text-on-ink-soft text-[1.0625rem] max-w-[40ch]">
-            Educação financeira sob medida para times executivos, conselhos,
-            sindicatos e instituições.
+          <p className="col-span-12 md:col-span-5 t-lede text-on-ink-soft text-[1.0625rem] max-w-[48ch]">
+            Conteúdo financeiro estratégico, desenvolvido para atender às
+            necessidades específicas de executivos, gestores, conselhos,
+            sindicatos e equipes corporativas.
           </p>
         </div>
 
@@ -563,8 +608,8 @@ function S08_Workshops() {
             <ProofRow
               dark
               items={[
-                { k: "Formato curto", v: "2h" },
-                { k: "Programa", v: "4 sessões" },
+                { k: "Formato curto", v: "1 a 3h" },
+                { k: "Programa", v: "1 a 2 sessões" },
                 { k: "Modalidade", v: "Presencial · remoto" },
               ]}
             />

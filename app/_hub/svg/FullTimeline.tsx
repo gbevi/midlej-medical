@@ -103,9 +103,9 @@ export function FullTimeline({ className }: { className?: string }) {
 
         {/* Nós */}
         {[
-          { x: x1, num: "01", name: "Diagnosticar", proof: "uma sessão estruturada", cls: "ft-node-1" },
-          { x: x2, num: "02", name: "Arquitetar", proof: "proposta documentada", cls: "ft-node-2" },
-          { x: x3, num: "03", name: "Sustentar", proof: "revisões trimestrais", cls: "ft-node-3" },
+          { x: x1, num: "01", name: "Diagnosticar", proof: "entender o que você precisa", cls: "ft-node-1" },
+          { x: x2, num: "02", name: "Arquitetar", proof: "mostrar o seu plano personalizado", cls: "ft-node-2" },
+          { x: x3, num: "03", name: "Sustentar", proof: "revisar e atualizar", cls: "ft-node-3" },
         ].map((n) => (
           <g key={n.num} className={n.cls}>
             <text x={n.x} y={Y - 36} textAnchor="middle" className="ft-num">

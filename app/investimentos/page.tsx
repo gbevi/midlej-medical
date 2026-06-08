@@ -725,12 +725,12 @@ function OutrasFrentes() {
           <div className="col-span-12 md:col-span-8">
             <Mark eyebrow="Hub Midlej Capital" dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.04] text-ink max-w-[26ch]">
-              Investimentos é uma das sete frentes da banca.
+              Investimentos é uma das oito frentes da banca.
             </h2>
             <p className="mt-8 t-lede text-ink-soft text-[1.0625rem] max-w-[48ch]">
-              Mentoria, internacionais, seguros, alternativos, previdência e
-              treinamentos. Operadas sob o mesmo critério, num único
-              interlocutor.
+              Mentoria, internacionais, câmbio, seguros, alternativos,
+              previdência e treinamentos. Operadas sob o mesmo critério, num
+              único interlocutor.
             </p>
           </div>
           <div className="col-span-12 md:col-span-4 flex md:justify-end">
