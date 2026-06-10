@@ -5,7 +5,6 @@ import { HubHeader } from "../_hub/HubHeader";
 import { HubLeadForm } from "../_hub/HubLeadForm";
 import { SmoothAnchor } from "../_hub/SmoothAnchor";
 import {
-  CurrencyOrbitsClient as CurrencyOrbits,
   AllocationRingsClient as AllocationRings,
   CompoundCurveClient as CompoundCurve,
 } from "../_hub/scenes/clients";
@@ -13,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Investimentos · Midlej Capital",
   description:
-    "Banca de investimentos sem conflito para quem já construiu patrimônio. Sem produto da prateleira, sem comissão por venda.",
+    "Gestão patrimonial integrada, sem conflito de interesse. Para famílias que já formaram patrimônio e querem conduzir cada decisão sob critério único.",
 };
 
 /* ================================================================
@@ -32,7 +31,6 @@ export default function InvestimentosPage() {
 
       <Hero />
       <Marcos />
-      <OndeOCapitalVive />
       <Manifesto />
       <Composicao />
       <ComoConduzimos />
@@ -101,13 +99,14 @@ function Hero() {
               Investimentos · Midlej Capital
             </p>
             <h1 className="reveal r-1 t-display text-[clamp(2.4rem,6vw,5.25rem)] leading-[0.98] text-balance text-on-ink-strong max-w-[20ch]">
-              Onde o capital vive,<br />
-              <span className="text-on-ink-soft">e como ele cresce.</span>
+              Patrimônio integrado,<br />
+              <span className="text-on-ink-soft">sob critério único.</span>
             </h1>
             <p className="reveal r-2 mt-10 t-lede text-on-ink-soft text-[1.0625rem] md:text-[1.2rem] max-w-[52ch]">
-              <span className="asterisk" />Banca privada de investimentos para
-              quem já construiu patrimônio. Recomendação sem comissão por
-              venda, estruturada caso a caso, acompanhada ao longo do tempo.
+              <span className="asterisk" />Gestão patrimonial independente
+              para famílias que já formaram patrimônio. Recomendação
+              remunerada pelo cliente, estruturada caso a caso, conduzida em
+              horizonte plurianual.
             </p>
             <div className="reveal r-3 mt-12 flex flex-wrap items-center gap-6">
               <Link href="#contato" className="btn-primary-inverse">
@@ -135,8 +134,8 @@ function Hero() {
 
 function Marcos() {
   const items = [
-    { k: "Atuação", v: "Brasil + internacional", note: "Conta no Brasil e veículo offshore quando faz sentido" },
-    { k: "Modelo", v: "Fee recorrente", note: "Remunerados pelo cliente, não pelo produto" },
+    { k: "Modelo", v: "Fee recorrente", note: "Remunerados pelo cliente, não pela distribuição" },
+    { k: "Independência", v: "Zero rebate", note: "Sem comissão de fundo, seguradora ou estrutura" },
     { k: "Plataforma", v: "Institucional", note: "Acesso a estruturas fora da prateleira de banco" },
     { k: "Relação", v: "Plurianual", note: "Acompanhamento contínuo, não venda pontual" },
   ];
@@ -206,83 +205,7 @@ function Manifesto() {
 }
 
 /* ================================================================
-   I — Onde o capital vive (ink, Globe 3D)
-   Inserida entre Marcos e Manifesto: depois dos números do "como
-   operamos", trazemos o "onde" — geografia de exchanges, jurisdições,
-   contas. O globo 3D dá corpo à ideia.
-   ================================================================ */
-
-function OndeOCapitalVive() {
-  return (
-    <section data-tone="dark" className="bg-ink text-on-ink-strong">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-36">
-        <div className="grid grid-cols-12 gap-10 md:gap-12 items-center">
-          <div className="col-span-12 md:col-span-5 order-2 md:order-1">
-            <Mark eyebrow="Geografia do capital" dark />
-            <h2 className="mt-10 t-display text-[clamp(1.875rem,3.6vw,3rem)] leading-[1.04] text-on-ink-strong max-w-[18ch]">
-              Onde o capital vive.
-            </h2>
-            <p className="mt-10 t-lede text-on-ink-soft text-[1.05rem] max-w-[40ch]">
-              <span className="asterisk" />
-              Carteira global construída com método. Conta no Brasil,
-              veículo offshore quando a estrutura pede, exposição ajustada
-              caso a caso.
-            </p>
-            <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-on-ink-soft max-w-[48ch]">
-              Trabalhamos em corretoras institucionais e bancos de
-              investimentos com balcão internacional. Abertura de conta no
-              exterior é assistida do início ao fim, sem terceirizar a
-              documentação.
-            </p>
-            <dl className="mt-12 grid grid-cols-3 gap-x-6 border-t border-line-on-ink pt-6">
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-on-ink-mute">
-                  Jurisdições
-                </dt>
-                <dd className="t-display-light text-[clamp(1rem,1.6vw,1.375rem)] leading-[1.15] tabular-nums mt-2 text-on-ink-strong">
-                  EUA · UK · UE
-                </dd>
-              </div>
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-on-ink-mute">
-                  Moeda
-                </dt>
-                <dd className="t-display-light text-[clamp(1rem,1.6vw,1.375rem)] leading-[1.15] tabular-nums mt-2 text-on-ink-strong">
-                  USD · EUR · GBP
-                </dd>
-              </div>
-              <div>
-                <dt className="t-mono text-[0.66rem] tracking-[0.16em] uppercase text-on-ink-mute">
-                  Conta
-                </dt>
-                <dd className="t-display-light text-[clamp(1rem,1.6vw,1.375rem)] leading-[1.15] tabular-nums mt-2 text-on-ink-strong">
-                  Assistida
-                </dd>
-              </div>
-            </dl>
-            <div className="mt-10">
-              <Link href="#contato" className="btn-ghost-inverse">
-                Quero diversificar globalmente
-                <Arrow />
-              </Link>
-            </div>
-          </div>
-
-          <div className="col-span-12 md:col-span-7 order-1 md:order-2">
-            <div className="w-full aspect-square">
-              <CurrencyOrbits className="w-full h-full" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
-   II — Composição (ink, AltLayers 3D)
-   Inserida entre Manifesto e Como conduzimos: cada classe de ativo
-   entra por uma razão. AltLayers separa as camadas conforme o scroll.
+   II — Composição (ink, AllocationRings 3D)
    ================================================================ */
 
 function Composicao() {
@@ -308,15 +231,16 @@ function Composicao() {
           <div className="col-span-12 md:col-span-6">
             <p className="t-lede text-on-ink-soft text-[1.05rem] max-w-[44ch]">
               Uma carteira é um sistema de exposições. Cada camada entra
-              porque carrega uma função: liquidez, proteção, crescimento,
-              prêmio.
+              porque carrega uma função: liquidez, preservação, crescimento,
+              sucessão.
             </p>
             <p className="mt-6 t-body text-[0.95rem] leading-[1.65] text-on-ink-soft max-w-[52ch]">
-              Renda fixa local segura o caixa de curto prazo. Renda variável
-              global captura o crescimento. Crédito privado estruturado
-              recolhe prêmio sem volatilidade equivalente. Alternativos
-              descorrelacionam o conjunto. Cada peso é decisão, não
-              recomendação de prateleira.
+              Reserva e liquidez sustentam o caixa de curto prazo. Renda
+              fixa preserva valor e gera previsibilidade. Renda variável
+              captura crescimento de longo prazo. Previdência e estruturas
+              patrimoniais organizam sucessão, longevidade e eficiência
+              tributária. Cada peso é decisão, não recomendação de
+              prateleira.
             </p>
           </div>
           <div className="col-span-12 md:col-span-6">
@@ -327,7 +251,7 @@ function Composicao() {
                     Camada 1
                   </p>
                   <p className="mt-1 t-display text-[1.0625rem] leading-[1.2] text-on-ink-strong">
-                    Caixa e liquidez
+                    Reserva e liquidez
                   </p>
                 </div>
                 <span className="t-display-light text-[1.5rem] tabular-nums text-emphasis">
@@ -340,11 +264,11 @@ function Composicao() {
                     Camada 2
                   </p>
                   <p className="mt-1 t-display text-[1.0625rem] leading-[1.2] text-on-ink-strong">
-                    Renda fixa estruturada
+                    Renda fixa
                   </p>
                 </div>
                 <span className="t-display-light text-[1.5rem] tabular-nums text-emphasis">
-                  25–35%
+                  30–45%
                 </span>
               </li>
               <li className="py-5 flex items-baseline justify-between gap-6">
@@ -353,7 +277,7 @@ function Composicao() {
                     Camada 3
                   </p>
                   <p className="mt-1 t-display text-[1.0625rem] leading-[1.2] text-on-ink-strong">
-                    Renda variável global
+                    Renda variável
                   </p>
                 </div>
                 <span className="t-display-light text-[1.5rem] tabular-nums text-emphasis">
@@ -366,11 +290,11 @@ function Composicao() {
                     Camada 4
                   </p>
                   <p className="mt-1 t-display text-[1.0625rem] leading-[1.2] text-on-ink-strong">
-                    Alternativos
+                    Previdência e estruturas patrimoniais
                   </p>
                 </div>
                 <span className="t-display-light text-[1.5rem] tabular-nums text-emphasis">
-                  10–25%
+                  10–20%
                 </span>
               </li>
             </ul>
@@ -487,7 +411,7 @@ function ComoConduzimos() {
     {
       n: "III",
       title: "Execução",
-      body: "Implementação assistida no ambiente que faz sentido — conta institucional, veículo offshore, previdência, estruturas alternativas — com responsável nomeado.",
+      body: "Implementação assistida no ambiente que faz sentido — conta institucional, previdência, estruturas patrimoniais — com responsável nomeado.",
     },
     {
       n: "IV",
@@ -551,15 +475,15 @@ function ParaQuem() {
     },
     {
       tag: "Empresários e sócios",
-      body: "Patrimônio próximo do negócio. Cuidamos da separação caixa pessoal × empresa, sucessão, holding e exposição internacional do lucro retido.",
+      body: "Patrimônio próximo do negócio. Cuidamos da separação caixa pessoal × empresa, sucessão, holding e estruturação patrimonial do lucro retido.",
     },
     {
       tag: "Executivos C-level",
-      body: "Stock options, RSU, bônus de longo prazo e mobilidade internacional. Planejamos a tributação e a alocação de quem é remunerado em camadas.",
+      body: "Stock options, RSU e bônus de longo prazo. Planejamos a tributação e a alocação de quem é remunerado em camadas.",
     },
     {
       tag: "Profissionais liberais",
-      body: "Advogados, engenheiros, consultores. Receita estável mas sem coordenação entre conta PJ, reserva de emergência, aposentadoria e exposição global.",
+      body: "Advogados, engenheiros, consultores. Receita estável mas sem coordenação entre conta PJ, reserva de emergência, previdência e patrimônio investido.",
     },
   ];
   return (
@@ -662,7 +586,7 @@ function FAQSection() {
     },
     {
       q: "Onde fica o dinheiro investido?",
-      a: "Em conta institucional no Brasil (corretora ou banco de investimentos) e em veículo offshore quando a estrutura pede. Nunca passa por conta nossa. Acesso, custódia e movimentação seguem com o cliente.",
+      a: "Em conta institucional no Brasil — corretora ou banco de investimentos. Nunca passa por conta nossa. Acesso, custódia e movimentação seguem com o cliente.",
     },
     {
       q: "Quanto tempo dura a relação?",
@@ -725,12 +649,11 @@ function OutrasFrentes() {
           <div className="col-span-12 md:col-span-8">
             <Mark eyebrow="Hub Midlej Capital" dark={false} />
             <h2 className="mt-10 t-display text-[clamp(1.625rem,3vw,2.5rem)] leading-[1.04] text-ink max-w-[26ch]">
-              Investimentos é uma das oito frentes da banca.
+              Investimentos é uma das frentes da banca.
             </h2>
             <p className="mt-8 t-lede text-ink-soft text-[1.0625rem] max-w-[48ch]">
-              Mentoria, internacionais, câmbio, seguros, alternativos,
-              previdência e treinamentos. Operadas sob o mesmo critério, num
-              único interlocutor.
+              Mentoria, câmbio, seguros, previdência e treinamentos.
+              Operadas sob o mesmo critério, num único interlocutor.
             </p>
           </div>
           <div className="col-span-12 md:col-span-4 flex md:justify-end">
