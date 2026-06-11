@@ -135,7 +135,7 @@ function Hero() {
 function Marcos() {
   const items = [
     { k: "Modelo", v: "Fee recorrente", note: "Remunerados pelo cliente, não pela distribuição" },
-    { k: "Independência", v: "Zero rebate", note: "Sem comissão de fundo, seguradora ou estrutura" },
+    { k: "Independência", v: "Zero rebate", note: "Receba o comissionamento dos seus investimentos realizados na corretora" },
     { k: "Plataforma", v: "Institucional", note: "Acesso a estruturas fora da prateleira de banco" },
     { k: "Relação", v: "Plurianual", note: "Acompanhamento contínuo, não venda pontual" },
   ];
@@ -185,17 +185,14 @@ function Manifesto() {
               dentro de um patrimônio que já existe.
             </p>
             <p className="mt-12 t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
-              A maioria dos brasileiros com patrimônio formado é atendida por
-              gerentes que vendem o que está na grade do banco. O incentivo é
-              a comissão. A consequência prática é uma carteira montada
-              produto a produto, sem desenho, sem revisão e sem responsável
-              por ela.
+              A maior parte dos investidores é atendida por instituições
+              remuneradas pela distribuição de produtos. Nós seguimos outro
+              modelo: somos remunerados exclusivamente pelo cliente e não
+              recebemos rebates ou comissões.
             </p>
             <p className="mt-6 t-body text-[1.0625rem] leading-[1.7] text-ink-soft max-w-[58ch]">
-              Operamos no modelo oposto. O cliente nos remunera com fee
-              recorrente; recebemos zero rebate de fundo, de seguradora ou de
-              estrutura. Quando recomendamos um caminho, ele serve à família,
-              não à distribuição.
+              Isso garante independência para recomendar o que faz sentido
+              para o patrimônio da família — e não para terceiros.
             </p>
           </div>
         </div>

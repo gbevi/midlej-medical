@@ -104,7 +104,7 @@ export function HubHeader() {
           <Logo
             tone={tone}
             subText="CAPITAL"
-            className="h-10 md:h-11 w-auto"
+            className="h-14 md:h-16 w-auto"
           />
         </Link>
         <CtaPill
