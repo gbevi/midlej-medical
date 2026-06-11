@@ -91,6 +91,7 @@ export async function submitLeadForm(
         error?: string;
         fields?: Record<string, string[]>;
       };
+      console.warn("[submitLeadForm] backend 400", { fields: data.fields });
       return {
         kind: "error",
         fields: data.fields,
@@ -99,13 +100,26 @@ export async function submitLeadForm(
       };
     }
 
+    const bodyPeek = await res.text().catch(() => "<unreadable>");
+    console.error("[submitLeadForm] backend non-2xx", {
+      url: `${env.BACKEND_API_URL}/api/pleno-med/leads`,
+      status: res.status,
+      hasKey: !!env.PLENO_MED_INGEST_KEY,
+      keyLen: env.PLENO_MED_INGEST_KEY.length,
+      body: bodyPeek.slice(0, 240),
+    });
     return {
       kind: "error",
       message: "Algo deu errado. Tente novamente em instantes.",
       values,
     };
   } catch (err) {
-    console.error("[submitLeadForm] backend unreachable:", err);
+    console.error("[submitLeadForm] backend unreachable:", {
+      url: `${env.BACKEND_API_URL}/api/pleno-med/leads`,
+      hasKey: !!env.PLENO_MED_INGEST_KEY,
+      keyLen: env.PLENO_MED_INGEST_KEY.length,
+      err: err instanceof Error ? err.message : String(err),
+    });
     return {
       kind: "error",
       message: "Não conseguimos enviar agora. Tente novamente em instantes.",
