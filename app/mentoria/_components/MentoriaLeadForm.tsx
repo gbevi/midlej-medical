@@ -41,6 +41,8 @@ type Props = {
   idPrefix?: string;
   /** Callback disparado na primeira transição para sucesso. */
   onSuccess?: () => void;
+  /** Identificação da LP de origem — aparece no email de notificação. */
+  origin?: string;
 };
 
 export function MentoriaLeadForm({
@@ -49,6 +51,7 @@ export function MentoriaLeadForm({
   successBody,
   idPrefix = "cs-lead",
   onSuccess,
+  origin,
 }: Props) {
   const [state, action, pending] = useActionState(submitLeadForm, initial);
 
@@ -97,6 +100,7 @@ export function MentoriaLeadForm({
         aria-hidden
         defaultValue=""
       />
+      {origin && <input type="hidden" name="origin" value={origin} />}
 
       <div className="cs-field">
         <label htmlFor={`${idPrefix}-name`} className="cs-field-label">

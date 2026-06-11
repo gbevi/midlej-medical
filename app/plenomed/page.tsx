@@ -205,7 +205,7 @@ export default function PlenoMedPage() {
               </p>
             </div>
 
-            <LeadForm />
+            <LeadForm origin="Pleno Med" />
           </div>
         </div>
       </section>

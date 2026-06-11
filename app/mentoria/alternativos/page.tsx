@@ -170,6 +170,7 @@ export default function AlternativosPage() {
             </div>
             <MentoriaLeadForm
               idPrefix="alt"
+              origin="Mentoria — Alternativos"
               submitLabel="Quero ver minha carteira diversificada"
               successTitle="Recebemos."
               successBody={

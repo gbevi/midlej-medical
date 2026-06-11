@@ -31,7 +31,7 @@ function maskWhatsapp(raw: string): string {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
-export function LeadForm() {
+export function LeadForm({ origin }: { origin?: string } = {}) {
   const [state, formAction, isPending] = useActionState(
     submitLeadForm,
     initialLeadFormState,
@@ -79,6 +79,7 @@ export function LeadForm() {
         className="hp-field"
         defaultValue=""
       />
+      {origin && <input type="hidden" name="origin" value={origin} />}
 
       <div className="field">
         <label htmlFor="name" className="field-label">

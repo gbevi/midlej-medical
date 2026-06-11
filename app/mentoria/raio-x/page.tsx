@@ -151,6 +151,7 @@ export default function RaioXPage() {
               </div>
               <MentoriaLeadForm
                 idPrefix="raiox"
+                origin="Mentoria — Raio-X"
                 submitLabel="Quero meu raio-x"
                 successTitle="Recebemos."
                 successBody={

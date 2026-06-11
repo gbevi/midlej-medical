@@ -33,11 +33,14 @@ type Props = {
   /** "dark" = sobre superfície ink; "light" = sobre paper. */
   tone?: "light" | "dark";
   submitLabel?: string;
+  /** Identificação da LP de origem — aparece no email de notificação. */
+  origin?: string;
 };
 
 export function HubLeadForm({
   tone = "light",
   submitLabel = "Pedir a primeira conversa",
+  origin,
 }: Props) {
   const [state, action, pending] = useActionState(submitLeadForm, initial);
 
@@ -98,6 +101,7 @@ export function HubLeadForm({
           opacity: 0,
         }}
       />
+      {origin && <input type="hidden" name="origin" value={origin} />}
 
       <div>
         <label htmlFor="hub-name" className={labelClass}>

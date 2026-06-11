@@ -26,6 +26,11 @@ function readValues(formData: FormData) {
   };
 }
 
+function readOrigin(formData: FormData): string | undefined {
+  const raw = (formData.get("origin") ?? "").toString().trim();
+  return raw ? raw.slice(0, 120) : undefined;
+}
+
 export async function submitLeadForm(
   _prev: LeadFormState,
   formData: FormData,
@@ -72,6 +77,7 @@ export async function submitLeadForm(
         estado: parsed.data.estado,
         whatsapp: parsed.data.whatsapp,
         consentText: CONSENT_TEXT,
+        origin: readOrigin(formData),
       }),
       cache: "no-store",
     });

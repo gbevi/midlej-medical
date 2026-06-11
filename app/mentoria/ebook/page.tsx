@@ -69,6 +69,7 @@ export default function EbookPage() {
               </p>
               <MentoriaLeadForm
                 idPrefix="ebook"
+                origin="Mentoria — Ebook"
                 submitLabel="Receber o guia"
                 successTitle="Pronto."
                 successBody={
