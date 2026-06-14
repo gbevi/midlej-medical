@@ -418,9 +418,11 @@ body::after {
   color: var(--body-warm-off-white);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 h1, h2, h3, h4 {

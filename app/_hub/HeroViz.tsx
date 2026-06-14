@@ -22,7 +22,7 @@ export function HeroViz() {
       `}</style>
 
       <div className="hviz-wrap w-full max-w-[500px]">
-        <svg viewBox="0 0 500 400" width="100%" style={{ display: "block" }}>
+        <svg viewBox="0 0 500 420" width="100%" style={{ display: "block" }}>
           {/* Card */}
           <rect x="20" y="16" width="460" height="368" rx="16" fill="white"
             style={{ filter: "drop-shadow(0 8px 32px rgba(74,107,140,0.13))" }} />
@@ -77,6 +77,13 @@ export function HeroViz() {
               {label}
             </text>
           ))}
+
+          {/* Disclaimer */}
+          <text x="250" y="400"
+            fontFamily="ui-sans-serif,system-ui,sans-serif" fontSize="9"
+            fill="#B0BEC5" textAnchor="middle" fontStyle="italic">
+            Exemplo ilustrativo. Não representa retornos reais.
+          </text>
         </svg>
       </div>
     </div>

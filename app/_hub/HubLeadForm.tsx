@@ -173,8 +173,12 @@ export function HubLeadForm({
 
       <button
         type="submit"
-        className={isDark ? "btn-primary-inverse mt-2 self-start" : "btn-primary mt-2 self-start"}
         disabled={pending}
+        className={
+          isDark
+            ? "inline-flex items-center gap-2.5 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#2E4659] hover:bg-[#1d3347] disabled:opacity-50 transition-colors duration-200 mt-2 self-start"
+            : "inline-flex items-center gap-2.5 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] disabled:opacity-50 transition-colors duration-200 mt-2 self-start"
+        }
       >
         {pending ? "Enviando…" : submitLabel}
         <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>

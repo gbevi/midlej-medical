@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Logo } from "./components/Logo";
+import Image from "next/image";
 import { HubLeadForm } from "./_hub/HubLeadForm";
 import { SmoothAnchor } from "./_hub/SmoothAnchor";
 import { HomeHeader } from "./_hub/HomeHeader";
@@ -8,6 +8,7 @@ import { HeroViz } from "./_hub/HeroViz";
 import { SeguroCompare } from "./_hub/svg/SeguroCompare";
 import { PrevidenciaStackClient as PrevidenciaStack } from "./_hub/scenes/clients";
 import { PortalMock } from "./_hub/PortalMock";
+import { MentoriaSection } from "./_hub/MentoriaSection";
 
 export const metadata: Metadata = {
   title: "Midlej Capital · Hub de soluções financeiras",
@@ -38,7 +39,7 @@ export default function HubPage() {
     <main
       data-brand
       id="main"
-      style={{ fontFamily: "var(--font-manrope), ui-sans-serif, system-ui, sans-serif" }}
+      style={{ fontFamily: "var(--font-brand), ui-sans-serif, system-ui, sans-serif" }}
       className="min-h-screen bg-white text-[#2E4659]"
     >
       <SmoothAnchor />
@@ -47,17 +48,15 @@ export default function HubPage() {
       <HomeStats />
       <HomeServices />
       <PortalCliente />
-      <S01_MentoriaFull />
-      <S02_MentoriaCondensada />
+      <MentoriaSection />
       <S03_Internacionais />
       <S04_Cambio />
       <S05_Seguro />
       <S06_Alternativos />
       <S07_Previdencia />
       <S08_Workshops />
-      <HomeContact />
       <ConhecaInvestimentos />
-      <HomeFooter />
+      <HomeClosing />
     </main>
   );
 }
@@ -144,15 +143,15 @@ function HomeHero() {
 
 function HomeStats() {
   return (
-    <section style={{ backgroundColor: "#F5F7FA" }} className="py-16 md:py-20">
+    <section style={{ backgroundColor: "#4a6b8c" }} className="py-16 md:py-20">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="text-[clamp(1.75rem,3vw,2.5rem)] font-bold tabular-nums leading-none mb-2" style={{ color: "#3FAE7A" }}>
+              <p className="text-[clamp(1.75rem,3vw,2.5rem)] font-bold tabular-nums leading-none mb-2 text-white">
                 {s.value}
               </p>
-              <p className="text-sm leading-snug" style={{ color: "#6B7B8D" }}>{s.label}</p>
+              <p className="text-sm leading-snug" style={{ color: "rgba(255,255,255,0.70)" }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -190,124 +189,6 @@ function HomeServices() {
               </span>
             </Link>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
-   01 — Mentoria completa
-   ================================================================ */
-
-function S01_MentoriaFull() {
-  const steps = [
-    { n: "01", title: "Diagnosticar", desc: "Entender o que você precisa" },
-    { n: "02", title: "Arquitetar",   desc: "Mostrar o seu plano personalizado" },
-    { n: "03", title: "Sustentar",    desc: "Revisar e atualizar" },
-  ];
-
-  return (
-    <section id="mentoria" style={{ backgroundColor: "#F5F7FA" }} className="py-20 md:py-28">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-8 items-end mb-12">
-          <div className="col-span-12 md:col-span-7">
-            <SectionTag label="Programa contínuo" />
-            <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-bold leading-tight tracking-tight" style={{ color: "#2E4659" }}>
-              Mentoria completa.<br />
-              <span style={{ color: "#6B7B8D" }}>Três frentes em paralelo.</span>
-            </h2>
-          </div>
-          <p className="col-span-12 md:col-span-5 text-[1.0rem] leading-[1.65]" style={{ color: "#6B7B8D" }}>
-            Planejamento financeiro privado, conduzido pessoalmente.
-            Diagnóstico, arquitetura e sustentação ativos ao mesmo tempo,
-            na ordem que o caso pede.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
-          {steps.map((step) => (
-            <div key={step.n} className="bg-white rounded-xl p-6 border border-[#EDEFF2] shadow-sm">
-              <span className="text-[2rem] font-bold block mb-3" style={{ color: "#4a6b8c" }}>{step.n}</span>
-              <h4 className="font-semibold text-[1.0625rem] mb-1" style={{ color: "#2E4659" }}>{step.title}</h4>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7B8D" }}>
-                {step.n} · {step.title} — {step.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-12 gap-8 items-end">
-          <div className="col-span-12 md:col-span-7">
-            <ProofRow items={[
-              { k: "Sessões iniciais", v: "2 a 4" },
-              { k: "Revisão",          v: "Sob demanda" },
-              { k: "Duração",          v: "30 a 60 dias" },
-            ]} />
-          </div>
-          <div className="col-span-12 md:col-span-5 flex md:justify-end">
-            <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-              Conhecer a mentoria completa <Arrow />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
-   02 — Mentoria condensada
-   ================================================================ */
-
-function S02_MentoriaCondensada() {
-  return (
-    <section className="bg-white py-20 md:py-28">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-center">
-          <div className="col-span-12 md:col-span-6">
-            <SectionTag label="Sprint focado" />
-            <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-bold leading-tight tracking-tight mb-6" style={{ color: "#2E4659" }}>
-              Mentoria condensada<br />
-              <span style={{ color: "#6B7B8D" }}>ou onboarding objetivo.</span>
-            </h2>
-            <p className="text-[1.0rem] leading-[1.65] mb-4" style={{ color: "#6B7B8D" }}>
-              Nosso método traz clareza para as principais decisões da sua vida financeira.
-            </p>
-            <p className="text-[0.95rem] leading-[1.65] mb-8" style={{ color: "#6B7B8D" }}>
-              Vamos abordar organização, proteção, sucessão, internacionalização e crédito,
-              mostrando na prática como fortalecer sua estrutura patrimonial e financeira.
-            </p>
-
-            <div className="flex items-center gap-2 mb-8">
-              {["01","02","03","04","05","06"].map((n) => (
-                <div key={n} className="w-10 h-10 rounded-full border-2 flex items-center justify-center text-xs font-bold shrink-0" style={{ borderColor: "#4a6b8c", color: "#4a6b8c" }}>
-                  {n}
-                </div>
-              ))}
-              <span className="ml-1 text-sm font-medium" style={{ color: "#6B7B8D" }}>semanas</span>
-            </div>
-
-            <ProofRow items={[
-              { k: "Janela",   v: "30 a 60 dias" },
-              { k: "Sessões",  v: "2 a 4" },
-              { k: "Entrega",  v: "Plano customizado" },
-            ]} />
-
-            <div className="mt-8">
-              <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-                Ver mentoria condensada <Arrow />
-              </Link>
-            </div>
-          </div>
-
-          <div className="col-span-12 md:col-span-6 grid grid-cols-3 gap-3">
-            {["Organização","Proteção","Sucessão","Internacional","Crédito","Patrimônio"].map((topic) => (
-              <div key={topic} className="rounded-xl p-4 text-center border border-[#EDEFF2]" style={{ backgroundColor: "#F5F7FA" }}>
-                <p className="text-xs font-semibold" style={{ color: "#4a6b8c" }}>{topic}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -370,15 +251,28 @@ function S04_Cambio() {
           </div>
           <div className="col-span-12 md:col-span-7 md:col-start-6">
             <p className="text-[1.0rem] leading-[1.65] mb-5" style={{ color: "#6B7B8D" }}>
-              Compra e envio de dólares americanos para contas no exterior.
+              Compra e envio de dólares americanos para contas no exterior,
+              com execução assistida do início ao fim da operação.
+            </p>
+            <p className="text-[0.95rem] leading-[1.65] mb-4" style={{ color: "#6B7B8D" }}>
+              Trabalhamos com parceiros regulados pelo Banco Central, garantindo
+              segurança jurídica, spread competitivo e conformidade fiscal em cada
+              remessa — da documentação ao SISBACEN.
             </p>
             <p className="text-[0.95rem] leading-[1.65] mb-8" style={{ color: "#6B7B8D" }}>
-              Execução assistida com parceiros regulados, desde a abertura da operação
-              até a liquidação na conta de destino.
+              Ideal para aportes ao exterior, manutenção de contas offshore
+              e diversificação cambial planejada.
             </p>
-            <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
-              Operar câmbio <Arrow />
-            </Link>
+            <ProofRow items={[
+              { k: "Parceiros",  v: "Regulados BCB" },
+              { k: "Moedas",     v: "USD · EUR" },
+              { k: "Destinos",   v: "EUA · Europa · Ilhas" },
+            ]} />
+            <div className="mt-8">
+              <Link href="#contato" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
+                Operar câmbio <Arrow />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -537,25 +431,38 @@ function S08_Workshops() {
 }
 
 /* ================================================================
-   Contato
+   Closing — contato + footer fundidos
    ================================================================ */
 
-function HomeContact() {
+const FOOTER_LINKS = [
+  { label: "Mentoria",      href: "#mentoria" },
+  { label: "Investimentos", href: "/investimentos" },
+  { label: "Câmbio",        href: "#cambio" },
+  { label: "Seguros",       href: "#seguro" },
+  { label: "Alternativos",  href: "#alternativos" },
+  { label: "Previdência",   href: "#previdencia" },
+  { label: "Workshops",     href: "#workshops" },
+];
+
+function HomeClosing() {
+  const year = new Date().getFullYear();
   return (
-    <section id="contato" style={{ backgroundColor: "#4a6b8c" }} className="py-28 md:py-36">
+    <section id="contato" style={{ backgroundColor: "#4a6b8c" }} className="pt-24 md:pt-32 pb-10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
+
+        {/* ── CTA principal ── */}
+        <div className="grid grid-cols-12 gap-10 md:gap-16 items-start pb-20 md:pb-24">
           <div className="col-span-12 md:col-span-5">
-            <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.55)" }}>
+            <p className="text-[0.7rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.50)" }}>
               Primeira conversa
             </p>
             <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-bold leading-tight tracking-tight text-white mb-6">
               Sem proposta antes da conversa.
             </h2>
-            <p className="text-[1.0625rem] leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.75)" }}>
+            <p className="text-[1.0625rem] leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.75)" }}>
               A primeira conversa é gratuita, confidencial e sem compromisso.
             </p>
-            <p className="text-[0.95rem] leading-relaxed max-w-[44ch]" style={{ color: "rgba(255,255,255,0.65)" }}>
+            <p className="text-[0.9375rem] leading-relaxed max-w-[44ch]" style={{ color: "rgba(255,255,255,0.60)" }}>
               Você apresenta seu contexto, seus objetivos e desafios. Nós ouvimos,
               fazemos as perguntas certas e avaliamos como agregar valor ao seu caso.
               Somente depois disso discutimos caminhos e soluções.
@@ -565,6 +472,66 @@ function HomeContact() {
             <HubLeadForm tone="dark" submitLabel="Pedir primeira conversa" origin="Hub Midlej Capital" />
           </div>
         </div>
+
+        {/* ── Divisor ── */}
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }} className="mb-12 md:mb-14" />
+
+        {/* ── Footer info ── */}
+        <div className="grid grid-cols-12 gap-8 items-start mb-10">
+
+          {/* Logo + tagline */}
+          <div className="col-span-12 md:col-span-4">
+            <Image
+              src="/midlej_capital.png"
+              alt="Midlej Capital"
+              width={320}
+              height={130}
+              className="h-12 w-auto mb-4"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+            <p className="text-sm leading-relaxed max-w-[32ch]" style={{ color: "rgba(255,255,255,0.55)" }}>
+              Sem conflito de interesse. Sem produto da prateleira.
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="col-span-6 md:col-span-3 md:col-start-6">
+            <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
+              Soluções
+            </p>
+            <ul className="flex flex-col gap-2.5">
+              {FOOTER_LINKS.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm hover:text-white transition-colors duration-200" style={{ color: "rgba(255,255,255,0.60)" }}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contato */}
+          <div className="col-span-6 md:col-span-4">
+            <p className="text-[0.6rem] font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
+              Contato
+            </p>
+            <a
+              href="mailto:contato@midlejcapital.com.br"
+              className="text-sm hover:text-white transition-colors duration-200 block"
+              style={{ color: "rgba(255,255,255,0.60)" }}
+            >
+              contato@midlejcapital.com.br
+            </a>
+          </div>
+
+        </div>
+
+        {/* ── Barra legal ── */}
+        <div className="border-t pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-xs" style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.35)" }}>
+          <span>CNPJ 35.340.252/0001-44</span>
+          <span>© {year} Midlej Capital. Todos os direitos reservados.</span>
+        </div>
+
       </div>
     </section>
   );
@@ -576,7 +543,7 @@ function HomeContact() {
 
 function PortalCliente() {
   return (
-    <section className="bg-white py-20 md:py-28 border-t border-[#EDEFF2]">
+    <section style={{ backgroundColor: "#F5F7FA" }} className="py-20 md:py-28">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
         <div className="grid grid-cols-12 gap-10 md:gap-16 items-start">
 
@@ -643,7 +610,7 @@ function ConhecaInvestimentos() {
             </p>
           </div>
           <div className="col-span-12 md:col-span-4 flex md:justify-end">
-            <Link href="/investimentos" style={{ color: "#ffffff" }} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
+            <Link href="/investimentos" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white bg-[#4a6b8c] hover:bg-[#2E4659] transition-colors duration-200">
               Conheça os investimentos <Arrow />
             </Link>
           </div>
@@ -653,31 +620,3 @@ function ConhecaInvestimentos() {
   );
 }
 
-/* ================================================================
-   Footer
-   ================================================================ */
-
-function HomeFooter() {
-  const year = new Date().getFullYear();
-  return (
-    <footer style={{ backgroundColor: "#2E4659" }} className="py-16 md:py-24">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-12 gap-8 items-start mb-16">
-          <div className="col-span-12 md:col-span-4">
-            <Logo tone="dark" subText="CAPITAL" className="h-12 w-auto" />
-          </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
-            <p className="text-[clamp(1.0625rem,1.6vw,1.375rem)] leading-[1.4] text-white max-w-[40ch]">
-              Midlej Capital. Hub privado de planejamento financeiro,
-              conduzido em Brasília, atende em todo o Brasil.
-            </p>
-          </div>
-        </div>
-        <div className="border-t pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-sm" style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.45)" }}>
-          <span>Midlej Capital · CNPJ 35.340.252/0001-44</span>
-          <span>© {year} Midlej Capital. Todos os direitos reservados.</span>
-        </div>
-      </div>
-    </footer>
-  );
-}
