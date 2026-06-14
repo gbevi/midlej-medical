@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Logo } from "../components/Logo";
 
 /**
  * Header fixed que muda de tom (ink ↔ paper) conforme a seção embaixo dele.
@@ -98,14 +98,21 @@ export function HubHeader() {
         <Link
           href="/"
           style={{ color: s.textPrimary }}
-          className="inline-flex items-center transition-colors duration-300"
+          className="inline-flex items-center gap-3 transition-colors duration-300"
           aria-label="Midlej Capital, ir ao topo"
         >
-          <Logo
-            tone={tone}
-            subText="CAPITAL"
-            className="h-14 md:h-16 w-auto"
+          <Image
+            src="/icon_midlej.png"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain transition-all duration-300"
+            style={{ filter: tone === "dark" ? "brightness(0) invert(1)" : "none" }}
+            aria-hidden
           />
+          <span className="text-base font-semibold tracking-wide">
+            Midlej Capital
+          </span>
         </Link>
         <CtaPill
           href="#contato"
